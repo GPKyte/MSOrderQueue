@@ -1,0 +1,5 @@
+*.swp
+*.out
+*.gch
+*.pyc
+test*
