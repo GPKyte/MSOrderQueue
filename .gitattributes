@@ -1,0 +1,6 @@
+# Set default line ending behavior, in case core.autocrlf isn't set.
+* text=auto
+
+# Denote all binary files that should not be modified
+*.png binary
+*.jpg binary
