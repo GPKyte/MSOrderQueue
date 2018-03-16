@@ -14,7 +14,7 @@ class SideBarJob extends Component {
     this.props.currentIndex(tempVar);
     this.setState = {
       isHidden: false
-    }
+    };
   }
 
   render() {
@@ -23,9 +23,7 @@ class SideBarJob extends Component {
       <div className="Printer">
         {job["email"]} {job["firstName"]}
         <div />
-        <button onClick={this.unHide.bind(this)}>
-          {this.props.elementID}
-        </button>
+        <button onClick={this.unHide.bind(this)}>{this.props.elementID}</button>
         {!this.state.isHidden && <FullList data={job} />}
       </div>
     );
@@ -35,10 +33,10 @@ class SideBarJob extends Component {
 class FullList extends Component {
   render() {
     var size = 0;
-    var requests = this.props.data['requests'][0];
+    var requests = this.props.data["requests"][0];
     return (
       <ul className="PrinterContainer">
-        {requests['files'].map(i => {
+        {requests["files"].map(i => {
           size += 1;
           return <SideBarFile key={size - 1} elementID={size - 1} data={i} />;
         })}

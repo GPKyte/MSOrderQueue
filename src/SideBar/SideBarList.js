@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import SideBarJob from "./SideBarJob.js";
 
 class SideBarList extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -13,17 +12,14 @@ class SideBarList extends Component {
   selectedList(number, id) {
     var flag = false;
     if (number === id) {
-      flag = !flag
+      flag = !flag;
     }
-    return flag
+    return flag;
   }
 
   changeSelectedIndex(value) {
     this.selectedIndex = value;
   }
-
-
-
 
   render() {
     var size = 0;
@@ -33,18 +29,21 @@ class SideBarList extends Component {
     var list = ListOfJobs.map(i => {
       size += 1;
       return (
-        <SideBarJob currentIndex={this.changeSelectedIndex} selected={this.selectedList} key={size - 1} elementID={size - 1} data={i} />
+        <SideBarJob
+          currentIndex={this.changeSelectedIndex}
+          selected={this.selectedList}
+          key={size - 1}
+          elementID={size - 1}
+          data={i}
+        />
       );
     });
-
 
     //If there are Jobs in the queue then render this
     if (ListOfJobs != null) {
       return (
         <div>
-          <ul className="PrinterContainer">
-            {list}
-          </ul>
+          <ul className="PrinterContainer">{list}</ul>
         </div>
       );
     } else {
