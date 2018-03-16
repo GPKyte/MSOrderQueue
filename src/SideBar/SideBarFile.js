@@ -7,8 +7,7 @@ class Printer extends Component {
     return(
       <div className="Printer">
         Hello World!
-        <button>{printerData}</button>
-
+        <button>{printerData['file']}</button>
       </div>
     )
   }

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import Printer from './Printer.js'
 
 class PrinterList extends Component {
@@ -9,7 +8,7 @@ class PrinterList extends Component {
   render() {
 
     var ListOfPrinters = this.props.data; //Make This a object to be repeated
-
+    var size = 0;
 
 
       if (ListOfPrinters != null) {
@@ -19,14 +18,10 @@ class PrinterList extends Component {
             {
 
                 ListOfPrinters.map(i => {
-                return <Printer data={i}></Printer>
+                  size +=1;
+                return <Printer key={size} data={i}></Printer>
             })}
             </ul>
-            <div className="renderPrinters">
-            </div>
-            <script>
-              // ReactDOM.render(<Printer/>, document.getElementById("Printers"));
-            </script>
           </div>
         )}
         else {
