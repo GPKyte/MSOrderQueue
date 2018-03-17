@@ -2,7 +2,7 @@
 System that works as a queue to process 3D-print requests for a MakerSpace
 ## Installation  
 Clone repository
-For the Front-end Server:
+For the Front-end Server: <
   Requirements:
     Node.js to be installed on your machine.
   Run the commands inside the directory:

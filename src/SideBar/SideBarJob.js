@@ -10,21 +10,40 @@ class SideBarJob extends Component {
   }
 
   unHide() {
-    var tempVar = this.props.elementID;
-    this.props.currentIndex(tempVar);
-    this.setState = {
-      isHidden: false
-    };
+    this.setState({ isHidden: false });
+  }
+
+  hide() {
+    this.setState({ isHidden: true });
+  }
+
+  onClick() {
+    this.props.onClick(this.props.elementID);
+    if (this.state.isHidden) {
+      this.unHide();
+      this.props.onClick(this.props.elementID);
+    } else {
+      this.hide();
+      this.props.onClick(-1);
+    }
   }
 
   render() {
     var job = this.props.data;
+    var selected = this.props.selected;
+
+    //The isHidden checks for wether or not the current list should be shown
+    //The selected is the current index of what should be shown
+    //The element id is the current index of the component that we are on
     return (
       <div className="Printer">
         {job["email"]} {job["firstName"]}
         <div />
-        <button onClick={this.unHide.bind(this)}>{this.props.elementID}</button>
-        {!this.state.isHidden && <FullList data={job} />}
+        <button onClick={this.onClick.bind(this)}>
+          {this.props.elementID}
+        </button>
+        {!this.state.isHidden &&
+          selected === this.props.elementID && <FullList data={job} />}
       </div>
     );
   }

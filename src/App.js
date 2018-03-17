@@ -8,6 +8,7 @@ class App extends Component {
     const printers = [1, 10, 20, 30, 40];
     const PrintJobs = [
       {
+        id:1,
         email: "3montyjack@gmail.com",
         type: "USER",
         firstName: "Jack",
@@ -27,6 +28,7 @@ class App extends Component {
         ]
       },
       {
+        id:2,
         email: "gavin@yahoo.net",
         type: "USER",
         firstName: "Gavin",
@@ -43,6 +45,7 @@ class App extends Component {
         ]
       },
       {
+        id:3,
         email: "Soloman@nerd.z",
         type: "USER",
         firstName: "Yams",

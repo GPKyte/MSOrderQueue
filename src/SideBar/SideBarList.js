@@ -9,16 +9,14 @@ class SideBarList extends Component {
     };
   }
 
-  selectedList(number, id) {
-    var flag = false;
-    if (number === id) {
-      flag = !flag;
-    }
-    return flag;
-  }
+  onClick(index) {
+    if (this.selectedIndex === index) {
 
-  changeSelectedIndex(value) {
-    this.selectedIndex = value;
+    }
+
+    this.setState ({
+      selectedIndex : index
+    })
   }
 
   render() {
@@ -26,16 +24,20 @@ class SideBarList extends Component {
     //This is the list of jobs that are in the queue
     var ListOfJobs = this.props.data;
 
+
+
     var list = ListOfJobs.map(i => {
       size += 1;
       return (
-        <SideBarJob
-          currentIndex={this.changeSelectedIndex}
-          selected={this.selectedList}
-          key={size - 1}
-          elementID={size - 1}
-          data={i}
-        />
+          <SideBarJob
+            onClick={this.onClick.bind(this)}
+            currentIndex={this.changeSelectedIndex}
+            selected={this.state.selectedIndex}
+            key={i.id}
+            currentlyRevealed={this.state.selectedIndex}
+            elementID={size - 1}
+            data={i}
+          />
       );
     });
 
@@ -49,6 +51,7 @@ class SideBarList extends Component {
     } else {
       return <div>There are no Jobs</div>;
     }
+
   }
 }
 
