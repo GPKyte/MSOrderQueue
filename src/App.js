@@ -21,7 +21,7 @@ class App extends Component {
             status: "ORDERED/IN_PROCESS/COMPLETED",
             "class?": "true/false",
             files: [
-              { file: "blob", qty: "int", printer: "string" },
+              { file: "notBlob", qty: "int", printer: "string" },
               { file: "blob", qty: "int", printer: "string" }
             ]
           }
