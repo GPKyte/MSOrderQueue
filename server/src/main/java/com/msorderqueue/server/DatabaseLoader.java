@@ -1,3 +1,13 @@
+package com.msorderqueue.server;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+/**
+ * @author Gavin Kyte
+ */
+// tag::code[]
 @Component
 public class DatabaseLoader implements CommandLineRunner {
 
@@ -13,3 +23,4 @@ public class DatabaseLoader implements CommandLineRunner {
 		this.repository.save(new Printer("Sully", "MakerBot", "5th Gen Replicator", "READY"));
 	}
 }
+// end::code[]

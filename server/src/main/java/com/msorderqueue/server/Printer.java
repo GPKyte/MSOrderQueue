@@ -1,3 +1,15 @@
+package com.msorderqueue.server;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+import lombok.Data;
+
+/**
+ * @author Gavin Kyte
+ */
+// tag::code[]
 @Data
 @Entity
 public class Printer {
@@ -16,3 +28,4 @@ public class Printer {
         this.status = status;
     }
 }
+// end::code[]
