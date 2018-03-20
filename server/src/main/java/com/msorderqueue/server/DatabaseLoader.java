@@ -7,14 +7,13 @@ import org.springframework.stereotype.Component;
 /**
  * @author Gavin Kyte
  */
-// tag::code[]
 @Component
 public class DatabaseLoader implements CommandLineRunner {
 
-	private final PrinterRepository repository;
+	private final PrinterMongoRepository repository;
 
 	@Autowired
-	public DatabaseLoader(PrinterRepository repository) {
+	public DatabaseLoader(PrinterMongoRepository repository) {
 		this.repository = repository;
 	}
 
@@ -23,4 +22,3 @@ public class DatabaseLoader implements CommandLineRunner {
 		this.repository.save(new Printer("Sully", "MakerBot", "5th Gen Replicator", "READY"));
 	}
 }
-// end::code[]
