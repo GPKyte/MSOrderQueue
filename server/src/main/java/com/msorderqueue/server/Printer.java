@@ -13,17 +13,17 @@ import lombok.Data;
 public class Printer {
     @Id
     private String id;
-    private String name;
     private String brand;
     private String model;
+    private String name;
     private String status;
 
     private Printer() {}
 
-    public Printer(String name, String brand, String model, String status) {
-        this.name = name;
+    public Printer(String brand, String model, String name, String status) {
         this.brand = brand;
         this.model = model;
+        this.name = name;
         this.status = status;
     }
 }
