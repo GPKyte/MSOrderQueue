@@ -6,7 +6,7 @@ class Printer extends Component {
     return (
       <div className="Printer">
         Hello World!
-        <button>{printerData}</button>
+        <button className="btn btn-primary">{printerData}</button>
       </div>
     );
   }

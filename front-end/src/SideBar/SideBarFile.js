@@ -5,8 +5,9 @@ class Printer extends Component {
     var printerData = this.props.data;
     return (
       <div className="Printer">
-        Hello World!
-        <button>{printerData["file"]}</button>
+        {printerData["file"]}
+        <button className="btn">Delete</button>
+        <button className="btn">Queue</button>
       </div>
     );
   }
