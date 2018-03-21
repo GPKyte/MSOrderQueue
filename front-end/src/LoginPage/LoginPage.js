@@ -13,6 +13,7 @@ class LoginPage extends Component {
     this.onClick = this.onClick.bind(this);
   }
 
+
   handleChange (event) {
     const name = event.target.name;
     console.log(name)

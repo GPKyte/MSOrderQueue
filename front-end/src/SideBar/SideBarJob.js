@@ -12,6 +12,7 @@ class SideBarJob extends Component {
     };
   }
 
+  //Responsible for showing all of the files that are inside the job
   unHide() {
     this.setState({ isHidden: false });
     this.setState({
@@ -19,6 +20,8 @@ class SideBarJob extends Component {
     })
   }
 
+
+  //Responsible for hiding all of the files that are inside the job
   hide() {
     this.setState({ isHidden: true });
     this.setState({
@@ -26,6 +29,7 @@ class SideBarJob extends Component {
     })
   }
 
+  //Responible for the logic behind hiding and showing the items in the job
   onClick() {
     this.props.onClick(this.props.elementID);
     if (this.state.isHidden) {
@@ -62,6 +66,7 @@ class SideBarJob extends Component {
 }
 
 class FullList extends Component {
+  //This is the generated list responsible for holding all of the files that we are using.
   render() {
     var size = 0;
     var requests = this.props.data["requests"][0];
