@@ -24,6 +24,7 @@ Front-End Server
 1. `cd front-end`  
 2. `npm update`  
 3. `npm start`  
+4. To look at the webpage that is run, go to localhost:3000, or follow the instructions on your command prompt. 
 
 ## Contribution  
 Contact @GPKyte for info.  
