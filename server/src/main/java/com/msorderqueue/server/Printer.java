@@ -1,31 +1,29 @@
 package com.msorderqueue.server;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.Data;
 
 /**
  * @author Gavin Kyte
  */
-// tag::code[]
 @Data
-@Entity
+@Document(collection = "printers")
 public class Printer {
-    private @Id @GeneratedValue Long id;
-    private String name;
+    @Id
+    private String id;
     private String brand;
     private String model;
+    private String name;
     private String status;
 
     private Printer() {}
 
-    public Printer(String name, String brand, String model, String status) {
-        this.name = name;
+    public Printer(String brand, String model, String name, String status) {
         this.brand = brand;
         this.model = model;
+        this.name = name;
         this.status = status;
     }
 }
-// end::code[]
