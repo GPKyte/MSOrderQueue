@@ -16,13 +16,13 @@ class LoginPage extends Component {
 
   handleChange (event) {
     const name = event.target.name;
-    console.log(name)
     if (name != null) {
       this.setState({[event.target.name]: event.target.value});
     }
   }
 
   onClick() {
+    //Submit API Request To Login
     console.log(this.state.username);
     console.log(this.state.password);
   }

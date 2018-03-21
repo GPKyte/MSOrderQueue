@@ -11,9 +11,9 @@ class SideBarList extends Component {
 
   //Part of the logic to see which of the jobs is currenty expanded.
   onClick(index) {
-    this.setState ({
-      selectedIndex : index
-    })
+    this.setState({
+      selectedIndex: index
+    });
   }
 
   render() {
@@ -21,34 +21,30 @@ class SideBarList extends Component {
     //This is the list of jobs that are in the queue
     var ListOfJobs = this.props.data;
 
-
     //This is the generated list that we will use to populate all of the jobs that are inside of the sidebar.
     var list = ListOfJobs.map(i => {
       size += 1;
       return (
-          <SideBarJob
-            onClick={this.onClick.bind(this)}
-            currentIndex={this.changeSelectedIndex}
-            selected={this.state.selectedIndex}
-            key={i.id}
-            currentlyRevealed={this.state.selectedIndex}
-            elementID={size - 1}
-            data={i}
-          />
+        <SideBarJob
+          onClick={this.onClick.bind(this)}
+          currentIndex={this.changeSelectedIndex}
+          selected={this.state.selectedIndex}
+          key={i.id}
+          currentlyRevealed={this.state.selectedIndex}
+          elementID={size - 1}
+          data={i}
+        />
       );
     });
 
     //If there are Jobs in the queue then render this
     if (ListOfJobs != null) {
       return (
-        <div>
-          <ul className="PrinterContainer">{list}</ul>
-        </div>
+          <div>{list}</div>
       );
     } else {
       return <div>There are no Jobs</div>;
     }
-
   }
 }
 

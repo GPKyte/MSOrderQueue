@@ -17,16 +17,15 @@ class SideBarJob extends Component {
     this.setState({ isHidden: false });
     this.setState({
       printerProperty: "Printer list-group-item active"
-    })
+    });
   }
-
 
   //Responsible for hiding all of the files that are inside the job
   hide() {
     this.setState({ isHidden: true });
     this.setState({
       printerProperty: "Printer list-group-item"
-    })
+    });
   }
 
   //Responible for the logic behind hiding and showing the items in the job
@@ -53,12 +52,16 @@ class SideBarJob extends Component {
       <div className={this.state.printerProperty}>
         <div className="panel-group">
           {job["email"]} {job["firstName"]}
-
-          <button className={this.state.buttonProperty} onClick={this.onClick.bind(this)}>
+          <button
+            className={this.state.buttonProperty}
+            onClick={this.onClick.bind(this)}
+          >
             {this.props.elementID}
           </button>
           <button className="btn">Delete</button>
-          {selected === this.props.elementID && <FullList className={this.state.listProperty}data={job} />}
+          {selected === this.props.elementID && (
+            <FullList className={this.state.listProperty} data={job} />
+          )}
         </div>
       </div>
     );

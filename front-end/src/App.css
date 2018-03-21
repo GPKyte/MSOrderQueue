@@ -1,3 +1,5 @@
+/*https://github.com/chenglou/react-motion
+*/
 .App {
   text-align: center;
 }
@@ -22,6 +24,17 @@
   font-size: large;
 }
 
+.SideBar {
+  width: 20%;
+  float: left;
+  height: 100vh;
+  background-color: #2a00fa
+}
+
+.MainBox{
+  width: auto;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -29,4 +42,6 @@
   to {
     transform: rotate(360deg);
   }
+
+
 }

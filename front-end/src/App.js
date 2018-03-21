@@ -5,6 +5,8 @@ import SideBar from "./SideBar/SideBarList.js";
 import LoginPage from "./LoginPage/LoginPage.js";
 
 class App extends Component {
+
+
   render() {
     const printers = [1, 10, 20, 30, 40];
     const PrintJobs = [
@@ -65,15 +67,17 @@ class App extends Component {
     ];
     //This is a tepmorary page with all of the elements inside of it to get api calls working before we end up seperating them into where they need to be
     return (
-      <div className="container">
+      <div>
         {/* This will be a sideBar on the left side */}
-        <aside>
-          <SideBar className="row" data={PrintJobs} />
-        </aside>
+        <div className="SideBar">
+          <SideBar data={PrintJobs} />
+        </div>
         {/* This will be in the main part of the view */}
-        <PrinterList data={printers} className="App" />
+        <div className="MainBox">
+          <PrinterList data={printers} className="App container" />
+        </div>
         {/* This will be a seperate page when finished */}
-        <LoginPage />
+        {/* <LoginPage/> */}
       </div>
     );
   }
