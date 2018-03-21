@@ -6,7 +6,7 @@ class PrinterList extends Component {
     //Make This a object to be repeated
     var ListOfPrinters = this.props.data;
     var size = 0;
-
+    //Generates all of the printers that we are using for the project
     if (ListOfPrinters != null) {
       return (
         <div>

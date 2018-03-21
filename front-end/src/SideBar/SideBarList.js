@@ -9,11 +9,8 @@ class SideBarList extends Component {
     };
   }
 
+  //Part of the logic to see which of the jobs is currenty expanded.
   onClick(index) {
-    if (this.selectedIndex === index) {
-
-    }
-
     this.setState ({
       selectedIndex : index
     })
@@ -25,7 +22,7 @@ class SideBarList extends Component {
     var ListOfJobs = this.props.data;
 
 
-
+    //This is the generated list that we will use to populate all of the jobs that are inside of the sidebar.
     var list = ListOfJobs.map(i => {
       size += 1;
       return (
