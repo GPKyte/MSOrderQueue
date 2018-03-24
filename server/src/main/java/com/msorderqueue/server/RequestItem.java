@@ -1,5 +1,7 @@
 package com.msorderqueue.server;
 
+import com.msorderqueue.server.RequestStatus;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -11,14 +13,14 @@ import lombok.Data;
 @Data
 public class RequestItem {
     private String fileName;
-    private Status status;
+    private RequestStatus status;
     private int qty;
 
     public RequestItem() {}
 
-    public RequestItem(String fileName, Status status, int qty) {
+    public RequestItem(String fileName, int qty) {
         this.fileName = fileName;
-        this.status = status;
+        this.status = RequestStatus.ORDERED;
         this.qty = qty;
     }
 }

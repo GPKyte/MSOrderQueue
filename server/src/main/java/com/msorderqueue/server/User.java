@@ -27,8 +27,8 @@ public class User {
     public User() {}
 
     public User(String first, String last, Role role) {
-        this.first = first;
-        this.last = last;
+        this.firstName = first;
+        this.lastName = last;
         this.role = role;
         this.requests = new ArrayList<>();
     }

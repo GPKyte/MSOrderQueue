@@ -27,7 +27,7 @@ public class Request {
     public Request(String comments, boolean forClass, ArrayList<RequestItem> requestItems) {
         this.comments = comments;
         this.forClass = forClass;
-        this.status = ORDERED;
+        this.status = RequestStatus.ORDERED;
         this.requestItems = new ArrayList(requestItems);
     }
 }
