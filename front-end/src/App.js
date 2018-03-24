@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import PrinterList from "./Printer/PrinterList.js";
 import SideBar from "./SideBar/SideBarList.js";
+import MakePrinter from "./Make Printers/MakePrinters.js"
 //import LoginPage from "./LoginPage/LoginPage.js";
 
 class App extends Component {
@@ -89,6 +90,10 @@ class App extends Component {
         <div className="MainBox">
           <PrinterList data={printers} className="App container" />
         </div>
+        <div>
+          <MakePrinter/>
+        </div>
+
         {/* This will be a seperate page when finished */}
         {/* <LoginPage/> */}
       </div>

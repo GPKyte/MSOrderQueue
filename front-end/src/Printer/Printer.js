@@ -8,11 +8,12 @@ class Printer extends Component {
 
   //This is the base printer object that displays all of the data needed on every printer
   onClick() {
-    this.props.deleteFunction(3);
+    this.props.deleteFunction(this.props.id);
   }
 
   render() {
     var printerData = this.props.data;
+    
     return (
       <div className="Printer">
         <button className="btn btn-primary">{printerData["name"]}</button>
