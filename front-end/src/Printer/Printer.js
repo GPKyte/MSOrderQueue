@@ -15,12 +15,12 @@ class Printer extends Component {
     var printerData = this.props.data;
     return (
       <div className="Printer">
-        Hello World!
         <button className="btn btn-primary">{printerData["name"]}</button>
-        <button onClick={this.onClick} className="btn btn-primary btn-warning">
+        <button onClick={this.onClick} className="btn btn-primary btn-outline-secondary">
           Delete Printer
         </button>
       </div>
+
     );
   }
 }

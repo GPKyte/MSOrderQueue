@@ -81,14 +81,16 @@ class PrinterList extends Component {
     //Generates all of the printers that we are using for the project
     if (ListOfPrinters != null) {
       return (
-        <div>
+        <div class = "page-header">
+        <h1>Printers</h1>
           <ul className="PrinterContainer">
             {ListOfPrinters.map(i => {
               return <Printer key={i["id"]} deleteFunction={this.deletePrinter} data={i} />;
             })}
           </ul>
-          <button onClick={this.refresh}>Refresh </button>
+          <button onClick={this.refresh} className="btn btn-outline-primary btn-sm">Refresh </button>
           <button onClick={this.makeNewPrinter}>Make New Printer </button>
+
         </div>
       );
     } else {
