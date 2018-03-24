@@ -2,13 +2,26 @@ import React, { Component } from "react";
 import "./App.css";
 import PrinterList from "./Printer/PrinterList.js";
 import SideBar from "./SideBar/SideBarList.js";
-import LoginPage from "./LoginPage/LoginPage.js";
+//import LoginPage from "./LoginPage/LoginPage.js";
 
 class App extends Component {
-
-
   render() {
-    const printers = [1, 10, 20, 30, 40];
+    const printers = [
+      {
+        id: "5ab1859cdb70af2d3db69b95",
+        brand: "MakerBot",
+        model: "5th Gen Replicator",
+        name: "Sully",
+        status: "READY"
+      },
+      {
+        id: "5ab15754db70af23dc9cec20",
+        brand: "MakerBot",
+        model: "5th Gen Replicator",
+        name: "Stitch",
+        status: "READY"
+      }
+    ];
     const PrintJobs = [
       {
         id: 1,

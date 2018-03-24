@@ -27,6 +27,7 @@ class LoginPage extends Component {
     console.log(this.state.password);
   }
   render() {
+    
     return (
       <div className="Printer">
         <input type="text"  value={this.state.username} onChange={this.handleChange} name="username" />

@@ -58,10 +58,10 @@ class SideBarJob extends Component {
           >
             {this.props.elementID}
           </button>
-          <button className="btn">Delete</button>
           {selected === this.props.elementID && (
             <FullList className={this.state.listProperty} data={job} />
           )}
+          <button className="btn">Delete</button>
         </div>
       </div>
     );
