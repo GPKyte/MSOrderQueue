@@ -26,9 +26,10 @@ public class User {
 
     public User() {}
 
-    public User(String first, String last, Role role) {
+    public User(String first, String last, String email, Role role) {
         this.firstName = first;
         this.lastName = last;
+        this.email = email;
         this.role = role;
         this.requests = new ArrayList<>();
     }

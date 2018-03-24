@@ -28,6 +28,6 @@ public class Request {
         this.comments = comments;
         this.forClass = forClass;
         this.status = RequestStatus.ORDERED;
-        this.requestItems = new ArrayList(requestItems);
+        this.requestItems = new ArrayList<>(requestItems);
     }
 }
