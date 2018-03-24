@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import SideBarJob from "./SideBarJob.js";
+var Promise = require("bluebird")
+Promise.promisifyAll(require("request"));
 
 class SideBarList extends Component {
   constructor(props) {
@@ -19,8 +21,9 @@ class SideBarList extends Component {
   }
 
   jobList() {
-    //fetch('http://localhost:8080/api/jobList')
-  //    .then(({ results }) => this.setState({ jobList: results }));
+   //  fetch('http://localhost:8080/api/jobList')
+   // .then(({ results }) => this.setState({ jobList: results.blob() }));
+   // console.log
   }
 
   componentDidMount() {
