@@ -25,4 +25,9 @@ public class PrinterController {
         printer.setStatus("READY");
         return printerRepository.save(printer);
     }
+
+    @DeleteMapping(value="/printers")
+    public void deletePrinterById(@Valid @RequestBody String id) {
+        printerRepository.deleteById(id);
+    }
 }
