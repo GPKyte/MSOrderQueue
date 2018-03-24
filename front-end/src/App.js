@@ -80,7 +80,7 @@ class App extends Component {
     ];
     //This is a tepmorary page with all of the elements inside of it to get api calls working before we end up seperating them into where they need to be
     return (
-      <div>
+      <div className="App Test">
         {/* This will be a sideBar on the left side */}
         <div className="SideBar">
           <SideBar data={PrintJobs} />
