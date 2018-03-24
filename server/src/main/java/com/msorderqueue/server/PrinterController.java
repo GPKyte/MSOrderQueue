@@ -26,8 +26,12 @@ public class PrinterController {
         return printerRepository.save(printer);
     }
 
-    @DeleteMapping(value="/printers")
-    public void deletePrinterById(@Valid @RequestBody String id) {
-        printerRepository.deleteById(id);
+    @DeleteMapping(value="/printers/{id}")
+    public ResponseEntity<?> deletePrinter(@PathVariable("id") String id) {
+        return printerRepository.findById(id)
+                .map(printer -> {
+                    printerRepository.deleteById(id);
+                    return ResponseEntity.ok().build();
+                }).orElse(ResponseEntity.notFound().build());
     }
 }
