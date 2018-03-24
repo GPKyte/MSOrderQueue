@@ -7,8 +7,9 @@ class Printer extends Component {
       <div className="Printer">
         {/* This is the base printer Object that displays all the nessicary for the future releases. */}
         {printerData["file"]}
-        <button className="btn">Delete</button>
-        <button className="btn">Queue</button>
+        <button className="btn btn-primary btn-sm">Delete</button>
+
+        <button className="btn btn-secondary btn-sm">Queue</button>
       </div>
     );
   }
