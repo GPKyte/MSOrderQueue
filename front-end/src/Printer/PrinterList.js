@@ -84,12 +84,11 @@ class PrinterList extends Component {
         <div>
           <ul className="PrinterContainer">
             {ListOfPrinters.map(i => {
-              return <Printer key={i["id"]} data={i} />;
+              return <Printer key={i["id"]} deleteFunction={this.deletePrinter} data={i} />;
             })}
           </ul>
           <button onClick={this.refresh}>Refresh </button>
           <button onClick={this.makeNewPrinter}>Make New Printer </button>
-          <button onClick={this.deletePrinter}> Delete Printer </button>
         </div>
       );
     } else {
