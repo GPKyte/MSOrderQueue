@@ -3,6 +3,7 @@ package com.msorderqueue.server;
 import com.msorderqueue.server.Request;
 
 import java.util.ArrayList;
+import javax.validation.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -14,23 +15,29 @@ import lombok.Data;
 @Data
 @Document(collection = "users")
 public class User {
-    @Id
-    private String id;
+    @Id @NotBlank
+    private String username;
     private String firstName;
     private String lastName;
+    @NotBlank
     private String email;
-    private Role role;
+    private Role role = Role.REQUESTER;
     private ArrayList<Request> requests;
 
     public enum Role {REQUESTER, STAFF, ADMIN};
 
     public User() {}
 
-    public User(String first, String last, String email, Role role) {
+    public User(String first, String last, String username, String email, Role role) {
+        this.username = username;
         this.firstName = first;
         this.lastName = last;
         this.email = email;
         this.role = role;
         this.requests = new ArrayList<>();
+    }
+
+    public ArrayList<Request> getRequests() {
+        return (this.requests != null)? this.requests : new ArrayList<Request>();
     }
 }

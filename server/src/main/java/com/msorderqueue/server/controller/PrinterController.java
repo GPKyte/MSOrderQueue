@@ -22,7 +22,6 @@ public class PrinterController {
 
     @PostMapping(value="/printers")
     public Printer createPrinter(@Valid @RequestBody Printer printer) {
-        printer.setStatus("READY");
         return printerRepository.save(printer);
     }
 
