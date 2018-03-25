@@ -1,19 +1,33 @@
 import React, { Component } from "react";
 import SideBarJob from "./SideBarJob.js";
+var Promise = require("bluebird")
+Promise.promisifyAll(require("request"));
 
 class SideBarList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedIndex: -1
+      selectedIndex: -1,
+      jobList: []
     };
   }
 
   //Part of the logic to see which of the jobs is currenty expanded.
   onClick(index) {
-    this.setState ({
-      selectedIndex : index
-    })
+    this.setState({
+      selectedIndex: index
+
+    });
+  }
+
+  jobList() {
+   //  fetch('http://localhost:8080/api/jobList')
+   // .then(({ results }) => this.setState({ jobList: results.blob() }));
+   // console.log
+  }
+
+  componentDidMount() {
+    this.jobList();
   }
 
   render() {
@@ -22,10 +36,13 @@ class SideBarList extends Component {
     var ListOfJobs = this.props.data;
 
 
-    //This is the generated list that we will use to populate all of the jobs that are inside of the sidebar.
-    var list = ListOfJobs.map(i => {
-      size += 1;
-      return (
+
+    //If there are Jobs in the queue then render this
+    if (ListOfJobs != null) {
+      //This is the generated list that we will use to populate all of the jobs that are inside of the sidebar.
+      var list = ListOfJobs.map(i => {
+        size += 1;
+        return (
           <SideBarJob
             onClick={this.onClick.bind(this)}
             currentIndex={this.changeSelectedIndex}
@@ -35,20 +52,14 @@ class SideBarList extends Component {
             elementID={size - 1}
             data={i}
           />
-      );
-    });
-
-    //If there are Jobs in the queue then render this
-    if (ListOfJobs != null) {
+        );
+      });
       return (
-        <div>
-          <ul className="PrinterContainer">{list}</ul>
-        </div>
+          <div>{list}</div>
       );
     } else {
       return <div>There are no Jobs</div>;
     }
-
   }
 }
 

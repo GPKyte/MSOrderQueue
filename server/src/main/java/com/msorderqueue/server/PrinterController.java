@@ -25,4 +25,13 @@ public class PrinterController {
         printer.setStatus("READY");
         return printerRepository.save(printer);
     }
+
+    @DeleteMapping(value="/printers/{id}")
+    public ResponseEntity<?> deletePrinter(@PathVariable("id") String id) {
+        return printerRepository.findById(id)
+                .map(printer -> {
+                    printerRepository.deleteById(id);
+                    return ResponseEntity.ok().build();
+                }).orElse(ResponseEntity.notFound().build());
+    }
 }
