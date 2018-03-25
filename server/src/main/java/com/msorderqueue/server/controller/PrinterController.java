@@ -26,6 +26,20 @@ public class PrinterController {
         return printerRepository.save(printer);
     }
 
+    @PutMapping(value="/printers/{id}")
+    public ResponseEntity<Printer> updatePrinter(@PathVariable("id") String id,
+                                                @Valid @RequestBody Printer printer) {
+        return printerRepository.findById(id)
+                .map(printerData -> {
+                    printerData.setModel(printer.getModel());
+                    printerData.setName(printer.getName());
+                    printerData.setBrand(printer.getBrand());
+                    printerData.setStatus(printer.getStatus());
+                    Printer updatedPrinter = printerRepository.save(printerData);
+                    return ResponseEntity.ok().body(updatedPrinter);
+                }).orElse(ResponseEntity.notFound().build());
+    }
+
     @DeleteMapping(value="/printers/{id}")
     public ResponseEntity<?> deletePrinter(@PathVariable("id") String id) {
         return printerRepository.findById(id)
