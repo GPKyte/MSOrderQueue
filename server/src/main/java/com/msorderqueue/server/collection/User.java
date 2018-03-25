@@ -36,4 +36,8 @@ public class User {
         this.role = role;
         this.requests = new ArrayList<>();
     }
+
+    public ArrayList<Request> getRequests() {
+        return (this.requests != null)? this.requests : new ArrayList<Request>();
+    }
 }
