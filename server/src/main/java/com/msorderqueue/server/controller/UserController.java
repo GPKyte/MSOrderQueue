@@ -6,6 +6,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api")
@@ -21,17 +23,22 @@ public class UserController {
         return userRepository.findAll(sortByEmail);
     }
 
+    @GetMapping("/users/{username}")
+    public Optional<User> getUserById(@PathVariable("username") String username) {
+        return userRepository.findById(username);
+    }
+
     @PostMapping(value="/users")
     public User createUser(@Valid @RequestBody User user) {
         if (user.getRole() == null) {user.setRole(User.Role.REQUESTER);}
         return userRepository.save(user);
     }
 
-    @DeleteMapping(value="/users/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable("id") String id) {
-        return userRepository.findById(id)
+    @DeleteMapping(value="/users/{username}")
+    public ResponseEntity<?> deleteUser(@PathVariable("username") String username) {
+        return userRepository.findById(username)
                 .map(user -> {
-                    userRepository.deleteById(id);
+                    userRepository.deleteById(username);
                     return ResponseEntity.ok().build();
                 }).orElse(ResponseEntity.notFound().build());
     }
