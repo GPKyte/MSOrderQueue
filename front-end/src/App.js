@@ -2,11 +2,27 @@ import React, { Component } from "react";
 import "./App.css";
 import PrinterList from "./Printer/PrinterList.js";
 import SideBar from "./SideBar/SideBarList.js";
-import LoginPage from "./LoginPage/LoginPage.js";
+import MakePrinter from "./Make Printers/MakePrinters.js"
+//import LoginPage from "./LoginPage/LoginPage.js";
 
 class App extends Component {
   render() {
-    const printers = [1, 10, 20, 30, 40];
+    const printers = [
+      {
+        id: "5ab1859cdb70af2d3db69b95",
+        brand: "MakerBot",
+        model: "5th Gen Replicator",
+        name: "Sully",
+        status: "READY"
+      },
+      {
+        id: "5ab15754db70af23dc9cec20",
+        brand: "MakerBot",
+        model: "5th Gen Replicator",
+        name: "Stitch",
+        status: "READY"
+      }
+    ];
     const PrintJobs = [
       {
         id: 1,
@@ -65,15 +81,21 @@ class App extends Component {
     ];
     //This is a tepmorary page with all of the elements inside of it to get api calls working before we end up seperating them into where they need to be
     return (
-      <div className="container">
+      <div className="App Test">
         {/* This will be a sideBar on the left side */}
-        <aside>
-          <SideBar className="row" data={PrintJobs} />
-        </aside>
+        <div className="SideBar">
+          <SideBar data={PrintJobs} />
+        </div>
         {/* This will be in the main part of the view */}
-        <PrinterList data={printers} className="App" />
+        <div className="MainBox">
+          <PrinterList data={printers} className="App container" />
+        </div>
+        <div>
+          <MakePrinter/>
+        </div>
+
         {/* This will be a seperate page when finished */}
-        <LoginPage />
+        {/* <LoginPage/> */}
       </div>
     );
   }

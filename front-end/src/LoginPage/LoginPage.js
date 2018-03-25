@@ -16,17 +16,18 @@ class LoginPage extends Component {
 
   handleChange (event) {
     const name = event.target.name;
-    console.log(name)
     if (name != null) {
       this.setState({[event.target.name]: event.target.value});
     }
   }
 
   onClick() {
+    //Submit API Request To Login
     console.log(this.state.username);
     console.log(this.state.password);
   }
   render() {
+    
     return (
       <div className="Printer">
         <input type="text"  value={this.state.username} onChange={this.handleChange} name="username" />
