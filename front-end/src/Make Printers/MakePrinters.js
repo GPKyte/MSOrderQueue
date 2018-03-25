@@ -6,9 +6,9 @@ class MakePrinter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      PrinterName: "",
-      Model: "MakerBot",
-      Brand: "",
+      PrinterName: "Geoffrey",
+      Model: "SomeModel",
+      Brand: "MakerBot",
       Status: ""
     };
     this.handleChange = this.handleChange.bind(this);
@@ -22,7 +22,6 @@ class MakePrinter extends Component {
     }
   }
   onClick() {
-
     const headersI = {
       "Content-Type": "application/json"
     };
@@ -33,8 +32,8 @@ class MakePrinter extends Component {
       body: JSON.stringify({
         name: this.state.PrinterName,
         brand: this.state.Model,
-        model: "5th Gen Replicator",
-        status: "BUSY"
+        model: this.state.Brand,
+        status: this.state.Status
       })
     });
     fetch(myRequest).then(response =>
@@ -66,12 +65,17 @@ class MakePrinter extends Component {
           onChange={this.handleChange}
         />
         <div />
-        <input
+
+        <select
           type="text"
           name="Status"
           value={this.state.Status}
           onChange={this.handleChange}
-        />
+        >
+          <option defaultValue value="BUSY">Busy</option>
+          <option value="OPEN">Open</option>
+          <option value="FINISHED">Finished</option>
+        </select>
         <div />
 
         <button onClick={this.onClick} className="btn">
