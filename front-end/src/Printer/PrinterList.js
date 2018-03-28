@@ -85,7 +85,15 @@ class PrinterList extends Component {
         </div>
       );
     } else {
-      return <div />;
+      return <div> There seems to be no printers, server might be down or you can try refreshing.
+      <div/>
+        <button
+          onClick={this.refresh}
+          className="btn btn-outline-primary btn-sm"
+        >
+        Refresh
+      </button>
+      </div>;
     }
   }
 }

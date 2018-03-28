@@ -2,27 +2,11 @@ import React, { Component } from "react";
 import "./App.css";
 import PrinterList from "./Printer/PrinterList.js";
 import SideBar from "./SideBar/SideBarList.js";
-import MakePrinter from "./Make Printers/MakePrinters.js"
+import MakePrinter from "./Make Printers/MakePrinters.js";
 //import LoginPage from "./LoginPage/LoginPage.js";
 
 class App extends Component {
   render() {
-    const printers = [
-      {
-        id: "5ab1859cdb70af2d3db69b95",
-        brand: "MakerBot",
-        model: "5th Gen Replicator",
-        name: "Sully",
-        status: "READY"
-      },
-      {
-        id: "5ab15754db70af23dc9cec20",
-        brand: "MakerBot",
-        model: "5th Gen Replicator",
-        name: "Stitch",
-        status: "READY"
-      }
-    ];
     const PrintJobs = [
       {
         id: 1,
@@ -88,10 +72,10 @@ class App extends Component {
         </div>
         {/* This will be in the main part of the view */}
         <div className="MainBox">
-          <PrinterList data={printers} className="App container" />
+          <PrinterList className="App container" />
         </div>
         <div>
-          <MakePrinter/>
+          <MakePrinter />
         </div>
 
         {/* This will be a seperate page when finished */}
