@@ -8,7 +8,8 @@ class SideBarJob extends Component {
       isHidden: true,
       buttonProperty: "btn btn-primary",
       printerProperty: "Printer list-group-item",
-      listProperty: "collapse"
+      listProperty: "collapse",
+      currentIndex: -1
     };
   }
 
@@ -40,6 +41,8 @@ class SideBarJob extends Component {
       this.props.onClick(-1);
     }
   }
+
+
 
   render() {
     var job = this.props.data;

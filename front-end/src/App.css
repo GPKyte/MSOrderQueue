@@ -24,6 +24,14 @@
   font-size: large;
 }
 
+.card-button {
+  width: 40%;
+}
+
+.card-size {
+  width: 30%;
+}
+
 .SideBar {
   width: 20%;
   float: left;
