@@ -17,6 +17,7 @@ import lombok.Data;
 public class Request {
     @Id
     private String id; // Make this a timestamp
+    private String user; // References requester username
     private String comments;
     private RequestStatus status;
     private boolean forClass;
@@ -24,7 +25,8 @@ public class Request {
 
     public Request() {}
 
-    public Request(String comments, boolean forClass, ArrayList<RequestItem> requestItems) {
+    public Request(String username, String comments, boolean forClass, ArrayList<RequestItem> requestItems) {
+        this.user = username;
         this.comments = comments;
         this.forClass = forClass;
         this.status = RequestStatus.ORDERED;
