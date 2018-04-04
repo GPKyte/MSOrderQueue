@@ -1,0 +1,23 @@
+matrix:
+  include:
+    - language: java
+      jdk: oraclejdk8
+      before_script:
+        - cd server
+      script:
+        - gradle test
+    - language: node_js
+      node_js:
+        - "node"
+        - "7"
+      before_script:
+        - cd front-end
+        - npm install
+      cache:
+        directories:
+
+      script:
+        - npm test
+notifications:
+  email:
+    - 3montyjack@gmail.com
