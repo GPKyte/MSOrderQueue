@@ -16,7 +16,7 @@ public class RequestController {
     @Autowired
     RequestMongoRepository requestRepository;
 
-    @GetMapping("/requests")
+    @GetMapping(value="/requests")
     public List<Request> getAllRequests() {
         Sort sortByTimestamp = new Sort(Sort.Direction.DESC, "timestamp");
         return requestRepository.findAll(sortByTimestamp);

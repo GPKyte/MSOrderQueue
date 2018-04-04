@@ -18,13 +18,13 @@ public class UserController {
     @Autowired
     UserMongoRepository userRepository;
 
-    @GetMapping("/users")
+    @GetMapping(value="/users")
     public List<User> getAllUsers() {
         Sort sortByEmail = new Sort(Sort.Direction.DESC, "email");
         return userRepository.findAll(sortByEmail);
     }
 
-    @GetMapping("/users/{username}")
+    @GetMapping(value="/users/{username}")
     public Optional<User> getUserById(@PathVariable("username") String username) {
         return userRepository.findById(username);
     }
