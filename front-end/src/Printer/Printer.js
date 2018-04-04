@@ -15,7 +15,7 @@ class Printer extends Component {
     var printerData = this.props.data;
 
     return (
-      <div className="Printer card card-size">
+      <div className="card card-size padding-md">
         <img className="card-img-top" src={require('./../Images/download.jpg')} alt="Card cap"/>
         <div> Status: {printerData['status']} </div>
         <div className="card-block">

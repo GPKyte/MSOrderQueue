@@ -48,7 +48,10 @@ class PrinterList extends Component {
       headers: headersI
     });
 
-    fetch(myRequest).then(response => console.log(response));
+    fetch(myRequest).then(response => {
+      console.log(response);
+      this.printerList();
+    });
   }
 
   refresh() {
@@ -58,12 +61,18 @@ class PrinterList extends Component {
   render() {
     //Make This a object to be repeated
     var ListOfPrinters = this.state.printerList;
+    var refreshButton = () => (
+      <button onClick={this.refresh} className="btn btn-outline-primary btn-sm">
+        Refresh{" "}
+      </button>
+    );
     //Generates all of the printers that we are using for the project
-    if (ListOfPrinters != null) {
+    console.log(ListOfPrinters);
+    if (ListOfPrinters != null && ListOfPrinters.length > 0) {
       return (
         <div className="page-header">
           <h1>Printers</h1>
-          <ul className="PrinterContainer">
+          <ul className="PrinterContainer row">
             {ListOfPrinters.map(i => {
               return (
                 <Printer
@@ -75,25 +84,18 @@ class PrinterList extends Component {
               );
             })}
           </ul>
-          <button
-            onClick={this.refresh}
-            className="btn btn-outline-primary btn-sm"
-          >
-            Refresh{" "}
-          </button>
-          <button onClick={this.makeNewPrinter}>Make New Printer </button>
+          {refreshButton()}
         </div>
       );
     } else {
-      return <div> There seems to be no printers, server might be down or you can try refreshing.
-      <div/>
-        <button
-          onClick={this.refresh}
-          className="btn btn-outline-primary btn-sm"
-        >
-        Refresh
-      </button>
-      </div>;
+      return (
+        <div>
+          There seems to be no printers, server might be down or you can try
+          refreshing.
+          <div />
+          {refreshButton()}
+        </div>
+      );
     }
   }
 }

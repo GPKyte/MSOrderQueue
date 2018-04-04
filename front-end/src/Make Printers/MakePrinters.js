@@ -72,8 +72,8 @@ class MakePrinter extends Component {
           value={this.state.Status}
           onChange={this.handleChange}
         >
-          <option defaultValue value="BUSY">Busy</option>
-          <option value="OPEN">Open</option>
+          <option value="READY">Ready</option>
+          <option value="BUSY">Busy</option>
           <option value="FINISHED">Finished</option>
         </select>
         <div />

@@ -14,32 +14,13 @@ class SideBarJob extends Component {
   }
 
   //Responsible for showing all of the files that are inside the job
-  unHide() {
-    this.setState({ isHidden: false });
-    this.setState({
-      printerProperty: "Printer list-group-item active"
-    });
-  }
 
   //Responsible for hiding all of the files that are inside the job
-  hide() {
-    this.setState({ isHidden: true });
-    this.setState({
-      printerProperty: "Printer list-group-item"
-    });
-  }
 
   //Responible for the logic behind hiding and showing the items in the job
   onClick() {
-    this.props.onClick(this.props.elementID);
-    if (this.state.isHidden) {
-      this.unHide();
-
-      this.props.onClick(this.props.elementID);
-    } else {
-      this.hide();
-      this.props.onClick(-1);
-    }
+    this.props.changeSelectedIndex(this.props.index);
+    console.log(this.props.index, this.props.selected);
   }
 
 
@@ -59,9 +40,9 @@ class SideBarJob extends Component {
             className={this.state.buttonProperty}
             onClick={this.onClick.bind(this)}
           >
-            {this.props.elementID}
+            {this.props.index}
           </button>
-          {selected === this.props.elementID && (
+          {selected === this.props.index && (
             <FullList className={this.state.listProperty} data={job} />
           )}
           <button className="btn btn-outline-primary btn-lg">Delete</button>
