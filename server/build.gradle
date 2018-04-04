@@ -10,10 +10,18 @@ buildscript {
     }
 }
 
+plugins {
+    id 'net.saliman.cobertura' version '2.3.1'
+    id 'com.github.kt3k.coveralls' version '2.8.2'
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
+
+
+cobertura.coverageFormats = ['html', 'xml']
 
 group = 'com.msorderqueue'
 version = '0.0.1-SNAPSHOT'
