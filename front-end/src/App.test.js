@@ -7,3 +7,4 @@ import App from "./App";
 //   ReactDOM.render(<App />, div);
 //   ReactDOM.unmountComponentAtNode(div);
 // });
+it ("Makes Me HAPPY", () => {Promise.resolve(3)});
