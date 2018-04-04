@@ -47,7 +47,6 @@ gradle-app.setting
 hs_err_pid*
 # Ignore for NodeJS
 front-end/build/
-front-end/package-lock.json
 # Logs
 logs
 *.log
