@@ -1,5 +1,7 @@
 package com.msorderqueue.server;
 
+import com.msorderqueue.server.RequestStatus;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,6 +26,7 @@ public class RequestMongoRepositoryTest {
         ArrayList<RequestItem> items1 = new ArrayList<>();
         items1.add(new RequestItem("testFile1.stl", 83));
         items1.add(new RequestItem("secondFile.stl", 5));
+        items1.add(new RequestItem("thirdFile.stl", 7));
         Request req1 = new Request("kyteg", "Comments are for nerds", false,  items1);
 
         ArrayList<RequestItem> items2 = new ArrayList<>();
@@ -53,7 +56,13 @@ public class RequestMongoRepositoryTest {
         for(Request r : requests) {
             count++;
         }
-        assertEquals(count, 2);
+        assertEquals(2, count);
+        // Test that we have correct count of RequestItems in our Request
+        ArrayList<RequestItem> items = requestA.getRequestItems();
+        assertEquals(3, items.size());
+        assertEquals("testFile1.stl", items.get(0).getFileName());
+        assertEquals(5, items.get(1).getQty());
+        assertEquals(RequestStatus.ORDERED, items.get(2).getStatus());
     }
 
     @Test
