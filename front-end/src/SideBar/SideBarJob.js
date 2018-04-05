@@ -12,6 +12,8 @@ class SideBarrequest extends Component {
     };
   }
 
+
+
   //Responsible for showing all of the files that are inside the request
   unHide() {
     this.setState({ isHidden: false });
@@ -60,7 +62,7 @@ class SideBarrequest extends Component {
           >
             Expand
           </button>
-          <button className="btn btn-danger disabled" aria-disabled="true">Delete</button>
+          <button className="btn btn-danger" onClick={this.props.deleteRequest(this.props.data['id'])}>Delete</button>
           {selected === this.props.elementID && (
             <FullList className={this.state.listProperty} data={request} />
           )}

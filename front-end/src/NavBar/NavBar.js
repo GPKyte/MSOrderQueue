@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import MakePrinter from "./../Make Printers/MakePrinters.js";
+import MakePrinter from "./../Make/MakePrinters.js";
 import PrinterList from "./../Printer/PrinterList.js";
 import LoginPage from "./../LoginPage/LoginPage.js";
 
@@ -21,7 +21,6 @@ class NavBar extends Component {
   }
 
   render() {
-
     return (
       <div>
         <button name="currentView" value="printers" onClick={this.onClick}>
@@ -29,6 +28,9 @@ class NavBar extends Component {
         </button>
         <button name="currentView" value="addPrinters" onClick={this.onClick}>
           Add Printers
+        </button>
+        <button name="currentView" value="addRequests" onClick={this.onClick}>
+          Add Requests
         </button>
         <button name="currentView" value="loginPage" onClick={this.onClick}>
           Login
@@ -50,6 +52,8 @@ class RenderedView extends Component {
         return <PrinterList />;
       case "addPrinters":
         return <MakePrinter />;
+      case "addRequests":
+        return <div>not implemented yet</div>;
       case "loginPage":
         return <LoginPage />;
       case "archive":

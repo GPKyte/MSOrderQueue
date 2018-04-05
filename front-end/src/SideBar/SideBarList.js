@@ -10,6 +10,7 @@ class SideBarList extends Component {
       selectedIndex: -1,
       requestList: []
     };
+    this.deleteRequest = this.deleteRequest.bind(this);
   }
 
   //Part of the logic to see which of the requests is currenty expanded.
@@ -40,6 +41,23 @@ class SideBarList extends Component {
     });
   }
 
+  deleteRequest(id) {
+
+    const headersI = {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "True"
+    };
+
+    const myRequest = new Request("http://localhost:8080/api/requests/" + id, {
+      method: "DELETE",
+      headers: headersI
+    });
+
+    fetch(myRequest).then(response => {
+      this.requestList();
+    });
+  }
+
   componentDidMount() {
     this.requestList();
   }
@@ -57,6 +75,7 @@ class SideBarList extends Component {
             currentIndex={this.changeSelectedIndex}
             selected={this.state.selectedIndex}
             key={i.id}
+            deleteRequest={this.deleteRequest}
             currentlyRevealed={this.state.selectedIndex}
             elementID={size - 1}
             data={i}
