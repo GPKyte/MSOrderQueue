@@ -60,7 +60,7 @@ class SideBarrequest extends Component {
           >
             Expand
           </button>
-          <button className="btn btn-outline-danger">Delete</button>
+          <button className="btn btn-danger disabled" aria-disabled="true">Delete</button>
           {selected === this.props.elementID && (
             <FullList className={this.state.listProperty} data={request} />
           )}

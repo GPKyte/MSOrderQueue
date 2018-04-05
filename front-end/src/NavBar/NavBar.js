@@ -21,7 +21,6 @@ class NavBar extends Component {
   }
 
   render() {
-    var printerData = this.props.data;
 
     return (
       <div>
@@ -44,9 +43,6 @@ class NavBar extends Component {
 }
 
 class RenderedView extends Component {
-  constructor(props) {
-    super(props);
-  }
   //This is the generated list responsible for holding all of the files that we are using.
   render() {
     switch (this.props.value) {
