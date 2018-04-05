@@ -7,10 +7,9 @@ class SideBarList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedIndex: "",
+      selectedIndex: -1,
       jobList: []
     };
-    this.changeSelectedIndex = this.changeSelectedIndex.bind(this);
   }
 
   //Part of the logic to see which of the jobs is currenty expanded.
@@ -19,13 +18,6 @@ class SideBarList extends Component {
       selectedIndex: index
 
     });
-    console.log(this.state.selectedIndex)
-  }
-
-  changeSelectedIndex(index) {
-    this.setState({
-      selectedIndex: index
-    })
   }
 
   jobList() {
@@ -39,6 +31,7 @@ class SideBarList extends Component {
   }
 
   render() {
+    var size = 0;
     //This is the list of jobs that are in the queue
     var ListOfJobs = this.props.data;
 
@@ -48,14 +41,15 @@ class SideBarList extends Component {
     if (ListOfJobs != null) {
       //This is the generated list that we will use to populate all of the jobs that are inside of the sidebar.
       var list = ListOfJobs.map(i => {
+        size += 1;
         return (
           <SideBarJob
             onClick={this.onClick.bind(this)}
-            index={i.id}
             currentIndex={this.changeSelectedIndex}
             selected={this.state.selectedIndex}
             key={i.id}
             currentlyRevealed={this.state.selectedIndex}
+            elementID={size - 1}
             data={i}
           />
         );

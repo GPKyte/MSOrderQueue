@@ -44,6 +44,8 @@ class MakePrinter extends Component {
   render() {
     return (
       <div>
+        This is for testing the addition of printers and will not be in the final iteration
+        <div/>
         <input
           type="text"
           name="PrinterName"

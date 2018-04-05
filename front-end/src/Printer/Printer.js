@@ -17,14 +17,15 @@ class Printer extends Component {
     return (
       <div className="card card-size padding-md">
         <img className="card-img-top" src={require('./../Images/download.jpg')} alt="Card cap"/>
+        {printerData["name"]}
         <div> Status: {printerData['status']} </div>
         <div className="card-block">
           <button className="btn btn-primary card-button">
-            {printerData["name"]}
+            Dequeue
           </button>
           <button
             onClick={this.onClick}
-            className="btn btn-outline-secondary card-button"
+            className="btn btn-outline-danger card-button"
           >
             Delete
           </button>

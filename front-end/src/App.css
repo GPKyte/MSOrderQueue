@@ -32,6 +32,22 @@
   width: 300px;
 }
 
+.wrap-emails {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.right {
+  position:relative;
+  float: right;
+  margin-right: 10%
+}
+
+.printerTitle {
+  width:100%;
+}
+
 .SideBar {
   width: 20%;
   float: left;

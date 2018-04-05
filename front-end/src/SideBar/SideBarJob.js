@@ -8,22 +8,38 @@ class SideBarJob extends Component {
       isHidden: true,
       buttonProperty: "btn btn-primary",
       printerProperty: "Printer list-group-item",
-      listProperty: "collapse",
-      currentIndex: -1
+      listProperty: "collapse"
     };
   }
 
   //Responsible for showing all of the files that are inside the job
+  unHide() {
+    this.setState({ isHidden: false });
+    this.setState({
+      printerProperty: "Printer list-group-item"
+    });
+  }
 
   //Responsible for hiding all of the files that are inside the job
+  hide() {
+    this.setState({ isHidden: true });
+    this.setState({
+      printerProperty: "Printer list-group-item"
+    });
+  }
 
   //Responible for the logic behind hiding and showing the items in the job
   onClick() {
-    this.props.changeSelectedIndex(this.props.index);
-    console.log(this.props.index, this.props.selected);
+    this.props.onClick(this.props.elementID);
+    if (this.state.isHidden) {
+      this.unHide();
+
+      this.props.onClick(this.props.elementID);
+    } else {
+      this.hide();
+      this.props.onClick(-1);
+    }
   }
-
-
 
   render() {
     var job = this.props.data;
@@ -35,18 +51,19 @@ class SideBarJob extends Component {
     return (
       <div className={this.state.printerProperty}>
         <div className="panel-group">
-          {job["email"]} {job["firstName"]}
+          <div className="wrap-enmails"> {job["email"]} </div>
+            {job["firstName"]}
+          <div/>
           <button
             className={this.state.buttonProperty}
             onClick={this.onClick.bind(this)}
           >
-            {this.props.index}
+            Expand
           </button>
-          {selected === this.props.index && (
+          {selected === this.props.elementID && (
             <FullList className={this.state.listProperty} data={job} />
           )}
-          <button className="btn btn-outline-primary btn-lg">Delete</button>
-
+          <button className="btn btn-outline-danger">Delete</button>
         </div>
       </div>
     );

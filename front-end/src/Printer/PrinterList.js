@@ -62,7 +62,7 @@ class PrinterList extends Component {
     //Make This a object to be repeated
     var ListOfPrinters = this.state.printerList;
     var refreshButton = () => (
-      <button onClick={this.refresh} className="btn btn-outline-primary btn-sm">
+      <button onClick={this.refresh} className="btn btn-outline-primary btn-sm right">
         Refresh{" "}
       </button>
     );
@@ -71,8 +71,8 @@ class PrinterList extends Component {
     if (ListOfPrinters != null && ListOfPrinters.length > 0) {
       return (
         <div className="page-header">
-          <h1>Printers</h1>
           <ul className="PrinterContainer row">
+            <h1 className="printerTitle">Printers {refreshButton()}</h1>
             {ListOfPrinters.map(i => {
               return (
                 <Printer
@@ -84,7 +84,7 @@ class PrinterList extends Component {
               );
             })}
           </ul>
-          {refreshButton()}
+
         </div>
       );
     } else {

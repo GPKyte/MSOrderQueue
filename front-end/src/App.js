@@ -3,6 +3,7 @@ import "./App.css";
 import PrinterList from "./Printer/PrinterList.js";
 import SideBar from "./SideBar/SideBarList.js";
 import MakePrinter from "./Make Printers/MakePrinters.js";
+import NavBar from "./NavBar/NavBar.js";
 //import LoginPage from "./LoginPage/LoginPage.js";
 
 class App extends Component {
@@ -70,6 +71,7 @@ class App extends Component {
         <div className="SideBar">
           <SideBar data={PrintJobs} />
         </div>
+        <NavBar></NavBar>
         {/* This will be in the main part of the view */}
         <div className="MainBox">
           <PrinterList className="App container" />
