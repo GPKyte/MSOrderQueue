@@ -18,13 +18,13 @@ public class UserController {
     @Autowired
     UserMongoRepository userRepository;
 
-    @GetMapping("/users")
+    @GetMapping(value="/users")
     public List<User> getAllUsers() {
         Sort sortByEmail = new Sort(Sort.Direction.DESC, "email");
         return userRepository.findAll(sortByEmail);
     }
 
-    @GetMapping("/users/{username}")
+    @GetMapping(value="/users/{username}")
     public Optional<User> getUserById(@PathVariable("username") String username) {
         return userRepository.findById(username);
     }
@@ -33,27 +33,6 @@ public class UserController {
     public User createUser(@Valid @RequestBody User user) {
         if (user.getRole() == null) {user.setRole(User.Role.REQUESTER);}
         return userRepository.save(user);
-    }
-
-    @GetMapping(value="/users/{username}/requests")
-    public ResponseEntity<ArrayList<Request>> getRequestsByUser(@PathVariable("username") String username) {
-        return userRepository.findById(username)
-                .map(user -> {
-                    return ResponseEntity.ok().body(user.getRequests());
-                }).orElse(ResponseEntity.notFound().build());
-    }
-
-    @PostMapping(value="/users/{username}/requests")
-    public ResponseEntity<Request> createRequest(@PathVariable("username") String username,
-                                @Valid @RequestBody Request request) {
-        return userRepository.findById(username)
-                .map(user -> {
-                    ArrayList<Request> requests = new ArrayList(user.getRequests());
-                    requests.add(0, request);
-                    user.setRequests(requests);
-                    User updatedUser = userRepository.save(user);
-                    return ResponseEntity.ok().body(updatedUser.getRequests().get(0));
-                }).orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping(value="/users/{username}")
