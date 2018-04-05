@@ -28,8 +28,8 @@ class LoginPage extends Component {
   render() {
     return (
       <div className="Printer container">
-        <div class="input-group mb-3 text-input-50">
-          <div class="input-group-prepend">
+        <div className="input-group mb-3 text-input-50">
+          <div className="input-group-prepend">
             <div className="input-group-text" id="inputGroup-sizing-default">
               Username
             </div>
@@ -45,8 +45,8 @@ class LoginPage extends Component {
           />
         </div>
         <div />
-        <div class="input-group mb-3 text-input-50">
-          <div class="input-group-prepend">
+        <div className="input-group mb-3 text-input-50">
+          <div className="input-group-prepend">
             <div className="input-group-text" id="inputGroup-sizing-default">
               Password
             </div>

@@ -49,7 +49,6 @@ class PrinterList extends Component {
     });
 
     fetch(myRequest).then(response => {
-      console.log(response);
       this.printerList();
     });
   }

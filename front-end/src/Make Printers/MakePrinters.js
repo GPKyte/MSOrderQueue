@@ -9,7 +9,7 @@ class MakePrinter extends Component {
       PrinterName: "Geoffrey",
       Model: "SomeModel",
       Brand: "MakerBot",
-      Status: ""
+      Status: "READY"
     };
     this.handleChange = this.handleChange.bind(this);
     this.onClick = this.onClick.bind(this);
@@ -47,8 +47,8 @@ class MakePrinter extends Component {
         This is for testing the addition of printers and will not be in the
         final iteration
         <div />
-        <div class="input-group mb-3 text-input-50">
-          <div class="input-group-prepend">
+        <div className="input-group mb-3 text-input-50">
+          <div className="input-group-prepend">
             <div className="input-group-text" id="inputGroup-sizing-default">
               Printer Name
             </div>
@@ -64,8 +64,8 @@ class MakePrinter extends Component {
           />
         </div>
         <div />
-        <div class="input-group mb-3 text-input-50">
-          <div class="input-group-prepend">
+        <div className="input-group mb-3 text-input-50">
+          <div className="input-group-prepend">
             <div className="input-group-text" id="inputGroup-sizing-default">
               Model
             </div>
@@ -81,8 +81,8 @@ class MakePrinter extends Component {
           />
         </div>
         <div />
-        <div class="input-group mb-3 text-input-50">
-          <div class="input-group-prepend">
+        <div className="input-group mb-3 text-input-50">
+          <div className="input-group-prepend">
             <div className="input-group-text" id="inputGroup-sizing-default">
               Brand
             </div>

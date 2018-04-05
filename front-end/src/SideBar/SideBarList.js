@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SideBarJob from "./SideBarJob.js";
+import SideBarrequest from "./SideBarJob.js";
 var Promise = require("bluebird");
 Promise.promisifyAll(require("request"));
 
@@ -8,39 +8,51 @@ class SideBarList extends Component {
     super(props);
     this.state = {
       selectedIndex: -1,
-      jobList: []
+      requestList: []
     };
   }
 
-  //Part of the logic to see which of the jobs is currenty expanded.
+  //Part of the logic to see which of the requests is currenty expanded.
   onClick(index) {
     this.setState({
       selectedIndex: index
     });
   }
 
-  jobList() {
-    //  fetch('http://localhost:8080/api/jobList')
-    // .then(({ results }) => this.setState({ jobList: results.blob() }));
-    // console.log
+  requestList() {
+    fetch("http://localhost:8080/api/requests").then(results => {
+      if (results.status === 200) {
+        results
+          .json()
+          .then(data => ({
+            data: data,
+            status: results.status
+          }))
+          .then(results => {
+            this.setState({
+              requestList: results["data"]
+            });
+            console.log(this.state.requestList);
+          });
+      } else {
+        throw new Error("This project SUCKS!");
+      }
+    });
   }
 
   componentDidMount() {
-    this.jobList();
+    this.requestList();
   }
 
   render() {
     var size = 0;
-    //This is the list of jobs that are in the queue
-    var ListOfJobs = this.props.data;
-
-    //If there are Jobs in the queue then render this
-    if (ListOfJobs != null) {
-      //This is the generated list that we will use to populate all of the jobs that are inside of the sidebar.
-      var list = ListOfJobs.map(i => {
+    //If there are requests in the queue then render this
+    if (this.state.requestList != null) {
+      //This is the generated list that we will use to populate all of the requests that are inside of the sidebar.
+      var list = this.state.requestList.map(i => {
         size += 1;
         return (
-          <SideBarJob
+          <SideBarrequest
             onClick={this.onClick.bind(this)}
             currentIndex={this.changeSelectedIndex}
             selected={this.state.selectedIndex}
@@ -53,7 +65,7 @@ class SideBarList extends Component {
       });
       return <div>{list}</div>;
     } else {
-      return <div>There are no Jobs</div>;
+      return <div>There are no requests</div>;
     }
   }
 }
