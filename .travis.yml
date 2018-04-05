@@ -18,11 +18,10 @@ matrix:
         - npm install
       cache:
         directories:
+          - "node_modules"
 
       script:
         - npm test
 notifications:
-  webhooks:
-    - webhooks: https://coveralls.io/webhook?repo_token=nCLMAOs5DadOenvkOYsIqkACo9lWnISTg
   email:
     - 3montyjack@gmail.com

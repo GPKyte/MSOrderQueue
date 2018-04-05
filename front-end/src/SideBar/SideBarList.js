@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SideBarJob from "./SideBarJob.js";
-var Promise = require("bluebird")
+var Promise = require("bluebird");
 Promise.promisifyAll(require("request"));
 
 class SideBarList extends Component {
@@ -16,14 +16,13 @@ class SideBarList extends Component {
   onClick(index) {
     this.setState({
       selectedIndex: index
-
     });
   }
 
   jobList() {
-   //  fetch('http://localhost:8080/api/jobList')
-   // .then(({ results }) => this.setState({ jobList: results.blob() }));
-   // console.log
+    //  fetch('http://localhost:8080/api/jobList')
+    // .then(({ results }) => this.setState({ jobList: results.blob() }));
+    // console.log
   }
 
   componentDidMount() {
@@ -34,8 +33,6 @@ class SideBarList extends Component {
     var size = 0;
     //This is the list of jobs that are in the queue
     var ListOfJobs = this.props.data;
-
-
 
     //If there are Jobs in the queue then render this
     if (ListOfJobs != null) {
@@ -54,9 +51,7 @@ class SideBarList extends Component {
           />
         );
       });
-      return (
-          <div>{list}</div>
-      );
+      return <div>{list}</div>;
     } else {
       return <div>There are no Jobs</div>;
     }

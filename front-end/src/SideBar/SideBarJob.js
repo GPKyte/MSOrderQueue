@@ -16,7 +16,7 @@ class SideBarJob extends Component {
   unHide() {
     this.setState({ isHidden: false });
     this.setState({
-      printerProperty: "Printer list-group-item active"
+      printerProperty: "Printer list-group-item"
     });
   }
 
@@ -51,17 +51,19 @@ class SideBarJob extends Component {
     return (
       <div className={this.state.printerProperty}>
         <div className="panel-group">
-          {job["email"]} {job["firstName"]}
+          <div className="wrap-emails"> {job["email"]} </div>
+            {job["firstName"]}
+          <div/>
           <button
             className={this.state.buttonProperty}
             onClick={this.onClick.bind(this)}
           >
-            {this.props.elementID}
+            Expand
           </button>
+          <button className="btn btn-outline-danger">Delete</button>
           {selected === this.props.elementID && (
             <FullList className={this.state.listProperty} data={job} />
           )}
-          <button className="btn btn-outline-primary btn-lg">Delete</button>
 
         </div>
       </div>
