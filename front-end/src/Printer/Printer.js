@@ -15,14 +15,16 @@ class Printer extends Component {
     var printerData = this.props.data;
 
     return (
-      <div className="card card-size padding-md">
-        <img className="card-img-top" src={require('./../Images/download.jpg')} alt="Card cap"/>
+      <div className="card card-size ">
+        <img
+          className="card-img-top"
+          src={require("./../Images/download.jpg")}
+          alt="Card cap"
+        />
         {printerData["name"]}
-        <div> Status: {printerData['status']} </div>
+        <div> Status: {printerData["status"]} </div>
         <div className="card-block">
-          <button className="btn btn-primary card-button">
-            Dequeue
-          </button>
+          <button className="btn btn-primary card-button">Dequeue</button>
           <button
             onClick={this.onClick}
             className="btn btn-outline-danger card-button"

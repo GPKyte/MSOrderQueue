@@ -51,7 +51,7 @@ class SideBarJob extends Component {
     return (
       <div className={this.state.printerProperty}>
         <div className="panel-group">
-          <div className="wrap-enmails"> {job["email"]} </div>
+          <div className="wrap-emails"> {job["email"]} </div>
             {job["firstName"]}
           <div/>
           <button
@@ -60,10 +60,11 @@ class SideBarJob extends Component {
           >
             Expand
           </button>
+          <button className="btn btn-outline-danger">Delete</button>
           {selected === this.props.elementID && (
             <FullList className={this.state.listProperty} data={job} />
           )}
-          <button className="btn btn-outline-danger">Delete</button>
+
         </div>
       </div>
     );
