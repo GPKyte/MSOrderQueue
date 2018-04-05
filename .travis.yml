@@ -19,5 +19,7 @@ matrix:
       script:
         - npm test
 notifications:
+  webhooks:
+    - webhooks: https://coveralls.io/webhook?repo_token=nCLMAOs5DadOenvkOYsIqkACo9lWnISTg
   email:
     - 3montyjack@gmail.com
