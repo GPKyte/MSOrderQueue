@@ -6,7 +6,7 @@ class Printer extends Component {
     return (
       <div className="Printer">
         {/* This is the base printer Object that displays all the nessicary for the future releases. */}
-        {printerData["file"]}
+        {printerData["fileName"]}
         <div />
         <button className="btn btn-primary btn-sm">Delete</button>
         <button className="btn btn-secondary btn-sm">Queue</button>

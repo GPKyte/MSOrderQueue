@@ -8,7 +8,7 @@ import NavBar from "./NavBar/NavBar.js";
 
 class App extends Component {
   render() {
-    const PrintJobs = [
+    const Printrequests = [
       {
         id: 1,
         email: "3montyjack@gmail.com",
@@ -69,7 +69,7 @@ class App extends Component {
       <div className="App Test">
         {/* This will be a sideBar on the left side */}
         <div className="SideBar">
-          <SideBar data={PrintJobs} />
+          <SideBar data={Printrequests} />
         </div>
         <NavBar />
       </div>
