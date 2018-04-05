@@ -15,7 +15,9 @@ matrix:
         - "7"
       before_script:
         - cd front-end
+        - npm cache --force clean
         - npm install
+
 
       script:
         - npm test
