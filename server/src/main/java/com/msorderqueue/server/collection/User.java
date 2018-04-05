@@ -22,7 +22,6 @@ public class User {
     @NotBlank
     private String email;
     private Role role = Role.REQUESTER;
-    private ArrayList<Request> requests;
 
     public enum Role {REQUESTER, STAFF, ADMIN};
 
@@ -34,10 +33,5 @@ public class User {
         this.lastName = last;
         this.email = email;
         this.role = role;
-        this.requests = new ArrayList<>();
-    }
-
-    public ArrayList<Request> getRequests() {
-        return (this.requests != null)? this.requests : new ArrayList<Request>();
     }
 }

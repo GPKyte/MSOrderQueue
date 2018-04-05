@@ -1,4 +1,4 @@
-# MSOrderQueue  
+# MSOrderQueue  [![Build Status](https://travis-ci.org/GPKyte/MSOrderQueue.svg?branch=master)](https://travis-ci.org/GPKyte/MSOrderQueue)
 System that works as a queue to process 3D-print requests for a MakerSpace  
 
 ## Installation  
