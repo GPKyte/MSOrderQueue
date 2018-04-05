@@ -16,9 +16,6 @@ matrix:
       before_script:
         - cd front-end
         - npm install
-      cache:
-        directories:
-          - "node_modules"
 
       script:
         - npm test
