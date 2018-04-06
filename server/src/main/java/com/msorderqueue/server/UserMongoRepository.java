@@ -5,6 +5,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 /**
  * @author Gavin Kyte
  */
-public interface PrinterMongoRepository extends MongoRepository<Printer, String> {
-    Printer findByName(String name);
+public interface UserMongoRepository extends MongoRepository<User, String> {
+    User findByEmail(String email);
 }

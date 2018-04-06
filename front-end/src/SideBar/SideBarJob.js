@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import SideBarFile from "./SideBarFile";
 
-class SideBarJob extends Component {
+class SideBarrequest extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -12,24 +12,23 @@ class SideBarJob extends Component {
     };
   }
 
-  //Responsible for showing all of the files that are inside the job
+  //Responsible for showing all of the files that are inside the request
   unHide() {
     this.setState({ isHidden: false });
     this.setState({
-      printerProperty: "Printer list-group-item active"
-    })
+      printerProperty: "Printer list-group-item"
+    });
   }
 
-
-  //Responsible for hiding all of the files that are inside the job
+  //Responsible for hiding all of the files that are inside the request
   hide() {
     this.setState({ isHidden: true });
     this.setState({
       printerProperty: "Printer list-group-item"
-    })
+    });
   }
 
-  //Responible for the logic behind hiding and showing the items in the job
+  //Responible for the logic behind hiding and showing the items in the request
   onClick() {
     this.props.onClick(this.props.elementID);
     if (this.state.isHidden) {
@@ -43,7 +42,7 @@ class SideBarJob extends Component {
   }
 
   render() {
-    var job = this.props.data;
+    var request = this.props.data;
     var selected = this.props.selected;
 
     //The isHidden checks for wether or not the current list should be shown
@@ -52,13 +51,19 @@ class SideBarJob extends Component {
     return (
       <div className={this.state.printerProperty}>
         <div className="panel-group">
-          {job["email"]} {job["firstName"]}
-
-          <button className={this.state.buttonProperty} onClick={this.onClick.bind(this)}>
-            {this.props.elementID}
+          <div className="wrap-emails"> {request["user"]} </div>
+          {request["firstName"]}
+          <div />
+          <button
+            className={this.state.buttonProperty}
+            onClick={this.onClick.bind(this)}
+          >
+            Expand
           </button>
-          <button className="btn">Delete</button>
-          {selected === this.props.elementID && <FullList className={this.state.listProperty}data={job} />}
+          <button className="btn btn-danger disabled" aria-disabled="true">Delete</button>
+          {selected === this.props.elementID && (
+            <FullList className={this.state.listProperty} data={request} />
+          )}
         </div>
       </div>
     );
@@ -69,10 +74,10 @@ class FullList extends Component {
   //This is the generated list responsible for holding all of the files that we are using.
   render() {
     var size = 0;
-    var requests = this.props.data["requests"][0];
+    var requests = this.props.data["requestItems"];
     return (
       <ul className="PrinterContainer">
-        {requests["files"].map(i => {
+        {requests.map(i => {
           size += 1;
           return <SideBarFile key={size - 1} elementID={size - 1} data={i} />;
         })}
@@ -81,4 +86,4 @@ class FullList extends Component {
   }
 }
 
-export default SideBarJob;
+export default SideBarrequest;

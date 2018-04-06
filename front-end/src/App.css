@@ -1,3 +1,6 @@
+/*https://github.com/chenglou/react-motion
+*/
+
 .App {
   text-align: center;
 }
@@ -22,11 +25,41 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.card-button {
+  width: 40%;
+}
+
+.card-size {
+  width: 300px;
+}
+
+.wrap-emails {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.right {
+  position: relative;
+  float: right;
+  margin-right: 10%;
+}
+
+.text-input-50 {
+  width: 50%;
+}
+
+.printerTitle {
+  width: 100%;
+}
+
+.SideBar {
+  width: 20%;
+  float: left;
+  height: 100vh;
+  background-color: #2a00fa;
+}
+
+.MainBox {
+  width: auto;
 }
