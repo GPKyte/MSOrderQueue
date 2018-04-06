@@ -2,37 +2,6 @@ import React, { Component } from "react";
 var Promise = require("bluebird");
 Promise.promisifyAll(require("request"));
 
-
-
-
-//This is not finished and ndeed a shit ton more work
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 class MakeRequest extends Component {
   constructor(props) {
     super(props);

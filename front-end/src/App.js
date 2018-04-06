@@ -14,7 +14,9 @@ class App extends Component {
         <div className="SideBar">
           <SideBar />
         </div>
+        <div className="App-Body">
         <NavBar />
+        </div>
       </div>
     );
   }
