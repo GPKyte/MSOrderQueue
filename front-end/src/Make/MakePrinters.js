@@ -23,7 +23,8 @@ class MakePrinter extends Component {
   }
   onClick() {
     const headersI = {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "True"
     };
 
     const myRequest = new Request("http://localhost:8080/api/printers", {

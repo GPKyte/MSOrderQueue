@@ -36,7 +36,7 @@ class SideBarList extends Component {
             console.log(this.state.requestList);
           });
       } else {
-        throw new Error("This project SUCKS!");
+        throw new Error("Server No Longer Has Has The File");
       }
     });
   }
