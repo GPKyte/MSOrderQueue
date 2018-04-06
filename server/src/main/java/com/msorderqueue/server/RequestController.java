@@ -40,17 +40,17 @@ public class RequestController {
         return requestRepository.save(new Request(request.getUser(), request.getComments(), request.isForClass(), items));
     }
 
-    // @PutMapping(value="/requests/{id}")
-    // public ResponseEntity<Request> updateRequest(@PathVariable("id") String id,
-    //                                             @Valid @RequestBody Request request) {
-    //     return requestRepository.findById(id)
-    //             .map(requestData -> {
-    //                 requestData.setStatus(request.getStatus());
-    //                 requestData.setComments(request.getComments());
-    //                 Request updatedRequest = requestRepository.save(requestData);
-    //                 return ResponseEntity.ok().body(updatedRequest);
-    //             }).orElse(ResponseEntity.notFound().build());
-    // }
+    @PutMapping(value="/requests/{id}")
+    public ResponseEntity<Request> updateRequest(@PathVariable("id") String id,
+                                                @Valid @RequestBody Request request) {
+        return requestRepository.findById(id)
+                .map(requestData -> {
+                    requestData.setStatus(request.getStatus());
+                    requestData.setComments(request.getComments());
+                    Request updatedRequest = requestRepository.save(requestData);
+                    return ResponseEntity.ok().body(updatedRequest);
+                }).orElse(ResponseEntity.notFound().build());
+    }
 
     @DeleteMapping(value="/requests/{id}")
     public ResponseEntity<?> deleteRequest(@PathVariable("id") String id) {
