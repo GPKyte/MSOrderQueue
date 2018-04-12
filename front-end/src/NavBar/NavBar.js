@@ -21,23 +21,49 @@ class NavBar extends Component {
   }
 
   render() {
-
     return (
-      <div>
-        <button name="currentView" value="printers" onClick={this.onClick}>
-          Printers
-        </button>
-        <button name="currentView" value="addPrinters" onClick={this.onClick}>
-          Add Printers
-        </button>
-        <button name="currentView" value="loginPage" onClick={this.onClick}>
-          Login
-        </button>
-        <button name="currentView" value="archive" onClick={this.onClick}>
-          Archive
-        </button>
+      <nav>
+        <nav className="navbar navbar-light bg-light">
+          <div className="navbar-nav">
+            <div className="navbar-brand">
+              <a
+                className="nav-item nav-link"
+                name="currentView"
+                value="printers"
+                onClick={this.onClick}
+              >
+                Printers
+              </a>
+              <a
+                className="nav-item nav-link"
+                name="currentView"
+                value="addPrinters"
+                onClick={this.onClick}
+              >
+                Add Printers
+              </a>
+              <a
+                className="nav-item nav-link"
+                name="currentView"
+                value="loginPage"
+                onClick={this.onClick}
+              >
+                Login
+              </a>
+              <a
+                className="nav-item nav-link"
+                name="currentView"
+                value="archive"
+                onClick={this.onClick}
+              >
+                Archive
+              </a>
+            </div>
+          </div>
+        </nav>
+
         <RenderedView value={this.state.currentView}> </RenderedView>
-      </div>
+      </nav>
     );
   }
 }
