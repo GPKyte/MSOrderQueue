@@ -22,4 +22,4 @@ matrix:
         - npm test
 notifications:
   email:
-    - 3montyjack@gmail.com
+    
