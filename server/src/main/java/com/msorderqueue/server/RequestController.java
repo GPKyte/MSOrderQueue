@@ -40,18 +40,13 @@ public class RequestController {
         return requestRepository.save(new Request(request.getUser(), request.getComments(), request.isForClass(), items));
     }
 
-    // May want to remove ability to directly edit status.
     @PatchMapping(value="/requests/{id}")
     public ResponseEntity<Request> updateRequest(@PathVariable("id") String id,
                                                 @Valid @RequestBody Request request) {
         return requestRepository.findById(id)
                 .map(requestData -> {
-                    RequestStatus status = request.getStatus();
                     String comments = request.getComments();
-
-                    if (status != null) { requestData.setStatus(status); }
                     if (comments != null) { requestData.setComments(comments); }
-
                     Request updatedRequest = requestRepository.save(requestData);
                     return ResponseEntity.ok().body(updatedRequest);
                 }).orElse(ResponseEntity.notFound().build());
