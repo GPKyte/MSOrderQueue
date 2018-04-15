@@ -16,6 +16,7 @@ import lombok.Data;
  * @author Gavin Kyte
  */
 @Data
+@Document(collection = "requests")
 public class Request implements Comparable<Request> {
     @Id
     private String id; // Make this a timestamp
