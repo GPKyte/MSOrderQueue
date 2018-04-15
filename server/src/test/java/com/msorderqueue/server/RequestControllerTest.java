@@ -47,7 +47,7 @@ public class RequestControllerTest {
         assertEquals("Comments are for nerds", requestA.getComments());
         assertEquals("kyteg", requestA.getUser());
         assertEquals(false, requestA.isForClass());
-        Iterable<Request> requests = requestController.getAllRequests();
+        Iterable<Request> requests = requestController.getAllRequests().getBody(); // Should we test for 200 success?
         int count = 0;
         for(Request r : requests) {
             count++;
