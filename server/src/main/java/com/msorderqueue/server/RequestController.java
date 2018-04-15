@@ -6,6 +6,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Collections;
 import java.util.ArrayList;
 import java.util.stream.*;
 
@@ -17,9 +18,9 @@ public class RequestController {
     RequestMongoRepository requestRepository;
 
     @GetMapping(value="/requests")
-    public List<Request> getAllRequests() {
+    public ResponseEntity<List<Request>> getAllRequests() {
         Sort sortByTimestamp = new Sort(Sort.Direction.DESC, "timestamp");
-        return requestRepository.findAll(sortByTimestamp);
+        return ResponseEntity.ok().body(requestRepository.findAll(sortByTimestamp));
     }
 
     @GetMapping(value="/archive")
@@ -42,7 +43,7 @@ public class RequestController {
     }
 
     @PostMapping(value="/requests")
-    public Request createRequest(@Valid @RequestBody Request request) {
+    public @ResponseBody Request createRequest(@Valid @RequestBody Request request) {
         ArrayList<RequestItem> items = new ArrayList<>();
         for (RequestItem i : request.getRequestItems()) {
             items.add(new RequestItem(i.getFileName(), i.getQty()));
