@@ -57,6 +57,10 @@ public class Request implements Comparable<Request> {
         this.status = status;
     }
 
+    public ArrayList<RequestItem> getRequestItems() {
+        return (this.requestItems == null)? new ArrayList<RequestItem>() : this.requestItems;
+    }
+
     public int compareTo(Request o) {
         int result = 0;
         if (this.forClass == o.forClass) {
