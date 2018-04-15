@@ -8,6 +8,7 @@ import java.util.Date;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.ArrayList;
+import java.lang.Comparable;
 
 import lombok.Data;
 
@@ -15,7 +16,7 @@ import lombok.Data;
  * @author Gavin Kyte
  */
 @Data
-public class Request {
+public class Request implements Comparable<Request> {
     @Id
     private String id; // Make this a timestamp
     private String user; // References requester username
@@ -53,5 +54,17 @@ public class Request {
         else if (complete == requestItems.size()) { status = RequestStatus.COMPLETE; }
         else { status = RequestStatus.ORDERED; }
         this.status = status;
+    }
+
+    public int compareTo(Request o) {
+        int result = 0;
+        if (this.forClass == o.forClass) {
+            result = this.timestamp.compareTo(o.timestamp);
+        } else if (this.forClass == true) {
+            result = -1;
+        } else {
+            result = 1;
+        }
+        return result;
     }
 }
