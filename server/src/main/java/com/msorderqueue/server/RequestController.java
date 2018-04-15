@@ -22,13 +22,23 @@ public class RequestController {
         return requestRepository.findAll(sortByTimestamp);
     }
 
-    @GetMapping(value="/requests?name={username}")
-    public ResponseEntity<List<Request>> getRequestsByUser(@PathVariable("username") String username) {
-        return ResponseEntity.ok().body(
-                requestRepository.findAll()
-                .stream()
-                .filter(r -> username.equals(r.getUser()))
-                .collect(Collectors.toList()));
+    @GetMapping(value="/archive")
+    public ResponseEntity<List<Request>> getArchive() {
+        return ResponseEntity.ok().body(requestRepository.findByStatus(RequestStatus.COMPLETE));
+    }
+
+    @GetMapping(value="/queue")
+    public @ResponseBody List<Request> getQueue() {
+        List<Request> requests = requestRepository.findAll().stream()
+            .filter(request -> request.getStatus() != RequestStatus.COMPLETE)
+            .collect(Collectors.toList());
+        Collections.sort(requests);
+        return requests;
+    }
+
+    @GetMapping(value="/requests", params={"username"})
+    public ResponseEntity<List<Request>> getRequestsByUser(@RequestParam String username) {
+        return ResponseEntity.ok().body(requestRepository.findByUser(username));
     }
 
     @PostMapping(value="/requests")
