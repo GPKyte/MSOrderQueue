@@ -17,10 +17,8 @@ class SideBarrequest extends Component {
     this.props.onClick(this.props.elementID);
     if (!(this.props.selected === this.props.elementID)) {
       this.props.onClick(this.props.elementID);
-      console.log("Hit Here");
     } else {
       this.props.onClick(-1);
-      console.log("Hit Here 2");
     }
   }
 
