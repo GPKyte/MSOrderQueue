@@ -21,7 +21,7 @@ class SideBarList extends Component {
   }
 
   requestList() {
-    fetch(this.props.url + "/api/requests").then(results => {
+    fetch(this.props.url + "/api/queue").then(results => {
       if (results.status === 200) {
         console.log(results);
         results
