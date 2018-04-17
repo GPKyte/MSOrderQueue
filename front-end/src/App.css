@@ -56,8 +56,19 @@
 .SideBar {
   width: 20%;
   float: left;
-  height: 100vh;
-  background-color: #2a00fa;
+}
+
+.button-link {
+  background-color: transparent;
+  border: none;
+}
+
+.button-link:hover {
+  color: blue;
+  text-decoration: underline;
+}
+.button-link:focus{
+
 }
 
 .MainBox {
