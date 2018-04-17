@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import MakePrinter from "./../Make Printers/MakePrinters.js";
+import MakePrinter from "./../Make/MakePrinters.js";
 import PrinterList from "./../Printer/PrinterList.js";
 import LoginPage from "./../LoginPage/LoginPage.js";
 import SideBar from "./../SideBar/SideBarList.js";

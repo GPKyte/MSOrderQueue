@@ -10,6 +10,7 @@ class SideBarList extends Component {
       selectedIndex: -1,
       requestList: []
     };
+    this.deleteRequest = this.deleteRequest.bind(this);
   }
 
   //Part of the logic to see which of the requests is currenty expanded.
@@ -36,8 +37,25 @@ class SideBarList extends Component {
             console.log(this.state.requestList);
           });
       } else {
-        throw new Error("This project SUCKS!");
+        throw new Error("Server No Longer Has Has The File");
       }
+    });
+  }
+
+  deleteRequest(id) {
+
+    const headersI = {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "True"
+    };
+
+    const myRequest = new Request("http://localhost:8080/api/requests/" + id, {
+      method: "DELETE",
+      headers: headersI
+    });
+
+    fetch(myRequest).then(response => {
+      this.requestList();
     });
   }
 

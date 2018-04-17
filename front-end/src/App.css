@@ -21,6 +21,11 @@
   font-size: 1.5em;
 }
 
+.App-Body {
+  float: right;
+  width: 80%;
+}
+
 .App-intro {
   font-size: large;
 }
