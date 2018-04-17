@@ -19,7 +19,7 @@ class File extends Component {
           className="btn btn-secondary btn-sm disabled"
           aria-disabled="true"
         >
-          Queue
+          Print
         </button>
       </div>
     );

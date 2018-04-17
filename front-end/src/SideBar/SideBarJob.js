@@ -10,6 +10,7 @@ class SideBarrequest extends Component {
       printerProperty: "Printer list-group-item",
       listProperty: "collapse"
     };
+    this.onDelete = this.onDelete.bind(this);
   }
 
   //Responible for the logic behind hiding and showing the items in the request
@@ -17,12 +18,15 @@ class SideBarrequest extends Component {
     this.props.onClick(this.props.elementID);
     if (!(this.props.selected === this.props.elementID)) {
       this.props.onClick(this.props.elementID);
-      console.log("Hit Here");
     } else {
       this.props.onClick(-1);
-      console.log("Hit Here 2");
     }
   }
+  onDelete(event) {
+    console.log(event.target)
+    this.props.deleteRequest("", this.props.data['id']);
+  }
+
 
   render() {
     var request = this.props.data;
@@ -50,7 +54,7 @@ class SideBarrequest extends Component {
           >
             {buttonLabel}
           </button>
-          <button className="btn btn-danger disabled" aria-disabled="true">
+          <button onClick={this.onDelete} className="btn btn-danger disabled" aria-disabled="true">
             Delete
           </button>
           {expanded && (
