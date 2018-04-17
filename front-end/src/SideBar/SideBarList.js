@@ -20,8 +20,9 @@ class SideBarList extends Component {
   }
 
   requestList() {
-    fetch("http://localhost:8080/api/requests").then(results => {
+    fetch(this.props.url + "/api/requests").then(results => {
       if (results.status === 200) {
+        console.log(results);
         results
           .json()
           .then(data => ({
@@ -52,15 +53,20 @@ class SideBarList extends Component {
       var list = this.state.requestList.map(i => {
         size += 1;
         return (
-          <SideBarrequest
-            onClick={this.onClick.bind(this)}
-            currentIndex={this.changeSelectedIndex}
-            selected={this.state.selectedIndex}
-            key={i.id}
-            currentlyRevealed={this.state.selectedIndex}
-            elementID={size - 1}
-            data={i}
-          />
+          <nav key={i["id"]} id="sidebar" className="wrapper">
+            <div className="sidebar-header">
+              <h3>Jobs</h3>
+            </div>
+            <SideBarrequest
+              onClick={this.onClick.bind(this)}
+              currentIndex={this.changeSelectedIndex}
+              selected={this.state.selectedIndex}
+              key={i.id}
+              currentlyRevealed={this.state.selectedIndex}
+              elementID={size - 1}
+              data={i}
+            />
+          </nav>
         );
       });
       return <div>{list}</div>;

@@ -33,6 +33,11 @@
   width: 300px;
 }
 
+.content-body {
+  display:flex;
+  flex-direction: row;
+}
+
 .wrap-emails {
   white-space: nowrap;
   overflow: hidden;
@@ -53,11 +58,31 @@
   width: 100%;
 }
 
-.SideBar {
-  width: 20%;
-  float: left;
-  height: 100vh;
-  background-color: #2a00fa;
+#sidebar.active {
+    margin-left: -250px;
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 100vh;
+}
+
+.display-box {
+  display: flex;
+}
+
+.button-link {
+  background-color: transparent;
+  border: none;
+}
+
+.button-link:hover {
+  color: blue;
+  text-decoration: underline;
+}
+.button-link:focus{
+  outline: 0px;
 }
 
 .MainBox {
