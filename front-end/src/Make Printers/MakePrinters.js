@@ -9,7 +9,7 @@ class MakePrinter extends Component {
       PrinterName: "Geoffrey",
       Model: "SomeModel",
       Brand: "MakerBot",
-      Status: "OPEN"
+      Status: "READY"
     };
     this.handleChange = this.handleChange.bind(this);
     this.onClick = this.onClick.bind(this);
@@ -23,8 +23,7 @@ class MakePrinter extends Component {
   }
   onClick() {
     const headersI = {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "True"
+      "Content-Type": "application/json"
     };
 
     const myRequest = new Request("http://localhost:8080/api/printers", {
@@ -38,7 +37,7 @@ class MakePrinter extends Component {
       })
     });
     fetch(myRequest).then(response =>
-      response.json().then(response => console.log(response))
+      response.blob().then(response => console.log(response))
     );
   }
 
@@ -106,7 +105,7 @@ class MakePrinter extends Component {
           value={this.state.Status}
           onChange={this.handleChange}
         >
-          <option value="OPEN">Open</option>
+          <option value="READY">Ready</option>
           <option value="BUSY">Busy</option>
           <option value="FINISHED">Finished</option>
         </select>
