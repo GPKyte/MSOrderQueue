@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import MakePrinter from "./../Make Printers/MakePrinters.js";
 import PrinterList from "./../Printer/PrinterList.js";
 import LoginPage from "./../LoginPage/LoginPage.js";
+import SideBar from "./../SideBar/SideBarList.js";
 
 class NavBar extends Component {
   constructor(props) {
@@ -15,77 +16,28 @@ class NavBar extends Component {
 
   //This is the base printer object that displays all of the data needed on every printer
   onClick(event) {
-    console.log(event.target.name, event.target.value)
-    if (event.target.name != null) {
+    if (event != null) {
       this.setState({ [event.target.name]: event.target.value });
     }
   }
 
   render() {
     return (
-      <nav>
+      <div>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
           <a className="navbar-brand">MakerSpace Printer Queue</a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-
-            <button
-              className="nav-item button-link"
-              name="currentView"
-              value="printers"
-              onClick={this.onClick}
-            >
-              Printers
-            </button>
-            <button
-              className="nav-item button-link"
-              name="currentView"
-              value="addPrinters"
-              onClick={this.onClick}
-            >
-              Add Printers
-            </button>
-            <button
-              className="nav-item button-link"
-              name="currentView"
-              value="loginPage"
-              onClick={this.onClick}
-            >
-              Login
-            </button>
-            <a
-              className="nav-item nav-link"
-              name="currentView"
-              value="loginPage"
-              onClick={this.onClick}
-            >
-              Login
-            </a>
-            <button
-              className="nav-item button-link nav-link"
-              name="currentView"
-              value="archive"
-              onClick={this.onClick}
-            >
-              Archive
-            </button>
-          </ul>
-          </div>
+          <NavBarButtons
+            onClick={this.onClick}
+            currentView={this.state.currentView}
+          />
         </nav>
-
-        <RenderedView value={this.state.currentView}> </RenderedView>
-      </nav>
+        <div className="content-body">
+          <SideBar url={this.props.url} />
+          <RenderedView url={this.props.url} value={this.state.currentView}>
+            {" "}
+          </RenderedView>
+        </div>
+      </div>
     );
   }
 }
@@ -95,17 +47,84 @@ class RenderedView extends Component {
   render() {
     switch (this.props.value) {
       case "printers":
-        return <PrinterList />;
+        return <PrinterList url={this.props.url} />;
       case "addPrinters":
-        return <MakePrinter />;
+        return <MakePrinter url={this.props.url} />;
       case "loginPage":
-        return <LoginPage />;
+        return <LoginPage url={this.props.url} />;
       case "archive":
         return <div>Isnt Implemented Yet</div>;
       default:
-        console.log(this.props.value)
         return <div>ERRRRROOOOORRRRR</div>;
     }
+  }
+}
+
+class NavBarButtons extends Component {
+  constructor(props) {
+    super(props);
+
+    this.onClick = this.onClick.bind(this);
+  }
+
+  onClick(event) {
+    if (event.target.name != null) {
+      this.props.onClick(event);
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon" />
+        </button>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            <button
+              className="nav-item button-link nav-link"
+              name="currentView"
+              value="printers"
+              onClick={this.onClick}
+            >
+              Printers
+            </button>
+            <button
+              className="nav-item button-link nav-link"
+              name="currentView"
+              value="addPrinters"
+              onClick={this.onClick}
+            >
+              Add Printers
+            </button>
+            <button
+              className="nav-item button-link nav-link"
+              name="currentView"
+              value="loginPage"
+              onClick={this.onClick}
+            >
+              Login
+            </button>
+            <button
+              className="nav-item button-link nav-link"
+              name="currentView"
+              value="archive"
+              onClick={this.onClick}
+            >
+              Archive
+            </button>
+          </ul>
+        </div>
+      </div>
+    );
   }
 }
 

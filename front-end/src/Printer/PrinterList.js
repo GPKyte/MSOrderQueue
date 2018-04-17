@@ -14,8 +14,10 @@ class PrinterList extends Component {
   }
 
   printerList() {
-    fetch("http://localhost:8080/api/printers").then(results => {
+    
+    fetch(this.props.url + "/api/printers").then(results => {
       if (results.status === 200) {
+        console.log(results);
         results
           .json()
           .then(data => ({
@@ -38,12 +40,13 @@ class PrinterList extends Component {
   }
 
   deletePrinter(id) {
+
     const headersI = {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "True"
     };
 
-    const myRequest = new Request("http://localhost:8080/api/printers/" + id, {
+    const myRequest = new Request(this.props.url + "/api/printers/" + id, {
       method: "DELETE",
       headers: headersI
     });
