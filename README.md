@@ -1,4 +1,4 @@
-# MSOrderQueue  [![Build Status](https://travis-ci.org/GPKyte/MSOrderQueue.svg?branch=master)](https://travis-ci.org/GPKyte/MSOrderQueue)
+# MSOrderQueue  [![Build Status](https://travis-ci.org/GPKyte/MSOrderQueue.svg?branch=master)](https://travis-ci.org/GPKyte/MSOrderQueue) [![codecov](https://codecov.io/gh/GPKyte/MSOrderQueue/branch/master/graph/badge.svg)](https://codecov.io/gh/GPKyte/MSOrderQueue)
 System that works as a queue to process 3D-print requests for a MakerSpace  
 
 ## Installation  
@@ -18,10 +18,10 @@ Back-End API
 4. To GET data, go to http://localhost:8080/api while running server  
 5. Alternatively use curl and see [printer schema](https://docs.google.com/document/d/15hHME8CRUwTjUELbfcHTXjU25vftQ_49fHTaqbWTC3s/edit#bookmark=id.tg3cquwfoicw) for format  
   Supported (but not fully tested) http commands are GET, POST, PUT, PATCH, DELETE  
-  e.g. `curl -X POST localhost:8080/api/printers -d "{\"name\": \"Tiny\", \"brand\": \"MakerBot\", \"model\": \"Z18\", \"status\": \"READY\"}" -H "Content-Type:application/json"`
+  e.g. `curl -v -X POST localhost:8080/api/requests -d '{"user": "kyteg", "comments": "Test Request", "forClass": "true", "requestItems": [{"fileName": "nerd.stl", "qty": 1337}]}' -H "Content-Type: application/json"`  
 
 Front-End Server  
-1. `cd front-end`  
+1. `cd front-end/`  
 2. `npm update`  
 3. `npm start`  
 4. To look at the webpage that is run, go to localhost:3000, or follow the instructions on your command prompt. 

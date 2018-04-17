@@ -17,7 +17,7 @@ public class PrinterMongoRepositoryTest {
 
 	@Before
     public void setUp() throws Exception {
-        Printer p1 = new Printer("MakerBot", "5th Gen Replicator", "Stitch", "READY");
+        Printer p1 = new Printer("MakerBot", "5th Gen Replicator", "Stitch", "OPEN");
         Printer p2 = new Printer("MakerBot", "5th Gen Replicator", "Sully", "BUSY");
         assertNull(p1.getId());
         assertNull(p2.getId());
