@@ -18,22 +18,17 @@ public class Printer {
     private String brand;
     private String model;
     private String name;
-    @NotBlank
     private PrinterStatus status;
 
     private Printer() {}
 
-    public Printer(String brand, String model, String name, String status) {
+    public Printer(String brand, String model, String name, PrinterStatus status) {
         this.brand = brand;
         this.model = model;
         this.name = name;
         setStatus(status);
     }
 
-    public void setStatus(String status) {
-        PrinterStatus tmp = PrinterStatus.valueOf(status.trim().toUpperCase());
-        this.status = (tmp == null)? PrinterStatus.OPEN : tmp;
-    }
     public void setStatus(PrinterStatus status) {
         this.status = status;
     }
