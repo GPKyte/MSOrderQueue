@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Printer extends Component {
+class ArchivePage extends Component {
   constructor(props) {
     super(props);
     this.onClick = this.onClick.bind(this);
@@ -8,7 +8,7 @@ class Printer extends Component {
 
   //This is the base printer object that displays all of the data needed on every printer
   onClick() {
-    this.props.finishButton(this.props.id);
+    this.props.deleteFunction(this.props.id);
   }
 
   render() {
@@ -27,9 +27,9 @@ class Printer extends Component {
           <button className="btn btn-primary card-button">Dequeue</button>
           <button
             onClick={this.onClick}
-            className="btn btn-outline-success card-button"
+            className="btn btn-outline-danger card-button"
           >
-            Finish
+            Delete
           </button>
         </div>
       </div>
@@ -37,4 +37,4 @@ class Printer extends Component {
   }
 }
 
-export default Printer;
+export default ArchivePage;

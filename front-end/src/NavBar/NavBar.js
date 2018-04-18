@@ -4,14 +4,22 @@ import MakePrinter from "./../Make Printers/MakePrinters.js";
 import PrinterList from "./../Printer/PrinterList.js";
 import LoginPage from "./../LoginPage/LoginPage.js";
 import SideBar from "./../SideBar/SideBarList.js";
+import ArchivePage from "./../Archive/Arcive.js";
+import Printer from "./../Fetch/Printers.js";
 
 class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentView: "printers"
+      currentView: "printers",
+      printerObject: Printer.getPrinterList()
     };
     this.onClick = this.onClick.bind(this);
+  }
+
+  componentDidMount() {
+    setInterval(Printer.getPrinterList(),500)
+
   }
 
   //This is the base printer object that displays all of the data needed on every printer
@@ -53,7 +61,7 @@ class RenderedView extends Component {
       case "loginPage":
         return <LoginPage url={this.props.url} />;
       case "archive":
-        return <div>Isnt Implemented Yet</div>;
+        return <ArchivePage url={this.props.url} />;
       default:
         return <div>ERRRRROOOOORRRRR</div>;
     }

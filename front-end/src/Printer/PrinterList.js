@@ -10,11 +10,10 @@ class PrinterList extends Component {
       printerList: null
     };
     this.refresh = this.refresh.bind(this);
-    this.deletePrinter = this.deletePrinter.bind(this);
   }
 
   printerList() {
-    
+
     fetch(this.props.url + "/api/printers").then(results => {
       if (results.status === 200) {
         console.log(results);
@@ -39,22 +38,10 @@ class PrinterList extends Component {
     this.printerList();
   }
 
-  deletePrinter(id) {
+  finishPrinter(id) {
 
-    const headersI = {
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Origin": "True"
-    };
-
-    const myRequest = new Request(this.props.url + "/api/printers/" + id, {
-      method: "DELETE",
-      headers: headersI
-    });
-
-    fetch(myRequest).then(response => {
-      this.printerList();
-    });
   }
+
 
   refresh() {
     this.printerList();
@@ -83,7 +70,7 @@ class PrinterList extends Component {
                 <Printer
                   key={i["id"]}
                   id={i["id"]}
-                  deleteFunction={this.deletePrinter}
+                  finishButton={this.finishPrinter}
                   data={i}
                 />
               );
