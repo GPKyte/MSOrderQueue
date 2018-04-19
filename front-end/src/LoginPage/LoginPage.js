@@ -28,6 +28,7 @@ class LoginPage extends Component {
   render() {
     return (
       <div className="Printer container">
+      <div></div>
         <div className="input-group mb-3 text-input-50">
           <div className="input-group-prepend">
             <div className="input-group-text" id="inputGroup-sizing-default">

@@ -1,5 +1,7 @@
 package com.msorderqueue.server;
 
+import com.msorderqueue.server.PrinterStatus;
+import javax.validation.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -16,14 +18,18 @@ public class Printer {
     private String brand;
     private String model;
     private String name;
-    private String status;
+    private PrinterStatus status;
 
     private Printer() {}
 
-    public Printer(String brand, String model, String name, String status) {
+    public Printer(String brand, String model, String name, PrinterStatus status) {
         this.brand = brand;
         this.model = model;
         this.name = name;
+        setStatus(status);
+    }
+
+    public void setStatus(PrinterStatus status) {
         this.status = status;
     }
 }

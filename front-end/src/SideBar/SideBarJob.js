@@ -10,40 +10,34 @@ class SideBarrequest extends Component {
       printerProperty: "Printer list-group-item",
       listProperty: "collapse"
     };
-  }
-
-  //Responsible for showing all of the files that are inside the request
-  unHide() {
-    this.setState({ isHidden: false });
-    this.setState({
-      printerProperty: "Printer list-group-item"
-    });
-  }
-
-  //Responsible for hiding all of the files that are inside the request
-  hide() {
-    this.setState({ isHidden: true });
-    this.setState({
-      printerProperty: "Printer list-group-item"
-    });
+    this.onDelete = this.onDelete.bind(this);
   }
 
   //Responible for the logic behind hiding and showing the items in the request
   onClick() {
     this.props.onClick(this.props.elementID);
-    if (this.state.isHidden) {
-      this.unHide();
-
+    if (!(this.props.selected === this.props.elementID)) {
       this.props.onClick(this.props.elementID);
     } else {
-      this.hide();
       this.props.onClick(-1);
     }
   }
+  onDelete(event) {
+    console.log(event.target)
+    this.props.deleteRequest("", this.props.data['id']);
+  }
+
 
   render() {
     var request = this.props.data;
     var selected = this.props.selected;
+    var buttonLabel = "Expand";
+    var expanded = false;
+
+    if (selected === this.props.elementID) {
+      buttonLabel = "Collapse";
+      expanded = true;
+    }
 
     //The isHidden checks for wether or not the current list should be shown
     //The selected is the current index of what should be shown
@@ -58,10 +52,12 @@ class SideBarrequest extends Component {
             className={this.state.buttonProperty}
             onClick={this.onClick.bind(this)}
           >
-            Expand
+            {buttonLabel}
           </button>
-          <button className="btn btn-danger disabled" aria-disabled="true">Delete</button>
-          {selected === this.props.elementID && (
+          <button onClick={this.onDelete} className="btn btn-danger disabled" aria-disabled="true">
+            Delete
+          </button>
+          {expanded && (
             <FullList className={this.state.listProperty} data={request} />
           )}
         </div>

@@ -10,6 +10,8 @@ class SideBarList extends Component {
       selectedIndex: -1,
       requestList: []
     };
+    this.deleteRequest = this.deleteRequest.bind(this);
+
   }
 
   //Part of the logic to see which of the requests is currenty expanded.
@@ -19,9 +21,27 @@ class SideBarList extends Component {
     });
   }
 
+  deleteRequest(path,id) {
+    const headersI = {
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "True"
+    };
+
+    const myRequest = new Request(this.props.url + "/api/requests/" + id, {
+      method: "DELETE",
+      headers: headersI
+    });
+
+    fetch(myRequest).then(response => {
+      this.requestList();
+    });
+  }
+
+
   requestList() {
-    fetch("http://localhost:8080/api/requests").then(results => {
+    fetch(this.props.url + "/api/queue").then(results => {
       if (results.status === 200) {
+        console.log(results);
         results
           .json()
           .then(data => ({
@@ -35,7 +55,7 @@ class SideBarList extends Component {
             console.log(this.state.requestList);
           });
       } else {
-        throw new Error("This project SUCKS!");
+        throw new Error("Server No Longer Has Has The File");
       }
     });
   }
@@ -52,21 +72,28 @@ class SideBarList extends Component {
       var list = this.state.requestList.map(i => {
         size += 1;
         return (
-          <SideBarrequest
-            onClick={this.onClick.bind(this)}
-            currentIndex={this.changeSelectedIndex}
-            selected={this.state.selectedIndex}
-            key={i.id}
-            currentlyRevealed={this.state.selectedIndex}
-            elementID={size - 1}
-            data={i}
-          />
+          <nav key={i["id"]} >
+            <SideBarrequest
+              onClick={this.onClick.bind(this)}
+              currentIndex={this.changeSelectedIndex}
+              selected={this.state.selectedIndex}
+              deleteRequest={this.deleteRequest}
+              currentlyRevealed={this.state.selectedIndex}
+              elementID={size - 1}
+              data={i}
+            />
+          </nav>
         );
       });
-      return <div>{list}</div>;
-    } else {
-      return <div>There are no requests</div>;
     }
+    return (
+      <div id="sidebar" className="wrapper">
+        <div className="sidebar-header">
+          <h3>Jobs</h3>
+        </div>
+        {list}
+      </div>
+    );
   }
 }
 
