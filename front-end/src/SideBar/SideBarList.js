@@ -9,7 +9,6 @@ class SideBarList extends Component {
     this.state = {
       selectedIndex: -1
     };
-    this.deleteRequest = this.deleteRequest.bind(this);
   }
 
   //Part of the logic to see which of the requests is currenty expanded.
