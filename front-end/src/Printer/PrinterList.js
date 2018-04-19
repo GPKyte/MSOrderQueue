@@ -9,7 +9,6 @@ class PrinterList extends Component {
     //Make This a object to be repeated
     var ListOfPrinters = this.props.printers;
     //Generates all of the printers that we are using for the project
-    console.log(ListOfPrinters);
     if (ListOfPrinters != null && ListOfPrinters.length > 0) {
       return (
         <div className="page-header">

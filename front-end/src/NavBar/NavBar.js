@@ -6,13 +6,15 @@ import LoginPage from "./../LoginPage/LoginPage.js";
 import SideBar from "./../SideBar/SideBarList.js";
 import ArchivePage from "./../Archive/Arcive.js";
 import Printer from "./../Fetch/Printers.js";
+import Requests from "./../Fetch/Requests.js";
 
 class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentView: "printers",
-      printerObject: ""
+      printerObject: "",
+      requestsObject: ""
     };
     this.onClick = this.onClick.bind(this);
     this.refresh = this.refresh.bind(this);
@@ -28,9 +30,12 @@ class NavBar extends Component {
   }
   //Refreshes the data from the api
   refresh() {
-    Printer.getPrinterList(this.props.url).then(data =>
+    Printer.getList(this.props.url).then(data =>
       this.setState({ printerObject: data })
-    );
+    ).then(
+    Requests.getList(this.props.url).then(data =>
+      this.setState({ requestsObject: data })
+    ));
 
     console.log(this.state.printerObject);
   }
@@ -53,7 +58,7 @@ class NavBar extends Component {
           />
         </nav>
         <div className="content-body">
-          <SideBar url={this.props.url} printers={this.state.printerObject} />
+          <SideBar url={this.props.url} requests={this.state.requestsObject} printers={this.state.printerObject} />
           <RenderedView
             url={this.props.url}
             printers={this.state.printerObject}

@@ -22,23 +22,23 @@ function printerList(url) {
         }
       });
     }
-  }
-);
+  });
 }
 
-this.getPrinterList = function(url) {
+this.finishPrinter = function(url,printerID) {
+
+}
+
+this.getList = function(url) {
   return printerList(url);
 };
 
-this.patchRequest = function(url, path, printerObject) {
-  const myRequest = new Request(url + "/api/Printers" + path, {
+this.patchRequest = function(url, printerID, printerObject, requestObject, fileList) {
+  const myRequest = new Request(url + "/api/Printers/" + printerID, {
     method: "PATCH",
     headers: header,
     body: JSON.stringify({
-      name: printerObject["name"],
-      brand: printerObject["brand"],
-      model: printerObject["model"],
-      status: printerObject["status"]
+      requestID: requestObject['id']
     })
   });
 
