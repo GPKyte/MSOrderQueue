@@ -4,14 +4,40 @@ import MakePrinter from "./../Make Printers/MakePrinters.js";
 import PrinterList from "./../Printer/PrinterList.js";
 import LoginPage from "./../LoginPage/LoginPage.js";
 import SideBar from "./../SideBar/SideBarList.js";
+import ArchivePage from "./../Archive/Arcive.js";
+import Printer from "./../Fetch/Printers.js";
+import Requests from "./../Fetch/Requests.js";
 
 class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentView: "printers"
+      currentView: "printers",
+      printerObject: "",
+      requestsObject: ""
     };
     this.onClick = this.onClick.bind(this);
+    this.refresh = this.refresh.bind(this);
+  }
+  //When the component loads, this is called starting the interval to repeditally call on the api to refresh the data
+  componentDidMount() {
+    this.refresh();
+    this.interval = setInterval(this.refresh, 5000);
+  }
+  //Reset the interval to stop calling the backend to refresh the data
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+  //Refreshes the data from the api
+  refresh() {
+    Printer.getList(this.props.url).then(data =>
+      this.setState({ printerObject: data })
+    ).then(
+    Requests.getList(this.props.url).then(data =>
+      this.setState({ requestsObject: data })
+    ));
+
+    console.log(this.state.printerObject);
   }
 
   //This is the base printer object that displays all of the data needed on every printer
@@ -24,7 +50,7 @@ class NavBar extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-light bg-light flex-row-reverse">
           <a className="navbar-brand">MakerSpace Printer Queue</a>
           <NavBarButtons
             onClick={this.onClick}
@@ -32,8 +58,12 @@ class NavBar extends Component {
           />
         </nav>
         <div className="content-body">
-          <SideBar url={this.props.url} />
-          <RenderedView url={this.props.url} value={this.state.currentView}>
+          <SideBar url={this.props.url} requests={this.state.requestsObject} printers={this.state.printerObject} />
+          <RenderedView
+            url={this.props.url}
+            printers={this.state.printerObject}
+            value={this.state.currentView}
+          >
             {" "}
           </RenderedView>
         </div>
@@ -47,13 +77,15 @@ class RenderedView extends Component {
   render() {
     switch (this.props.value) {
       case "printers":
-        return <PrinterList url={this.props.url} />;
-      case "addPrinters":
+        return (
+          <PrinterList url={this.props.url} printers={this.props.printers} />
+        );
+      case "add printers":
         return <MakePrinter url={this.props.url} />;
-      case "loginPage":
+      case "login":
         return <LoginPage url={this.props.url} />;
       case "archive":
-        return <div>Isnt Implemented Yet</div>;
+        return <ArchivePage url={this.props.url} />;
       default:
         return <div>ERRRRROOOOORRRRR</div>;
     }
@@ -65,15 +97,37 @@ class NavBarButtons extends Component {
     super(props);
 
     this.onClick = this.onClick.bind(this);
+    this.button = this.button.bind(this);
   }
 
+  //Automated event that processes the button that was clicked and changes the tab bassed on this.
   onClick(event) {
     if (event.target.name != null) {
       this.props.onClick(event);
     }
   }
 
+  //This is a function for the creation of all of the buttons in the nav bar
+  button(name) {
+    var value = name.toLowerCase();
+    return (
+      <button
+        className="nav-item button-link nav-link"
+        name="currentView"
+        value={value}
+        key={value}
+        onClick={this.onClick}
+      >
+        {name}
+      </button>
+    );
+  }
+
   render() {
+    //List of buttons to auto populate (if you change here make sure to change RenderedView class)
+    var buttons = ["Printers", "Add Printers", "Login", "Archive"];
+
+
     return (
       <div>
         <button
@@ -89,38 +143,9 @@ class NavBarButtons extends Component {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
-            <button
-              className="nav-item button-link nav-link"
-              name="currentView"
-              value="printers"
-              onClick={this.onClick}
-            >
-              Printers
-            </button>
-            <button
-              className="nav-item button-link nav-link"
-              name="currentView"
-              value="addPrinters"
-              onClick={this.onClick}
-            >
-              Add Printers
-            </button>
-            <button
-              className="nav-item button-link nav-link"
-              name="currentView"
-              value="loginPage"
-              onClick={this.onClick}
-            >
-              Login
-            </button>
-            <button
-              className="nav-item button-link nav-link"
-              name="currentView"
-              value="archive"
-              onClick={this.onClick}
-            >
-              Archive
-            </button>
+            {buttons.map(i => {
+              return(this.button(i))
+            })}
           </ul>
         </div>
       </div>
