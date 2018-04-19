@@ -4,67 +4,17 @@ var Promise = require("bluebird");
 Promise.promisifyAll(require("request"));
 
 class PrinterList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      printerList: null
-    };
-    this.refresh = this.refresh.bind(this);
-  }
-
-  printerList() {
-
-    fetch(this.props.url + "/api/printers").then(results => {
-      if (results.status === 200) {
-        console.log(results);
-        results
-          .json()
-          .then(data => ({
-            data: data,
-            status: results.status
-          }))
-          .then(results => {
-            this.setState({
-              printerList: results["data"]
-            });
-          });
-      } else {
-        throw new Error("This project SUCKS!");
-      }
-    });
-  }
-
-  componentDidMount() {
-    this.printerList();
-  }
-
-  finishPrinter(id) {
-
-  }
-
-
-  refresh() {
-    this.printerList();
-  }
 
   render() {
     //Make This a object to be repeated
-    var ListOfPrinters = this.state.printerList;
-    var refreshButton = () => (
-      <button
-        onClick={this.refresh}
-        className="btn btn-outline-primary btn-sm right"
-      >
-        Refresh{" "}
-      </button>
-    );
+    var ListOfPrinters = this.props.printers;
     //Generates all of the printers that we are using for the project
     console.log(ListOfPrinters);
     if (ListOfPrinters != null && ListOfPrinters.length > 0) {
       return (
         <div className="page-header">
           <ul className="PrinterContainer row">
-            <h1 className="printerTitle">Printers {refreshButton()}</h1>
+            <h1 className="printerTitle">Printers</h1>
             {ListOfPrinters.map(i => {
               return (
                 <Printer
@@ -82,9 +32,8 @@ class PrinterList extends Component {
       return (
         <div>
           There seems to be no printers, server might be down or you can try
-          refreshing.
+          refreshing the page.
           <div />
-          {refreshButton()}
         </div>
       );
     }
