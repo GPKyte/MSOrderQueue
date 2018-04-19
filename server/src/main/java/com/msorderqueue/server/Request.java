@@ -1,6 +1,5 @@
 package com.msorderqueue.server;
 
-
 import com.msorderqueue.server.RequestStatus;
 import com.msorderqueue.server.RequestItem;
 
