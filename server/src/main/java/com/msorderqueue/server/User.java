@@ -15,13 +15,14 @@ import lombok.Data;
 @Data
 @Document(collection = "users")
 public class User {
-    @Id @NotBlank
-    private String username;
-    private String firstName;
-    private String lastName;
-    @NotBlank
-    private String email;
-    private Role role = Role.REQUESTER;
+    @NotBlank private String firstName;
+    @NotBlank private String lastName;
+    @Id @NotBlank private String username;
+    @NotBlank private String email;
+    @NotBlank private Role role = Role.REQUESTER;
+
+    public enum Role {
+        REQUESTER, STAFF, ADMIN
 
     public enum Role {REQUESTER, STAFF, ADMIN};
 
