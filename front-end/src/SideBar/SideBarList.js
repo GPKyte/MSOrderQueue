@@ -27,7 +27,7 @@ class SideBarList extends Component {
       "Access-Control-Allow-Origin": "True"
     };
 
-    const myRequest = new Request("http://localhost:8080/api/requests/" + id, {
+    const myRequest = new Request(this.props.url + "/api/requests/" + id, {
       method: "DELETE",
       headers: headersI
     });
