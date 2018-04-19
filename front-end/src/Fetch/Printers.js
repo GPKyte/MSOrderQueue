@@ -25,10 +25,6 @@ function printerList(url) {
   });
 }
 
-this.finishPrinter = function(url,printerID) {
-
-}
-
 this.getList = function(url) {
   return printerList(url);
 };
