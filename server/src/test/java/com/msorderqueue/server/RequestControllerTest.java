@@ -19,6 +19,7 @@ public class RequestControllerTest {
     @Autowired
     private RequestController requestController;
     private String id1, id2;
+    private ArrayList<Request> testRequests; // Next step is to use this instead of id refs
 
 	@Before
     public void setUp() throws Exception {
@@ -73,6 +74,21 @@ public class RequestControllerTest {
         Request requestB = (requestList.getStatusCodeValue() == 200) ? requestList.getBody().get(0) : null;
         assertNotNull(requestB);
         assertEquals("Scale to 5 inches", requestB.getComments());
+    }
+
+    @Test
+    public void testGetAllRequests() {
+        return;
+    }
+
+    @Test
+    public void testGetArchive() {
+        return;
+    }
+
+    @Test
+    public void testGetQueue() {
+        return;
     }
 
     @After
