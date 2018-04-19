@@ -13,13 +13,13 @@ matrix:
       node_js:
         - "node"
         - "7"
-      cache:
-        directories:
-          - "/front-end/node_modules"
+
       before_script:
         - cd front-end
         - npm install
-
+      cache:
+        directories:
+          - "/front-end/node_modules"
 
       script:
         - npm test

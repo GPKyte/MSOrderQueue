@@ -37,5 +37,7 @@ function requestList(url) {
 }
 
 this.getList = function(url) {
-  return requestList(url);
+  var temp = "";
+  temp = requestList(url)
+  return temp;
 };
