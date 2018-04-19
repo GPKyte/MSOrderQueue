@@ -18,7 +18,8 @@ class NavBar extends Component {
   }
 
   componentDidMount() {
-    setInterval(Printer.getPrinterList(),500)
+    setInterval(this.setState({printerObject: Printer.getUpdatedPrinterList(this.props.url)}),500);
+
 
   }
 
