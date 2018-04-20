@@ -26,7 +26,7 @@ public class PrinterController {
     }
 
     @PutMapping(value="/printers/{id}")
-    public ResponseEntity<Printer> updatePrinter(@PathVariable("id") String id,
+    public ResponseEntity<Printer> replacePrinter(@PathVariable("id") String id,
                                                 @Valid @RequestBody Printer printer) {
         return printerRepository.findById(id)
                 .map(printerData -> {
@@ -34,6 +34,21 @@ public class PrinterController {
                     printerData.setName(printer.getName());
                     printerData.setBrand(printer.getBrand());
                     printerData.setStatus(printer.getStatus());
+                    printerData.setRequestID(printer.getRequestID());
+                    printerData.setFilesPrinting(printer.getFilesPrinting());
+                    Printer updatedPrinter = printerRepository.save(printerData);
+                    return ResponseEntity.ok().body(updatedPrinter);
+                }).orElse(ResponseEntity.notFound().build());
+    }
+
+    @PatchMapping(value="/printers/{id}")
+    public ResponseEntity<Printer> updatePrinter(@PathVariable("id") String id,
+                                                @Valid @RequestBody Printer printer) {
+        return printerRepository.findById(id)
+                .map(printerData -> {
+                    if(printer.getStatus() != null) { printerData.setStatus(printer.getStatus()); }
+                    if(printer.getRequestID() != null) { printerData.setRequestID(printer.getRequestID()); }
+                    if(printer.getFilesPrinting() != null) { printerData.setFilesPrinting(printer.getFilesPrinting()); } // checking against null may be an issue
                     Printer updatedPrinter = printerRepository.save(printerData);
                     return ResponseEntity.ok().body(updatedPrinter);
                 }).orElse(ResponseEntity.notFound().build());
