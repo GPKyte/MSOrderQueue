@@ -6,7 +6,8 @@ Printer
     "model": String,  
     "status": (OPEN | BUSY | DONE),  
     "requestId": String // Deprecated  
-}  
+    "itemsPrinting": [{"index": int, "qty": int}, ...] // List of indices to RequestItems in Request
+}   
 
 Request  
 {  
@@ -24,9 +25,11 @@ Request
 RequestItem  
 {  
     "fileName": String,  
-    "color": String, // Deprecated  
+    "color": String,  
     "qty": int,  
     "status": (**ORDERED** | IN_PROGRESS | COMPLETE)  
+    "started": true | false,  
+    "completed": int  
 }  
 
 User  
