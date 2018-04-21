@@ -24,14 +24,14 @@ public class RequestControllerTest {
 	@Before
     public void setUp() throws Exception {
         ArrayList<RequestItem> items1 = new ArrayList<>();
-        items1.add(new RequestItem("testFile1.stl", 83));
-        items1.add(new RequestItem("secondFile.stl", 5));
-        items1.add(new RequestItem("thirdFile.stl", 7));
+        items1.add(new RequestItem("testFile1.stl", 83, "blue"));
+        items1.add(new RequestItem("secondFile.stl", 5, "any"));
+        items1.add(new RequestItem("thirdFile.stl", 7, "black"));
         Request req1 = new Request("kyteg", "Comments are for nerds", false,  items1);
 
         ArrayList<RequestItem> items2 = new ArrayList<>();
-        items2.add(new RequestItem("testFile2.stl", 3));
-        items2.add(new RequestItem("fourthFile.stl", 14));
+        items2.add(new RequestItem("testFile2.stl", 3, "red"));
+        items2.add(new RequestItem("fourthFile.stl", 14, "orange"));
         Request req2 = new Request("jiangh", "Comments are fun", true, items2);
 
         id1 = this.requestController.createRequest(req1).getId();
