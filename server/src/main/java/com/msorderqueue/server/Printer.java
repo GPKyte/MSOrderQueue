@@ -38,4 +38,24 @@ public class Printer {
         this.status = status;
         this.filesPrinting = new ArrayList<HashMap<String, Integer>>();
     }
+
+    public void setStatus(PrinterStatus status) {
+        switch(status) {
+            case OPEN:  this.requestID = "";
+                        this.filesPrinting.clear();
+                        this.status = status;
+                        break;
+
+            case BUSY:  if( ! (requestID.equals("") || filesPrinting.isEmpty()) ) {
+                            this.status = status;
+                        } else {
+                            this.status = PrinterStatus.OPEN;
+                        }
+                        break;
+
+            case DONE:  this.status = status;
+                        break;
+            default:    break;
+        }
+    }
 }

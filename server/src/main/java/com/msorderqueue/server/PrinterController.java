@@ -53,9 +53,9 @@ public class PrinterController {
                                                 @RequestBody Printer printer) {
         return printerRepository.findById(id)
                 .map(printerData -> {
-                    if(printer.getStatus() != null) { printerData.setStatus(printer.getStatus()); }
                     if(printer.getRequestID() != null) { printerData.setRequestID(printer.getRequestID()); }
                     if(printer.getFilesPrinting() != null) { printerData.setFilesPrinting(printer.getFilesPrinting()); }
+                    if(printer.getStatus() != null) { printerData.setStatus(printer.getStatus()); }
                     Printer updatedPrinter = printerRepository.save(printerData);
                     return ResponseEntity.ok().body(updatedPrinter);
                 }).orElse(ResponseEntity.notFound().build());
