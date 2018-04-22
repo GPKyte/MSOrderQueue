@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 import java.util.List;
 
 @RestController
@@ -18,6 +20,11 @@ public class PrinterController {
     public List<Printer> getAllPrinters() {
         Sort sortByName = new Sort(Sort.Direction.DESC, "name");
         return printerRepository.findAll(sortByName);
+    }
+
+    @GetMapping(value="/printers/{id}")
+    @ResponseBody public Optional<Printer> getPrinterById(@PathVariable("id") String id) {
+        return printerRepository.findById(id);
     }
 
     @PostMapping(value="/printers")
