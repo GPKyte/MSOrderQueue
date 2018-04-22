@@ -25,11 +25,10 @@ public class Printer {
     @NotBlank private String name;
     @NotNull private PrinterStatus status;
     private String requestID;
-    @NotNull private ArrayList<HashMap<String, Integer>> filesPrinting;
+    @NotNull private ArrayList<HashMap<String, Integer>> filesPrinting; // [{"index": Integer, "qty": Integer}]
 
     private Printer() {
-        this.requestID = null;
-        this.filesPrinting = new ArrayList<HashMap<String, Integer>>();
+        this.requestID = "";
     }
 
     public Printer(String brand, String model, String name, PrinterStatus status) {
@@ -37,11 +36,6 @@ public class Printer {
         this.model = model;
         this.name = name;
         this.status = status;
-    }
-
-    public ArrayList<HashMap<String, Integer>> getFilesPrinting() {
-        return (this.filesPrinting == null)?
-            new ArrayList<HashMap<String, Integer>>() :
-            this.filesPrinting;
+        this.filesPrinting = new ArrayList<HashMap<String, Integer>>();
     }
 }

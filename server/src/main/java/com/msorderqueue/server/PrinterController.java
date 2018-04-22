@@ -43,12 +43,12 @@ public class PrinterController {
 
     @PatchMapping(value="/printers/{id}")
     public ResponseEntity<Printer> updatePrinter(@PathVariable("id") String id,
-                                                @Valid @RequestBody Printer printer) {
+                                                @RequestBody Printer printer) {
         return printerRepository.findById(id)
                 .map(printerData -> {
                     if(printer.getStatus() != null) { printerData.setStatus(printer.getStatus()); }
                     if(printer.getRequestID() != null) { printerData.setRequestID(printer.getRequestID()); }
-                    if(printer.getFilesPrinting() != null) { printerData.setFilesPrinting(printer.getFilesPrinting()); } // checking against null may be an issue
+                    if(printer.getFilesPrinting() != null) { printerData.setFilesPrinting(printer.getFilesPrinting()); }
                     Printer updatedPrinter = printerRepository.save(printerData);
                     return ResponseEntity.ok().body(updatedPrinter);
                 }).orElse(ResponseEntity.notFound().build());

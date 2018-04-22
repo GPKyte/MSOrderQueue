@@ -53,7 +53,7 @@ public class RequestController {
 
     @PatchMapping(value="/requests/{id}")
     public ResponseEntity<Request> updateRequest(@PathVariable("id") String id,
-                                                @Valid @RequestBody Request request) {
+                                                @RequestBody Request request) {
         return requestRepository.findById(id)
                 .map(requestData -> {
                     String comments = request.getComments();
@@ -65,7 +65,7 @@ public class RequestController {
 
     @PatchMapping(value="/requests/{id}/{index}")
     public ResponseEntity<Request> updateRequestItem(@PathVariable("id") String id, @PathVariable("index") int index,
-                                                @Valid @RequestBody RequestItem item) {
+                                                @RequestBody RequestItem item) {
         return requestRepository.findById(id)
                 .map(requestData -> {
                     ArrayList<RequestItem> items = requestData.getRequestItems();
