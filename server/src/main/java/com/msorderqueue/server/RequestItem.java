@@ -5,6 +5,9 @@ import com.msorderqueue.server.RequestStatus;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import lombok.Data;
 
 /**
@@ -12,31 +15,28 @@ import lombok.Data;
  */
 @Data
 public class RequestItem {
-    private String fileName;
-    private int qty;
-    private int completed;
-    private boolean started;
-    private RequestStatus status;
-    private String color;
+    @NotBlank private String fileName;
+    @NotBlank private int qty = 1;
+    @NotNull private int completed = 0;
+    @NotNull private boolean started = false;
+    @NotNull private RequestStatus status;
+    @NotBlank private String color = "any";
 
-    public RequestItem() {}
-
-    public RequestItem(String fileName, int qty, String color) {
-        this.fileName = fileName;
-        this.qty = qty;
+    public RequestItem() {
         this.completed = 0;
         this.started = false;
         this.status = RequestStatus.ORDERED;
+    }
+
+    public RequestItem(String fileName, int qty, String color) {
+        this();
+        this.fileName = fileName;
+        this.qty = qty;
         this.color = color;
     }
 
     public RequestItem(String fileName, int qty) {
-        this.fileName = fileName;
-        this.qty = qty;
-        this.completed = 0;
-        this.started = false;
-        this.status = RequestStatus.ORDERED;
-        this.color = "Any";
+        this(fileName, qty, "any");
     }
 
     public RequestStatus getStatus() {

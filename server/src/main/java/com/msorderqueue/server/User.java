@@ -1,10 +1,13 @@
 package com.msorderqueue.server;
 
-import java.util.ArrayList;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import com.fasterxml.jackson.annotation.JsonCreator;
+
+import java.util.ArrayList;
 
 import lombok.Data;
 
@@ -18,7 +21,7 @@ public class User {
     @NotBlank private String lastName;
     @Id @NotBlank private String username;
     @NotBlank private String email;
-    @NotBlank private Role role = Role.REQUESTER;
+    @NotNull private Role role = Role.REQUESTER;
 
     public enum Role {
         REQUESTER, STAFF, ADMIN;
