@@ -46,10 +46,10 @@ public class RequestItem {
     public void setStatus() {
         if(!this.started) {
             this.status = RequestStatus.ORDERED;
-        } else if(this.started || this.completed > 0) {
-            this.status = RequestStatus.IN_PROCESS;
         } else if(this.completed >= qty) {
             this.status = RequestStatus.COMPLETE;
+        } else if(this.completed > 0) {
+            this.status = RequestStatus.IN_PROCESS;
         } else {
             this.status = RequestStatus.ORDERED;
         }

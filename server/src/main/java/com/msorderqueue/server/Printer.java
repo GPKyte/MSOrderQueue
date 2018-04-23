@@ -23,11 +23,11 @@ public class Printer {
     @NotBlank private String model;
     @NotBlank private String name;
     @NotNull private PrinterStatus status;
-    private String requestID;
+    @NotNull private String requestID;
     @NotNull private ArrayList<PrintItem> printItems; // [{"index": Integer, "qty": Integer}]
 
     private Printer() {
-        this.requestID = "";
+        this.requestID = null;
     }
 
     public Printer(String brand, String model, String name, PrinterStatus status) {
@@ -38,23 +38,31 @@ public class Printer {
         this.printItems = new ArrayList<PrintItem>();
     }
 
-    public void setStatus(PrinterStatus status) {
+    public void conditionalSetStatus(PrinterStatus status) {
         switch(status) {
             case OPEN:  this.requestID = "";
                         this.printItems.clear();
                         this.status = status;
                         break;
 
-            case BUSY:  if( ! (requestID.equals("") || printItems.isEmpty()) ) {
-                            this.status = status;
-                        } else {
+            case BUSY:  if(this.requestID == null || "".equals(this.requestID) || this.printItems.isEmpty()) {
+                            System.out.println("You shouldn't see this.");
+                            System.out.println("Status: "+status+", requestID==null: "+requestID.equals("")+", empty: "+printItems.isEmpty());
                             this.status = PrinterStatus.OPEN;
+                        } else {
+                            this.status = status;
                         }
                         break;
 
             case DONE:  this.status = status;
                         break;
-            default:    break;
+
+            default:    this.status = PrinterStatus.OPEN;
+                        break;
         }
+    }
+
+    public void setStatus(PrinterStatus status) {
+        this.status = status;
     }
 }

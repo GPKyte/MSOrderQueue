@@ -63,9 +63,14 @@ public class PrinterController {
                     }
 
                     // Update Printer if updates present in request
-                    if(printer.getRequestID() != null) { printerData.setRequestID(printer.getRequestID()); }
-                    if(printer.getPrintItems() != null) { printerData.setPrintItems(printer.getPrintItems()); }
-                    if(printer.getStatus() != null) { printerData.setStatus(printer.getStatus()); }
+                    if(printer.getRequestID() != null && printer.getPrintItems() != null) {
+                        printerData.setRequestID(printer.getRequestID());
+                        printerData.setPrintItems(printer.getPrintItems());
+                        // Assume BUSY now, even if not because conditionalSetStatus will confirm state
+                        printerData.conditionalSetStatus(PrinterStatus.BUSY);
+                    }
+
+                    if(printer.getStatus() != null) { printerData.conditionalSetStatus(printer.getStatus()); }
                     Printer updatedPrinter = printerRepository.save(printerData);
                     return ResponseEntity.ok().body(updatedPrinter);
                 }).orElse(ResponseEntity.notFound().build());
@@ -92,7 +97,7 @@ public class PrinterController {
                 requestItems.set(pi.getIndex(), ri);
             }
             request.setRequestItems(requestItems);
-            requestController.updateRequest(request.getId(), request);
+            System.out.println(requestController.updateRequest(request.getId(), request));
         } catch (Exception e) {
             e.printStackTrace();
         }

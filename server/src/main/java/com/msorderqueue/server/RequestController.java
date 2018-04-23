@@ -62,8 +62,11 @@ public class RequestController {
                                                 @RequestBody Request request) {
         return requestRepository.findById(id)
                 .map(requestData -> {
-                    String comments = request.getComments();
-                    if (comments != null) { requestData.setComments(comments); }
+                    if(request.getComments() != null) { requestData.setComments(request.getComments()); }
+                    if(request.getRequestItems() != null) {
+                        requestData.setRequestItems(request.getRequestItems());
+                        requestData.setStatus();
+                    }
                     Request updatedRequest = requestRepository.save(requestData);
                     return ResponseEntity.ok().body(updatedRequest);
                 }).orElse(ResponseEntity.notFound().build());
