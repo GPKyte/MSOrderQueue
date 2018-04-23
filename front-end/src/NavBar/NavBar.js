@@ -36,8 +36,6 @@ class NavBar extends Component {
     Requests.getList(this.props.url).then(data =>
       this.setState({ requestsObject: data })
     ));
-
-    console.log(this.state.printerObject);
   }
 
   //This is the base printer object that displays all of the data needed on every printer

@@ -7,8 +7,7 @@ class SideBarrequest extends Component {
     this.state = {
       isHidden: true,
       buttonProperty: "btn btn-primary",
-      printerProperty: "Printer list-group-item",
-      listProperty: "collapse"
+      printerProperty: "Printer list-group-item"
     };
     this.onDelete = this.onDelete.bind(this);
   }
@@ -23,19 +22,16 @@ class SideBarrequest extends Component {
     }
   }
   onDelete(event) {
-    console.log(event.target)
-    this.props.deleteRequest("", this.props.data['id']);
+    console.log(event.target);
+    this.props.deleteRequest("", this.props.data["id"]);
   }
-
 
   render() {
     var request = this.props.data;
     var selected = this.props.selected;
-    var buttonLabel = "Expand";
     var expanded = false;
 
     if (selected === this.props.elementID) {
-      buttonLabel = "Collapse";
       expanded = true;
     }
 
@@ -44,17 +40,19 @@ class SideBarrequest extends Component {
     //The element id is the current index of the component that we are on
     return (
       <div className={this.state.printerProperty}>
+        <button className="btn-close" onClick={this.onDelete}>X</button>
         <div className="panel-group">
-          <div className="wrap-emails"> {request["user"]} </div>
+          <div className="wrap-emails" onClick={this.onClick.bind(this)}>
+            {" "}
+            {request["user"]}{" "}
+          </div>
           {request["firstName"]}
           <div />
           <button
-            className={this.state.buttonProperty}
-            onClick={this.onClick.bind(this)}
+
+            className="btn btn-danger disabled"
+            aria-disabled="true"
           >
-            {buttonLabel}
-          </button>
-          <button onClick={this.onDelete} className="btn btn-danger disabled" aria-disabled="true">
             Delete
           </button>
           {expanded && (

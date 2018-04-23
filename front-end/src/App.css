@@ -77,6 +77,12 @@
   display: flex;
 }
 
+.btn-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
 .button-link {
   background-color: transparent;
   border: none;
