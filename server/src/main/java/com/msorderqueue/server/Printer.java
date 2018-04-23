@@ -9,7 +9,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import lombok.Data;
 
@@ -25,7 +24,7 @@ public class Printer {
     @NotBlank private String name;
     @NotNull private PrinterStatus status;
     private String requestID;
-    @NotNull private ArrayList<HashMap<String, Integer>> filesPrinting; // [{"index": Integer, "qty": Integer}]
+    @NotNull private ArrayList<PrintItem> printItems; // [{"index": Integer, "qty": Integer}]
 
     private Printer() {
         this.requestID = "";
@@ -36,17 +35,17 @@ public class Printer {
         this.model = model;
         this.name = name;
         this.status = status;
-        this.filesPrinting = new ArrayList<HashMap<String, Integer>>();
+        this.printItems = new ArrayList<PrintItem>();
     }
 
     public void setStatus(PrinterStatus status) {
         switch(status) {
             case OPEN:  this.requestID = "";
-                        this.filesPrinting.clear();
+                        this.printItems.clear();
                         this.status = status;
                         break;
 
-            case BUSY:  if( ! (requestID.equals("") || filesPrinting.isEmpty()) ) {
+            case BUSY:  if( ! (requestID.equals("") || printItems.isEmpty()) ) {
                             this.status = status;
                         } else {
                             this.status = PrinterStatus.OPEN;

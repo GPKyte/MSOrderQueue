@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 import java.util.List;
+import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/api")
@@ -15,6 +16,8 @@ import java.util.List;
 public class PrinterController {
     @Autowired
     PrinterMongoRepository printerRepository;
+    @Autowired
+    RequestController requestController;
 
     @GetMapping("/printers")
     public List<Printer> getAllPrinters() {
@@ -42,7 +45,7 @@ public class PrinterController {
                     printerData.setBrand(printer.getBrand());
                     printerData.setStatus(printer.getStatus());
                     printerData.setRequestID(printer.getRequestID());
-                    printerData.setFilesPrinting(printer.getFilesPrinting());
+                    printerData.setPrintItems(printer.getPrintItems());
                     Printer updatedPrinter = printerRepository.save(printerData);
                     return ResponseEntity.ok().body(updatedPrinter);
                 }).orElse(ResponseEntity.notFound().build());
@@ -53,8 +56,15 @@ public class PrinterController {
                                                 @RequestBody Printer printer) {
         return printerRepository.findById(id)
                 .map(printerData -> {
+                    // Affect request if print completed
+                    if(PrinterStatus.DONE.equals(printer.getStatus()) &&
+                        PrinterStatus.BUSY.equals(printerData.getStatus())) {
+                        completePrint(printerData);
+                    }
+
+                    // Update Printer if updates present in request
                     if(printer.getRequestID() != null) { printerData.setRequestID(printer.getRequestID()); }
-                    if(printer.getFilesPrinting() != null) { printerData.setFilesPrinting(printer.getFilesPrinting()); }
+                    if(printer.getPrintItems() != null) { printerData.setPrintItems(printer.getPrintItems()); }
                     if(printer.getStatus() != null) { printerData.setStatus(printer.getStatus()); }
                     Printer updatedPrinter = printerRepository.save(printerData);
                     return ResponseEntity.ok().body(updatedPrinter);
@@ -68,5 +78,23 @@ public class PrinterController {
                     printerRepository.deleteById(id);
                     return ResponseEntity.ok().build();
                 }).orElse(ResponseEntity.notFound().build());
+    }
+
+    private void completePrint(Printer printer) {
+        Optional<Request> response = requestController.getRequestById(printer.getRequestID());
+        try {
+            Request request = response.get();
+            ArrayList<RequestItem> requestItems = request.getRequestItems();
+
+            for(PrintItem pi : printer.getPrintItems()) {
+                RequestItem ri = requestItems.get(pi.getIndex());
+                ri.setCompleted(ri.getCompleted() + pi.getQty());
+                requestItems.set(pi.getIndex(), ri);
+            }
+            request.setRequestItems(requestItems);
+            requestController.updateRequest(request.getId(), request);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

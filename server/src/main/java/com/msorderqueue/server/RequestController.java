@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.stream.*;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -40,6 +41,11 @@ public class RequestController {
     @GetMapping(value="/requests", params={"username"})
     public ResponseEntity<List<Request>> getRequestsByUser(@RequestParam String username) {
         return ResponseEntity.ok().body(requestRepository.findByUser(username));
+    }
+
+    @GetMapping(value="/requests/{id}")
+    public @ResponseBody Optional<Request> getRequestById(@PathVariable("id") String id) {
+        return requestRepository.findById(id);
     }
 
     @PostMapping(value="/requests")
