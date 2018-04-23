@@ -5,8 +5,8 @@ Printer
     "brand": String,  
     "model": String,  
     "status": (OPEN | BUSY | DONE),  
-    "requestId": String // Deprecated  
-    "itemsPrinting": [{"index": int, "qty": int}, ...] // List of indices to RequestItems in Request
+    "requestId": String  
+    "printItems": [{"index": int, "qty": int}, ...] // List of indices to RequestItems in Request
 }   
 
 Request  
