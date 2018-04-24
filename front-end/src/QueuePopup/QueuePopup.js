@@ -75,16 +75,22 @@ class QueuePopup extends Component {
     if (this.state.printerSelection == this.state.defaultPrinter) {
       var tempData = this.state.listOfAmmounts;
       //TODO Change requests to only be requests without 0
-      var requestData = this.props.requests[0]["requestItems"]
-      var finalData = []
+      var requestData = this.props.requests[0]["requestItems"];
+      var finalData = [];
       for (var i = 0; i > requestData.length; i++) {
-        finalData.push({"index": i, "qty": tempData[i]})
+        finalData.push({ index: i, qty: tempData[i] });
       }
       //TODO Change requests to only be requests without 0
-    Printer.patchRequest(this.props.url, this.state.printerSelection, this.props.requests[0], finalData,this.state.colorOfPrinter)
-  } else {
-    console.log("Not A valid Printer");
-  }
+      Printer.patchRequest(
+        this.props.url,
+        this.state.printerSelection,
+        this.props.requests[0],
+        finalData,
+        this.state.colorOfPrinter
+      );
+    } else {
+      console.log("Not A valid Printer");
+    }
   }
 
   printerList(items) {
@@ -137,8 +143,7 @@ class QueuePopup extends Component {
             type="text"
           />
         </div>
-        <button onClick={this.patchPrinters}>
-        Trying To not die</button>
+        <button onClick={this.patchPrinters}>Trying To not die</button>
       </div>
     );
   }
