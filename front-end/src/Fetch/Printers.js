@@ -40,10 +40,6 @@ this.requestItems = function(url, printerID, requestObject, fileList, color) {
       color: color
     })
   });
-  console.log(fileList)
-  console.log(
-    url + " " + printerID + " " + fileList + " " + color
-  );
   fetch(myRequest).then(response => {
     this.getList(url);
   });

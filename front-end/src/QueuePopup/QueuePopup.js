@@ -79,7 +79,7 @@ class QueuePopup extends Component {
       //TODO Change requests to only be requests without 0
       var requestData = this.props.requests[0]["requestItems"];
       var finalData = [];
-      for (var i = 0; i > requestData.length; i++) {
+      for (var i = 0; i < requestData.length; i++) {
         finalData.push({ index: i, qty: tempData[i] });
       }
       //TODO Change requests to only be requests without 0
