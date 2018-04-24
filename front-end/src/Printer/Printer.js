@@ -22,6 +22,11 @@ class Printer extends Component {
           alt="Card cap"
         />
         {printerData["name"]}
+        {console.log(printerData)}
+        {printerData["printItems"] !== null && printerData["printItems"].map(i => {
+
+          return (<div>{i["index"]} : {i["qty"]}</div>)
+        })}
         <div> Status: {printerData["status"]} </div>
         <div className="card-block">
           <button className="btn btn-primary card-button">Dequeue</button>
@@ -36,5 +41,7 @@ class Printer extends Component {
     );
   }
 }
+
+
 
 export default Printer;

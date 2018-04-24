@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import SideBarFile from "./SideBarFile";
-import QueuePopup from "./../QueuePopup/QueuePopup.js";
 
 class SideBarrequest extends Component {
   constructor(props) {
@@ -31,7 +30,6 @@ class SideBarrequest extends Component {
   render() {
     var request = this.props.data;
     var selected = this.props.selected;
-    var printers = this.props.printers;
     var expanded = false;
 
     if (selected === this.props.elementID) {

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import SideBarrequest from "./SideBarJob.js";
-import QueuePopup from "./../QueuePopup/QueuePopup.js";
 var Promise = require("bluebird");
 Promise.promisifyAll(require("request"));
 

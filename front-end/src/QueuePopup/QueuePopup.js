@@ -22,14 +22,13 @@ class QueuePopup extends Component {
   }
 
   getNameFronId(id) {
+    var temp = "Not Found";
     for (var i = 0; i < this.props.printers.length; i++) {
-      console.log(this.props.printers[i]);
-      console.log(id);
       if (this.props.printers[i]["id"] === id) {
-        return this.props.printers[i]["name"];
+        temp = this.props.printers[i]["name"];
       }
     }
-    return "Not Found";
+    return temp;
   }
 
   changeFileAmmount(event) {
@@ -131,7 +130,7 @@ class QueuePopup extends Component {
                 )}
             </ul>
           </div>
-          {requestItem != undefined && (
+          {requestItem !== undefined && (
             <FileList
               data={requestItem}
               changeFileAmmount={this.changeFileAmmount}
@@ -163,14 +162,12 @@ class PrinterListDropdown extends Component {
 
   //This is the generated list responsible for holding all of the files that we are using.
   render() {
-    var size = 0;
     var printerName = this.props.data;
 
     if (printerName !== "") {
       return (
         <ul className="">
           {printerName.map(i => {
-            size += 1;
             return (
               <div
                 onClick={this.onClick}
