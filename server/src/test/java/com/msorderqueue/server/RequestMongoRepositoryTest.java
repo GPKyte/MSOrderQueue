@@ -56,7 +56,7 @@ public class RequestMongoRepositoryTest {
         for(Request r : requests) {
             count++;
         }
-        assertEquals(2, count);
+        assertEquals(count, 2);
         // Test that we have correct count of RequestItems in our Request
         ArrayList<RequestItem> items = requestA.getRequestItems();
         assertEquals(3, items.size());

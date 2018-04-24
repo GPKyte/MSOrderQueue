@@ -37,7 +37,7 @@ public class PrinterMongoRepositoryTest {
         for(Printer p : printers) {
             count++;
         }
-        assertEquals(count, 2);
+        assertEquals(2, count);
     }
 
     @Test
