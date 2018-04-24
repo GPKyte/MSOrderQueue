@@ -52,12 +52,6 @@ class SideBarrequest extends Component {
           </div>
           {request["firstName"]}
           <div />
-          <button
-            className="btn btn-danger disabled"
-            aria-disabled="true"
-          >
-            Delete
-          </button>
           {expanded && (
             <FullList className={this.state.listProperty} data={request} />
           )}
