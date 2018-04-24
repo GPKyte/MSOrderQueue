@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import static org.junit.Assert.*;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -29,7 +30,8 @@ public class PrinterControllerTest {
 
     @Test
     public void testGetAllPrinters() {
-        controller.getAllPrinters();
+      //getting all the printers. check if there are printers name: Bruce, Tiny, Lilo. Jen
+        return;
     }
 
     @Test
@@ -51,10 +53,17 @@ public class PrinterControllerTest {
         return;
     }
 
+
     @Test
-    public void deletePrinter() {
-        controller.Printer();
-        return;
+    public void deletePrinter(String id) {
+      List<Printer> printers = controller.getAllPrinters();
+      String id = printers.get(0).getId();
+      controller.deletePrinter(id);
+
+      List<Printer> newPrinters = controller.getAllPrinters();
+      for (Printer p : newPrinters){
+        assertNotEqual(p.getId(), id);
+      }
     }
 
     @After
