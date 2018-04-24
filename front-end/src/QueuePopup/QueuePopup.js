@@ -83,7 +83,7 @@ class QueuePopup extends Component {
         finalData.push({ index: i, qty: tempData[i] });
       }
       //TODO Change requests to only be requests without 0
-      Printer.patchRequest(
+      Printer.requestItems(
         this.props.url,
         this.state.printerID,
         this.props.requests[0],

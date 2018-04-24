@@ -29,19 +29,22 @@ this.getList = function(url) {
   return printerList(url);
 };
 
-this.patchRequest = function(url, printerID, requestObject, fileList, color) {
-  const myRequest = new Request(url + "/api/Printers/" + printerID, {
+this.requestItems = function(url, printerID, requestObject, fileList, color) {
+  const myRequest = new Request(url + "/api/printers/" + printerID, {
     method: "PATCH",
     headers: header,
     body: JSON.stringify({
+      status: "BUSY",
       requestID: requestObject["id"],
-      printItems: fileList
+      printItems: fileList,
+      color: color
     })
   });
+  console.log(fileList)
   console.log(
-    url + " " + printerID + " " + requestObject + " " + fileList + " " + color
+    url + " " + printerID + " " + fileList + " " + color
   );
   fetch(myRequest).then(response => {
-    this.requestList();
+    this.getList(url);
   });
 };
