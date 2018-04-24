@@ -72,7 +72,7 @@ class QueuePopup extends Component {
   }
 
   patchPrinters() {
-    if (this.state.printerSelection == this.state.defaultPrinter) {
+    if (this.state.printerSelection !== this.state.defaultPrinter) {
       var tempData = this.state.listOfAmmounts;
       //TODO Change requests to only be requests without 0
       var requestData = this.props.requests[0]["requestItems"];

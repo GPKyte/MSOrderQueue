@@ -34,11 +34,13 @@ this.patchRequest = function(url, printerID, requestObject, fileList, color) {
     method: "PATCH",
     headers: header,
     body: JSON.stringify({
-      requestID: requestObject['id'],
+      requestID: requestObject["id"],
       printItems: fileList
     })
   });
-
+  console.log(
+    url + " " + printerID + " " + requestObject + " " + fileList + " " + color
+  );
   fetch(myRequest).then(response => {
     this.requestList();
   });
