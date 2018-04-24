@@ -60,18 +60,12 @@ public class UserControllerTest {
         return;
     }
 
-    @Test
-    public void testCreateUser() {
-        User hd = controller.createUser();
-        for (User u: hd) {
-
-        }
-        return;
-    }
 
     @Test
     public void testDeleteUser() {
-        ResponseEntity<?> er = controller.deleteUser();
+        controller.deleteUser("B0aker");
+        Optional<User> ac = controller.getUserById("B0aker");
+        assertEquals(ac.isPresent(), false);
         return;
     }
 
