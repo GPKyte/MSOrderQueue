@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import static org.junit.Assert.*;
+import java.util.List;
+import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -35,7 +37,7 @@ public class UserControllerTest {
     public void testGetAllUsers() {
         List<User> ul = controller.getAllUsers();
         assertEquals(ul.size(),5);
-        User sg;
+        User sg = new User();
         for (User u :ul) {
           if (u.getFirstName().equals("Solomon")) {
               sg = u;
