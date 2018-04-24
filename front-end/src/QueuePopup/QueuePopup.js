@@ -17,6 +17,7 @@ class QueuePopup extends Component {
     this.onClick = this.onClick.bind(this);
     this.changeFileAmmount = this.changeFileAmmount.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.patchPrinters = this.patchPrinters.bind(this);
   }
 
   getNameFronId(id) {
@@ -73,12 +74,14 @@ class QueuePopup extends Component {
   patchPrinters() {
     if (this.state.printerSelection == this.state.defaultPrinter) {
       var tempData = this.state.listOfAmmounts;
+      //TODO Change requests to only be requests without 0
       var requestData = this.props.requests[0]["requestItems"]
       var finalData = []
       for (var i = 0; i > requestData.length; i++) {
         finalData.push({"index": i, "qty": tempData[i]})
       }
-    Printer.patchRequest(this.props.url, this.state.printerSelection, finalData,this.state.colorOfPrinter)
+      //TODO Change requests to only be requests without 0
+    Printer.patchRequest(this.props.url, this.state.printerSelection, this.props.requests[0], finalData,this.state.colorOfPrinter)
   } else {
     console.log("Not A valid Printer");
   }
@@ -93,7 +96,7 @@ class QueuePopup extends Component {
   }
 
   render() {
-    var requestItem = this.props.requests[0]; //Change this from 0 for when binded properly with which request we are feeding through
+    var requestItem = this.props.requests[0]; //TODO Change this from 0 for when binded properly with which request we are feeding through
     var printerObjects = this.props.printers;
     return (
       <div className="modal-background-custom">
@@ -134,6 +137,8 @@ class QueuePopup extends Component {
             type="text"
           />
         </div>
+        <button onClick={this.patchPrinters}>
+        Trying To not die</button>
       </div>
     );
   }
