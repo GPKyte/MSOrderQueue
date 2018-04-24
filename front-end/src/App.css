@@ -122,3 +122,15 @@
 .MainBox {
   width: auto;
 }
+
+nav {
+  width: 100%;
+}
+
+.navbar-brand {
+  float: left;
+}
+
+#navbar-btns {
+  margin-left: auto;
+}
