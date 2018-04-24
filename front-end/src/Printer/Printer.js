@@ -15,13 +15,17 @@ class Printer extends Component {
     var printerData = this.props.data;
 
     return (
-      <div className="card card-size ">
+      <div className="card card-size " id={"printer/" + this.props.id} >
         <img
           className="card-img-top"
           src={require("./../Images/download.jpg")}
           alt="Card cap"
         />
         {printerData["name"]}
+        {printerData["printItems"] !== null && printerData["printItems"].map(i => {
+
+          return (<div>{i["index"]} : {i["qty"]}</div>)
+        })}
         <div> Status: {printerData["status"]} </div>
         <div className="card-block">
           <button className="btn btn-primary card-button">Dequeue</button>
@@ -36,5 +40,7 @@ class Printer extends Component {
     );
   }
 }
+
+
 
 export default Printer;

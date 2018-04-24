@@ -2,14 +2,13 @@ import React, { Component } from "react";
 
 class File extends Component {
   render() {
-    var printerData = this.props.data;
+    var sidebarRequestFile = this.props.data;
     return (
-      <div className="Printer">
+      <div className="File">
         {/* This is the base printer Object that displays all the nessicary for the future releases. */}
-        {printerData["fileName"]}
+        {sidebarRequestFile["fileName"]}
         <div />
         <button
-          id={printerData["id"]}
           className="btn btn-primary btn-sm disabled"
           aria-disabled="true"
         >
