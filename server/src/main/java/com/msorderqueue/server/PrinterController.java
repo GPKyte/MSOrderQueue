@@ -26,7 +26,7 @@ public class PrinterController {
     }
 
     @GetMapping(value="/printers/{id}")
-    @ResponseBody public Optional<Printer> getPrinterById(@PathVariable("id") String id) {
+    public @ResponseBody Optional<Printer> getPrinterById(@PathVariable("id") String id) {
         return printerRepository.findById(id);
     }
 

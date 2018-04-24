@@ -46,8 +46,6 @@ public class Printer {
                         break;
 
             case BUSY:  if(this.requestID == null || "".equals(this.requestID) || this.printItems.isEmpty()) {
-                            System.out.println("You shouldn't see this.");
-                            System.out.println("Status: "+status+", requestID==null: "+requestID.equals("")+", empty: "+printItems.isEmpty());
                             this.status = PrinterStatus.OPEN;
                         } else {
                             this.status = status;
