@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Printer from "./../Fetch/Printers.js";
 
 class QueuePopup extends Component {
   constructor(props) {
@@ -6,12 +7,16 @@ class QueuePopup extends Component {
     this.state = {
       dialogShowing: false,
       showDropdown: "dropdown-menu",
+      defaultPrinter: "Choose A Printer",
       printerSelection: "Choose A Printer",
       listOfFiles: [],
-      listOfAmmounts: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      listOfAmmounts: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+      colorOfPrinter: "red",
+      currentPrinter: ""
     };
     this.onClick = this.onClick.bind(this);
     this.changeFileAmmount = this.changeFileAmmount.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   getNameFronId(id) {
@@ -33,6 +38,15 @@ class QueuePopup extends Component {
     });
   }
 
+  handleChange(event) {
+    if (event.target.type === "text") {
+      console.log(event.target.value);
+      this.setState({
+        colorOfPrinter: event.target.value
+      });
+    }
+  }
+
   //This is the base printer object that displays all of the data needed on every printer
   onClick(event) {
     if (event.target.value === "showDropdown") {
@@ -50,10 +64,24 @@ class QueuePopup extends Component {
     ) {
       var selection = event.target.attributes.getNamedItem("valueobject").value;
       this.setState({
-        printerSelection: this.getNameFronId(selection)
+        printerSelection: this.getNameFronId(selection),
+        showDropdown: "dropdown-menu"
       });
     }
-    console.log(this.state.showDropdown);
+  }
+
+  patchPrinters() {
+    if (this.state.printerSelection == this.state.defaultPrinter) {
+      var tempData = this.state.listOfAmmounts;
+      var requestData = this.props.requests[0]["requestItems"]
+      var finalData = []
+      for (var i = 0; i > requestData.length; i++) {
+        finalData.push({"index": i, "qty": tempData[i]})
+      }
+    Printer.patchRequest(this.props.url, this.state.printerSelection, finalData,this.state.colorOfPrinter)
+  } else {
+    console.log("Not A valid Printer");
+  }
   }
 
   printerList(items) {
@@ -65,7 +93,7 @@ class QueuePopup extends Component {
   }
 
   render() {
-    var requestItem = this.props.requests[1];  //Change this from 0 for when binded properly with which request we are feeding through
+    var requestItem = this.props.requests[0]; //Change this from 0 for when binded properly with which request we are feeding through
     var printerObjects = this.props.printers;
     return (
       <div className="modal-background-custom">
@@ -92,7 +120,19 @@ class QueuePopup extends Component {
                 )}
             </ul>
           </div>
-          {requestItem != undefined && <FileList data={requestItem} changeFileAmmount={this.changeFileAmmount} />}
+          {requestItem != undefined && (
+            <FileList
+              data={requestItem}
+              changeFileAmmount={this.changeFileAmmount}
+              listOfAmmounts={this.state.listOfAmmounts}
+            />
+          )}
+          <input
+            className="form-control"
+            value={this.state.colorOfPrinter}
+            onChange={this.handleChange}
+            type="text"
+          />
         </div>
       </div>
     );
@@ -141,9 +181,6 @@ class PrinterListDropdown extends Component {
 class FileList extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      fileListTemp: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    };
     this.onClick = this.onClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
@@ -182,7 +219,7 @@ class FileList extends Component {
                 <div className="col">
                   <input
                     className="form-control"
-                    value={this.state.numberOfGuests}
+                    value={this.props.listOfAmmounts[size]}
                     onChange={this.handleChange}
                     type="number"
                     id={size}

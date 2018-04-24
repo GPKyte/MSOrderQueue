@@ -29,12 +29,13 @@ this.getList = function(url) {
   return printerList(url);
 };
 
-this.patchRequest = function(url, printerID, printerObject, requestObject, fileList) {
+this.patchRequest = function(url, printerID, fileList, color) {
   const myRequest = new Request(url + "/api/Printers/" + printerID, {
     method: "PATCH",
     headers: header,
     body: JSON.stringify({
-      requestID: requestObject['id']
+      requestID: requestObject['id'],
+      printItems: fileList
     })
   });
 
