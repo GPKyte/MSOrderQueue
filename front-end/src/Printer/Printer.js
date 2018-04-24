@@ -22,7 +22,6 @@ class Printer extends Component {
           alt="Card cap"
         />
         {printerData["name"]}
-        {console.log(printerData)}
         {printerData["printItems"] !== null && printerData["printItems"].map(i => {
 
           return (<div>{i["index"]} : {i["qty"]}</div>)
