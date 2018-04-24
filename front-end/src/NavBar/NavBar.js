@@ -7,12 +7,13 @@ import SideBar from "./../SideBar/SideBarList.js";
 import ArchivePage from "./../Archive/Arcive.js";
 import Printer from "./../Fetch/Printers.js";
 import Requests from "./../Fetch/Requests.js";
+import QueuePopup from "./../QueuePopup/QueuePopup.js";
 
 class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentView: "printers",
+      currentView: "queueing",
       printerObject: "",
       requestsObject: ""
     };
@@ -30,12 +31,13 @@ class NavBar extends Component {
   }
   //Refreshes the data from the api
   refresh() {
-    Printer.getList(this.props.url).then(data =>
-      this.setState({ printerObject: data })
-    ).then(
-    Requests.getList(this.props.url).then(data =>
-      this.setState({ requestsObject: data })
-    ));
+    Printer.getList(this.props.url)
+      .then(data => this.setState({ printerObject: data }))
+      .then(
+        Requests.getList(this.props.url).then(data =>
+          this.setState({ requestsObject: data })
+        )
+      );
   }
 
   //This is the base printer object that displays all of the data needed on every printer
@@ -56,10 +58,15 @@ class NavBar extends Component {
           />
         </nav>
         <div className="content-body">
-          <SideBar url={this.props.url} requests={this.state.requestsObject} printers={this.state.printerObject} />
+          <SideBar
+            url={this.props.url}
+            requests={this.state.requestsObject}
+            printers={this.state.printerObject}
+          />
           <RenderedView
             url={this.props.url}
             printers={this.state.printerObject}
+            requests={this.state.requestsObject}
             value={this.state.currentView}
           >
             {" "}
@@ -83,7 +90,20 @@ class RenderedView extends Component {
       case "login":
         return <LoginPage url={this.props.url} />;
       case "archive":
-        return <ArchivePage url={this.props.url} />;
+        return (
+          <ArchivePage
+            url={this.props.url}
+            requests={this.state.requests}
+          />
+        );
+      case "queueing":
+        return (
+          <QueuePopup
+            url={this.props.url}
+            requests={this.props.requests}
+            printers={this.props.printers}
+          />
+        );
       default:
         return <div>ERRRRROOOOORRRRR</div>;
     }
@@ -123,8 +143,7 @@ class NavBarButtons extends Component {
 
   render() {
     //List of buttons to auto populate (if you change here make sure to change RenderedView class)
-    var buttons = ["Printers", "Add Printers", "Login", "Archive"];
-
+    var buttons = ["Printers", "Add Printers", "Login", "Archive", "Queueing"];
 
     return (
       <div>
@@ -142,7 +161,7 @@ class NavBarButtons extends Component {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             {buttons.map(i => {
-              return(this.button(i))
+              return this.button(i);
             })}
           </ul>
         </div>

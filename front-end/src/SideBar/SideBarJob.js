@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SideBarFile from "./SideBarFile";
+import QueuePopup from "./../QueuePopup/QueuePopup.js";
 
 class SideBarrequest extends Component {
   constructor(props) {
@@ -7,7 +8,8 @@ class SideBarrequest extends Component {
     this.state = {
       isHidden: true,
       buttonProperty: "btn btn-primary",
-      printerProperty: "Printer list-group-item"
+      printerProperty: "Printer list-group-item",
+      popupVisable: true
     };
     this.onDelete = this.onDelete.bind(this);
   }
@@ -29,6 +31,7 @@ class SideBarrequest extends Component {
   render() {
     var request = this.props.data;
     var selected = this.props.selected;
+    var printers = this.props.printers;
     var expanded = false;
 
     if (selected === this.props.elementID) {
@@ -38,8 +41,11 @@ class SideBarrequest extends Component {
     //The isHidden checks for wether or not the current list should be shown
     //The selected is the current index of what should be shown
     //The element id is the current index of the component that we are on
+    //Add the popup later with inserting this {this.state.popupVisable && (<QueuePopup printers={printers}></QueuePopup>)}
     return (
       <div className={this.state.printerProperty}>
+
+
         <button className="btn-close" onClick={this.onDelete}>X</button>
         <div className="panel-group">
           <div className="wrap-emails" onClick={this.onClick.bind(this)}>
@@ -49,7 +55,6 @@ class SideBarrequest extends Component {
           {request["firstName"]}
           <div />
           <button
-
             className="btn btn-danger disabled"
             aria-disabled="true"
           >

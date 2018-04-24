@@ -16,7 +16,7 @@ class PrinterList extends Component {
             <h1 className="printerTitle">Printers</h1>
             {ListOfPrinters.map(i => {
               return (
-                <Printer
+                  <Printer
                   key={i["id"]}
                   id={i["id"]}
                   finishButton={this.finishPrinter}

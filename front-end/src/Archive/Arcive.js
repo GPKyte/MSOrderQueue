@@ -12,7 +12,7 @@ class ArchivePage extends Component {
   }
 
   render() {
-    var printerData = this.props.data;
+    var printerData = this.props.requests;
 
     return (
       <div className="card card-size ">

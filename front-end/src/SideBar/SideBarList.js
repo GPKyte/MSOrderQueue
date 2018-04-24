@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SideBarrequest from "./SideBarJob.js";
+import QueuePopup from "./../QueuePopup/QueuePopup.js";
 var Promise = require("bluebird");
 Promise.promisifyAll(require("request"));
 
@@ -9,6 +10,11 @@ class SideBarList extends Component {
     this.state = {
       selectedIndex: -1
     };
+    this.deleteRequest = this.deleteRequest.bind(this);
+  }
+
+  deleteRequest(string, id) {
+    return "";
   }
 
   //Part of the logic to see which of the requests is currenty expanded.
@@ -35,6 +41,7 @@ class SideBarList extends Component {
                 onClick={this.onClick.bind(this)}
                 currentIndex={this.changeSelectedIndex}
                 selected={this.state.selectedIndex}
+                printers={printers}
                 deleteRequest={this.deleteRequest}
                 currentlyRevealed={this.state.selectedIndex}
                 elementID={size - 1}
