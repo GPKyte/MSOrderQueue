@@ -9,6 +9,7 @@ class QueuePopup extends Component {
       showDropdown: "dropdown-menu",
       defaultPrinter: "Choose A Printer",
       printerSelection: "Choose A Printer",
+      printerID: "",
       listOfFiles: [],
       listOfAmmounts: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       colorOfPrinter: "red",
@@ -66,6 +67,7 @@ class QueuePopup extends Component {
       var selection = event.target.attributes.getNamedItem("valueobject").value;
       this.setState({
         printerSelection: this.getNameFronId(selection),
+        printerID: selection,
         showDropdown: "dropdown-menu"
       });
     }
@@ -83,7 +85,7 @@ class QueuePopup extends Component {
       //TODO Change requests to only be requests without 0
       Printer.patchRequest(
         this.props.url,
-        this.state.printerSelection,
+        this.state.printerID,
         this.props.requests[0],
         finalData,
         this.state.colorOfPrinter
