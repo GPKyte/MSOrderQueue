@@ -29,21 +29,31 @@ public class PrinterControllerTest {
 
     @Test
     public void testGetAllPrinters() {
-        return;
+        controller.getAllPrinters();
     }
 
     @Test
     public void testCreatePrinter() {
-        return;
+        Printer p = controller.createPrinter("SomeBrand", "", "", "", PrinterStatus);
+        // Some tests on p, maybe check the id or other fields
+        assertEquals(p.getId(), "");
+        assertEquals(p.getBrand(), "SomeBrand");
+        assertEquals(p.getModel(), "");
+        assertEquals(p.getName(), "")；
+        assertEquals(p.getStatus(), "");
+        return:
     }
 
     @Test
     public void testUpdatePrinter() {
+        Printer p1 = controller.updatePrinter();
+        p1.getValue(testCreatePrinter());
         return;
     }
 
     @Test
     public void deletePrinter() {
+        controller.Printer();
         return;
     }
 
@@ -52,5 +62,6 @@ public class PrinterControllerTest {
         for(Printer p : controller.getAllPrinters()) {
             controller.deletePrinter(p.getId());
         }
+        return；
     }
 }

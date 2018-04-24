@@ -33,21 +33,45 @@ public class UserControllerTest {
 
     @Test
     public void testGetAllUsers() {
+        List<User> ul = controller.getAllUsers();
+        assertEquals(ul.size(),5);
+        User sg;
+        for (User u :ul) {
+          if (u.getFirstName().equals("Solomon")) {
+              sg = u;
+          }
+        }
+        assertEquals(sg.getLastName(),"G");
+        assertEquals(sg.getUsername(),"ghberemeskels");
+        assertEquals(sg.getEmail(),"dragoesubs@gmail.com");
+        assertEquals(sg.getRole(),User.Role.STAFF);
         return;
     }
 
     @Test
     public void testGetUserById() {
+        Optional<User> uo = controller.getUserById("haodongeric");
+        User ej = uo.get();
+        assertEquals(ej.getUsername(), "haodongeric");
+        assertEquals(ej.getFirstName(), "Haodong");
+        assertEquals(ej.getLastName(), "J");
+        assertEquals(ej.getEmail(), "dragoesubs@gmail.com");
+        assertEquals(ej.getRole(),User.Role.REQUESTER);
         return;
     }
 
     @Test
     public void testCreateUser() {
+        User hd = controller.createUser();
+        for (User u: hd) {
+
+        }
         return;
     }
 
     @Test
     public void testDeleteUser() {
+        ResponseEntity<?> er = controller.deleteUser();
         return;
     }
 
