@@ -31,7 +31,6 @@ class SideBarList extends Component {
     //If there are requests in the queue then render this
     if (requests != null) {
       //This is the generated list that we will use to populate all of the requests that are inside of the sidebar.
-      console.log(requests)
       if (requests.length > 0) {
         var list = requests.map(i => {
           size += 1;
