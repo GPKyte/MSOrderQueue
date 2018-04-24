@@ -31,7 +31,6 @@ public class Request implements Comparable<Request> {
 
     public Request() {
         this.timestamp = new Date();
-        this.status = RequestStatus.ORDERED;
     }
 
     public Request(String user, String comments, boolean forClass, ArrayList<RequestItem> requestItems) {
@@ -40,6 +39,7 @@ public class Request implements Comparable<Request> {
         this.comments = comments;
         this.forClass = forClass;
         this.requestItems = new ArrayList<>(requestItems);
+        this.status = RequestStatus.ORDERED;
         setStatus();
     }
 
@@ -60,10 +60,6 @@ public class Request implements Comparable<Request> {
         else if (complete == requestItems.size()) { status = RequestStatus.COMPLETE; }
         else { status = RequestStatus.ORDERED; }
         this.status = status;
-    }
-
-    public ArrayList<RequestItem> getRequestItems() {
-        return (this.requestItems == null)? new ArrayList<RequestItem>() : this.requestItems;
     }
 
     public int compareTo(Request o) {
