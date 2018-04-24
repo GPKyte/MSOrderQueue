@@ -30,21 +30,31 @@ public class RequestTest {
         assertNull(nullRequest.getUser());
         assertNull(nullRequest.getRequestItems());
         assertNull(nullRequest.getComments());
+        assertNull(nullRequest.getStatus());
         assertEquals(nullRequest.isForClass(), false);
         assertNotNull(nullRequest.getTimestamp());
-        assertNotNull(nullRequest.getStatus());
     }
 
     @Test
     public void testSetStatus() {
+        // Note can't change status between ORDERED/IN_PROCESS/COMPLETE externally
+        // since it's meant to be based off of state
+        // But NOTIFIED and DELIVERED are less so and will be handled externally
+        // Should also be dependent on the Request being COMPLETE by the conditions
+        // given in updateStatus()
         Request nullReq = new Request();
+        assertNull(nullReq.getRequestItems());
         assertNull(nullReq.getStatus());
         nullReq.setStatus(RequestStatus.ORDERED);
-        assertEquals(nullReq.getStatus(), RequestStatus.ORDERED);
-
-        // Note that if no requestItems are inprogress, setStatus will set to ORDERED
+        assertNull(nullReq.getStatus());
+        nullReq.setStatus(RequestStatus.IN_PROCESS);
+        assertNull(nullReq.getStatus());
         nullReq.setStatus(RequestStatus.COMPLETE);
-        assertEquals(nullReq.getStatus(), RequestStatus.ORDERED);
+        assertNull(nullReq.getStatus());
+        nullReq.setStatus(RequestStatus.NOTIFIED);
+        assertEquals(nullReq.getStatus(), RequestStatus.NOTIFIED);
+        nullReq.setStatus(RequestStatus.DELIVERED);
+        assertEquals(nullReq.getStatus(), RequestStatus.DELIVERED);
 
         ArrayList<RequestItem> items = new ArrayList<>();
         RequestItem r1 = new RequestItem("testFile1.stl", 83, "blue");
@@ -68,16 +78,11 @@ public class RequestTest {
         r3.setCompleted(7);
         items.set(1, r1);
         items.set(2, r2);
-        assertEquals(items.get(0), RequestStatus.COMPLETE);
-        assertEquals(items.get(1), RequestStatus.COMPLETE);
-        assertEquals(items.get(2), RequestStatus.COMPLETE);
+        assertEquals(items.get(0).getStatus(), RequestStatus.COMPLETE);
+        assertEquals(items.get(1).getStatus(), RequestStatus.COMPLETE);
+        assertEquals(items.get(2).getStatus(), RequestStatus.COMPLETE);
         goodRequest.setRequestItems(items);
         assertEquals(goodRequest.getStatus(), RequestStatus.COMPLETE);
-    }
-
-    @Test
-    public void testGetRequestItems() {
-        return;
     }
 
     @Test

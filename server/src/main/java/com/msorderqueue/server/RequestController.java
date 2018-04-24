@@ -65,7 +65,6 @@ public class RequestController {
                     if(request.getComments() != null) { requestData.setComments(request.getComments()); }
                     if(request.getRequestItems() != null) {
                         requestData.setRequestItems(request.getRequestItems());
-                        requestData.setStatus();
                     }
                     Request updatedRequest = requestRepository.save(requestData);
                     return ResponseEntity.ok().body(updatedRequest);
@@ -84,7 +83,6 @@ public class RequestController {
                     if (item.getStatus() != null) { updatedItem.setStatus(item.getStatus()); }
                     items.set(index, updatedItem);
                     requestData.setRequestItems(items);
-                    requestData.setStatus();
                     return ResponseEntity.ok().body(requestRepository.save(requestData));
                 }).orElse(ResponseEntity.notFound().build());
     }

@@ -40,10 +40,14 @@ public class Request implements Comparable<Request> {
         this.forClass = forClass;
         this.requestItems = new ArrayList<>(requestItems);
         this.status = RequestStatus.ORDERED;
-        setStatus();
+        updateStatus();
     }
 
-    public void setStatus() {
+    public void updateStatus() {
+        if(requestItems == null || requestItems.isEmpty()) {
+            // Don't change status, likely null/NOTIFIED/DELIVERED inside a PATCH request
+            return;
+        }
         RequestStatus status;
         int ordered = 0;
         int inProcess = 0;
@@ -56,10 +60,28 @@ public class Request implements Comparable<Request> {
                 default: break;
             }
         }
-        if (inProcess > 0 || (complete > 0 && ordered > 0)) { status = RequestStatus.IN_PROCESS; }
+        if (complete == requestItems.size() &&
+            (RequestStatus.NOTIFIED.equals(this.status) || RequestStatus.DELIVERED.equals(this.status))) { return; }
         else if (complete == requestItems.size()) { status = RequestStatus.COMPLETE; }
+        else if (inProcess > 0 || (complete > 0 && ordered > 0)) { status = RequestStatus.IN_PROCESS; }
+        else if (inProcess == 0 && complete == 0 && ordered == 0) { status = null; }
         else { status = RequestStatus.ORDERED; }
         this.status = status;
+    }
+
+    public void setStatus(RequestStatus status) {
+        if(status == null) { this.status = null; return; }
+        switch(status) {
+            case ORDERED:
+            case IN_PROCESS:
+            case COMPLETE: updateStatus(); break;
+            default: this.status = status; break;
+        }
+    }
+
+    public void setRequestItems(ArrayList<RequestItem> requests) {
+        this.requestItems = requests;
+        updateStatus();
     }
 
     public int compareTo(Request o) {
