@@ -144,7 +144,7 @@ class QueuePopup extends Component {
             type="text"
           />
         </div>
-        <button onClick={this.patchPrinters}>Trying To not die</button>
+        <button className="btn btn-primary" onClick={this.patchPrinters}>Add to Printer</button>
       </div>
     );
   }
