@@ -1,6 +1,12 @@
 /*https://github.com/chenglou/react-motion
 */
 
+* {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 14px;
+  line-height: 1.2em;
+}
+
 h3 {
   font-size: 20px;
 }
@@ -40,6 +46,14 @@ h3 {
 
 .card-size {
   width: 300px;
+}
+
+.card {
+  padding: 10px;
+}
+
+.printer-name {
+  font-size: 24px;
 }
 
 .content-body {
@@ -134,6 +148,7 @@ h3 {
 
 nav {
   width: 100%;
+  margin-bottom: 2px;
 }
 
 a.navbar-brand {
@@ -147,4 +162,12 @@ a.navbar-brand {
 
 #navbar-btns {
   margin-left: auto;
+}
+
+.nav-item {
+  font-size: 15px;
+}
+
+div.Printer.list-group-item {
+  padding: 6px;
 }
