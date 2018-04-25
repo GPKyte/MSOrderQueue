@@ -13,7 +13,7 @@ class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentView: "queueing",
+      currentView: "printers",
       printerObject: "",
       requestsObject: ""
     };
@@ -50,7 +50,7 @@ class NavBar extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-light bg-light flex-row">
+        <nav className="navbar navbar-expand navbar-light bg-light flex-row">
           <a className="navbar-brand">MakerSpace Printer Queue</a>
           <NavBarButtons
             onClick={this.onClick}
@@ -93,7 +93,7 @@ class RenderedView extends Component {
         return (
           <ArchivePage
             url={this.props.url}
-            requests={this.state.requests}
+            requests={this.props.requests}
           />
         );
       case "queueing":
