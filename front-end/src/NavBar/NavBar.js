@@ -51,7 +51,7 @@ class NavBar extends Component {
     return (
       <div>
         <nav className="navbar navbar-expand navbar-light bg-light flex-row">
-          <a className="navbar-brand">MakerSpace Printer Queue</a>
+          <a className="navbar-brand">MakerSpace Queue</a>
           <NavBarButtons
             onClick={this.onClick}
             currentView={this.state.currentView}
