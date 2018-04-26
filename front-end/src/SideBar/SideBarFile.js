@@ -7,7 +7,7 @@ class File extends Component {
     return (
       <div className="file">
         <div className="left">{file.indexOf("thingiverse") !== -1 ?
-          <a href="file">Thingiverse</a> : file}</div>
+          <a href={file} target="_blank">Thingiverse</a> : file}</div>
           <div className="right">{sidebarRequestFile["color"]} {sidebarRequestFile["completed"]}/{sidebarRequestFile["qty"]}</div>
       </div>
     );
