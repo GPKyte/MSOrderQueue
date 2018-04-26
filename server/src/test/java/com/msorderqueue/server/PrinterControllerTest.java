@@ -31,9 +31,19 @@ public class PrinterControllerTest {
 
     @Test
     public void testGetAllPrinters() {
-        //getting all the printers. check if there are printers name: Bruce, Tiny, Lilo. Jen
-        return;
-    }
+       List<Printer> p1 = controller.getAllPrinters();
+       assertEquals(p1.size(),4);
+       Printer p;
+       for (Printer x:p1){
+         if (p.getName().equals("Jen")){
+           px = p;
+         }
+       }
+       //getting all the printers. check if there are printers name: Bruce, Tiny, Lilo. Jen
+       assertEquals(px.getBrand(),"MakerBot");
+       assertEquals(px.getModel(),"Replicator 2x");
+       assertEquals(px.getStatus(),PrinterStatus.OPEN);
+       return;
 
     @Test
     public void testCreatePrinter() {
