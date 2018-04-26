@@ -38,12 +38,12 @@ class Printer extends Component {
     // }
   }
 
-  findRequestById( index, request, id) {
-    console.log(index, request, id)
-    for (var i=0; i < request.length; i++) {
-      console.log(request[i]["id"],id)
+  findRequestById(index, request, id) {
+    console.log(index, request, id);
+    for (var i = 0; i < request.length; i++) {
+      console.log(request[i]["id"], id);
       if (request[i]["id"] === id) {
-        return request[i]["requestItems"][index]["fileName"]
+        return request[i]["requestItems"][index]["fileName"];
       }
     }
     return "Fucking Error";
@@ -54,7 +54,7 @@ class Printer extends Component {
     var requestData = this.props.requests;
     this.whenUpdate(printerData);
     return (
-      <div className="card card-size" id={"printer/" + this.props.id} >
+      <div className="card card-size" id={"printer/" + this.props.id}>
         <img
           className="card-img-top"
           src={require("./../Images/download.jpg")}
@@ -63,13 +63,24 @@ class Printer extends Component {
         {printerData["name"]}
         {printerData["printItems"] !== null &&
           printerData["printItems"].map(i => {
-          // Excludes non-printing items
-            return ({return i["qty"] > 0 ?
+            // Excludes non-printing items
+            return i["qty"] > 0 ? (
               <div key={i["index"]}>
-                <div className="print-item"><div className="left">File: {this.findRequestById(i["index"], requestData, printerData["requestID"])} : </div>
-              <div className="right">Qty: {i["qty"]}</div></div>
-            );
-            : null})}
+                <div className="print-item">
+                  <div className="left">
+                    File:{" "}
+                    {this.findRequestById(
+                      i["index"],
+                      requestData,
+                      printerData["requestID"]
+                    )}{" "}
+                    :
+                  </div>
+                  <div className="right">Qty: {i["qty"]}></div>
+                </div>
+              </div>
+            ) : null;
+          })}
         <div className="printer-status"> {printerData["status"]} </div>
         <div className="card-block bottom">
           <button className="btn btn-outline-danger card-button left" id="0">
