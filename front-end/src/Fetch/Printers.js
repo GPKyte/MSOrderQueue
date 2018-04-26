@@ -25,20 +25,53 @@ function printerList(url) {
   });
 }
 
+function functionToEndAllFunctions(url, id, typeOfRequest, statusActual) {
+  console.log(url, id, typeOfRequest, statusActual)
+  const myRequest = new Request(url + "/api/printers/" + id, {
+    method: typeOfRequest,
+    headers: header,
+    body: JSON.stringify({
+      status: statusActual
+    })
+  });
+  fetch(myRequest).then(response => {
+    console.log("Kill Me Now", response.json())
+    // this.getList(url);
+  });
+};
+
+this.Finish = function(url, id) {
+  functionToEndAllFunctions(url, id, "PATCH", "DONE")
+}
+
+this.Restart = function(url, id) {
+  functionToEndAllFunctions(url, id, "PATCH", "BUSY")
+}
+
+this.Clear = function(url, id) {
+  functionToEndAllFunctions(url, id, "PATCH", "OPEN")
+}
+
+this.Cancel = function(url, id) {
+  functionToEndAllFunctions(url, id, "PATCH", "OPEN")
+}
+
 this.getList = function(url) {
   return printerList(url);
 };
 
-this.patchRequest = function(url, printerID, printerObject, requestObject, fileList) {
-  const myRequest = new Request(url + "/api/Printers/" + printerID, {
+this.requestItems = function(url, printerID, requestObject, fileList, color) {
+  const myRequest = new Request(url + "/api/printers/" + printerID, {
     method: "PATCH",
     headers: header,
     body: JSON.stringify({
-      requestID: requestObject['id']
+      status: "BUSY",
+      requestID: requestObject["id"],
+      printItems: fileList,
+      color: color
     })
   });
-
   fetch(myRequest).then(response => {
-    this.requestList();
+    this.getList(url);
   });
 };

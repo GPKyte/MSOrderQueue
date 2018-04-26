@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.stream.*;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -16,6 +17,8 @@ import java.util.stream.*;
 public class RequestController {
     @Autowired
     RequestMongoRepository requestRepository;
+    @Autowired
+    PrinterMongoRepository printerRepository;
 
     @GetMapping(value="/requests")
     public ResponseEntity<List<Request>> getAllRequests() {
@@ -42,6 +45,11 @@ public class RequestController {
         return ResponseEntity.ok().body(requestRepository.findByUser(username));
     }
 
+    @GetMapping(value="/requests/{id}")
+    public @ResponseBody Optional<Request> getRequestById(@PathVariable("id") String id) {
+        return requestRepository.findById(id);
+    }
+
     @PostMapping(value="/requests")
     public @ResponseBody Request createRequest(@Valid @RequestBody Request request) {
         ArrayList<RequestItem> items = new ArrayList<>();
@@ -53,11 +61,13 @@ public class RequestController {
 
     @PatchMapping(value="/requests/{id}")
     public ResponseEntity<Request> updateRequest(@PathVariable("id") String id,
-                                                @Valid @RequestBody Request request) {
+                                                @RequestBody Request request) {
         return requestRepository.findById(id)
                 .map(requestData -> {
-                    String comments = request.getComments();
-                    if (comments != null) { requestData.setComments(comments); }
+                    if(request.getComments() != null) { requestData.setComments(request.getComments()); }
+                    if(request.getRequestItems() != null) {
+                        requestData.setRequestItems(request.getRequestItems());
+                    }
                     Request updatedRequest = requestRepository.save(requestData);
                     return ResponseEntity.ok().body(updatedRequest);
                 }).orElse(ResponseEntity.notFound().build());
@@ -65,7 +75,7 @@ public class RequestController {
 
     @PatchMapping(value="/requests/{id}/{index}")
     public ResponseEntity<Request> updateRequestItem(@PathVariable("id") String id, @PathVariable("index") int index,
-                                                @Valid @RequestBody RequestItem item) {
+                                                @RequestBody RequestItem item) {
         return requestRepository.findById(id)
                 .map(requestData -> {
                     ArrayList<RequestItem> items = requestData.getRequestItems();
@@ -75,7 +85,6 @@ public class RequestController {
                     if (item.getStatus() != null) { updatedItem.setStatus(item.getStatus()); }
                     items.set(index, updatedItem);
                     requestData.setRequestItems(items);
-                    requestData.setStatus();
                     return ResponseEntity.ok().body(requestRepository.save(requestData));
                 }).orElse(ResponseEntity.notFound().build());
     }
@@ -85,6 +94,9 @@ public class RequestController {
         return requestRepository.findById(id)
                 .map(request -> {
                     requestRepository.deleteById(id);
+                    for(Printer p : printerRepository.findAll()) {
+                        if(id.equals(p.getRequestID())) { p.conditionalSetStatus(PrinterStatus.OPEN); }
+                    }
                     return ResponseEntity.ok().build();
                 }).orElse(ResponseEntity.notFound().build());
     }

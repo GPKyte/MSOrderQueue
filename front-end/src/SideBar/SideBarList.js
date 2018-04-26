@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SideBarrequest from "./SideBarJob.js";
+import Request from "./../Fetch/Requests.js";
 var Promise = require("bluebird");
 Promise.promisifyAll(require("request"));
 
@@ -9,6 +10,11 @@ class SideBarList extends Component {
     this.state = {
       selectedIndex: -1
     };
+    this.deleteRequest = this.deleteRequest.bind(this);
+  }
+
+  deleteRequest(url, id) {
+    Request.deleteRequest(url,id)
   }
 
   //Part of the logic to see which of the requests is currenty expanded.
@@ -25,7 +31,6 @@ class SideBarList extends Component {
     //If there are requests in the queue then render this
     if (requests != null) {
       //This is the generated list that we will use to populate all of the requests that are inside of the sidebar.
-      console.log(requests)
       if (requests.length > 0) {
         var list = requests.map(i => {
           size += 1;
@@ -35,9 +40,11 @@ class SideBarList extends Component {
                 onClick={this.onClick.bind(this)}
                 currentIndex={this.changeSelectedIndex}
                 selected={this.state.selectedIndex}
+                printers={printers}
                 deleteRequest={this.deleteRequest}
                 currentlyRevealed={this.state.selectedIndex}
                 elementID={size - 1}
+                url={this.props.url}
                 data={i}
               />
             </nav>

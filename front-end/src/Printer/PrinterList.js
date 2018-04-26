@@ -8,18 +8,21 @@ class PrinterList extends Component {
   render() {
     //Make This a object to be repeated
     var ListOfPrinters = this.props.printers;
+
     //Generates all of the printers that we are using for the project
     if (ListOfPrinters != null && ListOfPrinters.length > 0) {
       return (
         <div className="page-header">
           <ul className="PrinterContainer row">
-            <h1 className="printerTitle">Printers</h1>
+            <div className="printerTitle"><h3>Printers</h3></div>
             {ListOfPrinters.map(i => {
               return (
-                <Printer
+                  <Printer
                   key={i["id"]}
                   id={i["id"]}
                   finishButton={this.finishPrinter}
+                  requests={this.props.requests}
+                  url={this.props.url}
                   data={i}
                 />
               );

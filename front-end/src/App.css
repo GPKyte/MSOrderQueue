@@ -1,6 +1,16 @@
 /*https://github.com/chenglou/react-motion
 */
 
+* {
+  font-family: 'Exo 2', sans-serif;
+  font-size: 14px;
+  line-height: 1.2em;
+}
+
+h3 {
+  font-size: 20px;
+}
+
 .App {
   text-align: center;
 }
@@ -38,8 +48,19 @@
   width: 300px;
 }
 
+.card {
+  padding: 10px;
+}
+
+.printer-name {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  margin-top: 2px;
+}
+
 .content-body {
-  display:flex;
+  display: flex;
   flex-direction: row;
 }
 
@@ -50,31 +71,120 @@
 }
 
 .right {
-  position: relative;
   float: right;
-  margin-right: 10%;
+}
+
+.left {
+  float: left;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
 }
 
 .text-input-50 {
   width: 50%;
 }
 
+.PrinterContainer {
+  /* ul element here is weird with padding */
+  padding-left: 40px;
+  width: 340px;
+  margin-right: 40px;
+}
+
 .printerTitle {
   width: 100%;
 }
 
+.printerTitle h3 {
+  width: 100%;
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* 2 printers*/
+@media (min-width: 900px) {
+  .PrinterContainer {
+    width: 640px;
+  }
+}
+/* 3 printers */
+@media (min-width: 1200px) {
+  .PrinterContainer {
+    width: 940px;
+  }
+}
+/* 4 printers */
+@media (min-width: 1500px) {
+  .PrinterContainer {
+    width: 1240px;
+  }
+}
+
+.card * {
+  line-height: 1.3em;
+}
+
+.printer-status {
+  margin-bottom: 40px;
+}
+
+.print-item {
+  display: inline-block;
+  width: 29%;
+  margin: 0 auto;
+}
+
+.card-block button {
+  padding: 2px 0;
+  width: 49%;
+}
+
+.model-background-custom {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.custom-model {
+  background-color: "#fff";
+  border-radius: 5;
+  max-width: 500;
+  min-height: 300;
+  margin: "0 auto";
+  padding: 30;
+}
+
 #sidebar.active {
-    margin-left: -250px;
+  margin-left: -250px;
 }
 
 #sidebar {
-    min-width: 250px;
-    max-width: 250px;
-    min-height: 100vh;
+  min-width: 250px;
+  max-width: 250px;
+  min-height: 100vh;
 }
 
 .display-box {
   display: flex;
+}
+
+.btn-close {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .button-link {
@@ -86,10 +196,45 @@
   color: blue;
   text-decoration: underline;
 }
-.button-link:focus{
+.button-link:focus {
   outline: 0px;
 }
 
 .MainBox {
   width: auto;
+}
+
+nav {
+  width: 100%;
+  margin-bottom: 2px;
+}
+
+a.navbar-brand {
+  float: left;
+  font-size: 24px;
+}
+
+.navbar {
+  margin-bottom: 18px;
+}
+
+#navbar-btns {
+  margin-left: auto;
+}
+
+.nav-item {
+  font-size: 15px;
+}
+
+div.Printer.list-group-item {
+  padding: 6px;
+}
+
+.btn-close {
+  font-size: 10px;
+  padding: 2px;
+  line-height: 8px;
+  background-color: #DC4545;
+  border: none;
+  border-radius: 2px;
 }

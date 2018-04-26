@@ -1,11 +1,13 @@
 package com.msorderqueue.server;
 
-import com.msorderqueue.server.Request;
-
-import java.util.ArrayList;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import com.fasterxml.jackson.annotation.JsonCreator;
+
+import java.util.ArrayList;
 
 import lombok.Data;
 
@@ -15,15 +17,26 @@ import lombok.Data;
 @Data
 @Document(collection = "users")
 public class User {
-    @Id @NotBlank
-    private String username;
-    private String firstName;
-    private String lastName;
-    @NotBlank
-    private String email;
-    private Role role = Role.REQUESTER;
+    @NotBlank private String firstName;
+    @NotBlank private String lastName;
+    @Id @NotBlank private String username;
+    @NotBlank private String email;
+    @NotNull private Role role = Role.REQUESTER;
 
-    public enum Role {REQUESTER, STAFF, ADMIN};
+    public enum Role {
+        REQUESTER, STAFF, ADMIN;
+
+        @JsonCreator
+        public static Role fromText(String text){
+            text = text.trim().toUpperCase();
+            for(Role r : Role.values()){
+               if(r.toString().equals(text)){
+                   return r;
+               }
+            }
+            throw new IllegalArgumentException();
+       }
+    };
 
     public User() {}
 
