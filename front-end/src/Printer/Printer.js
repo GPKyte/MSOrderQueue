@@ -29,12 +29,12 @@ class Printer extends Component {
       switch (this.props.data["status"]) {
         case "BUSY":
           return this.setState({
-            jacksgay: ["", "", "Delete", ""],
+            jacksgay: ["", "", "Delete", "btn btn-outline-danger card-button left"],
             currentPrinter: this.props.data["status"]
           });
         case "OPEN":
           return this.setState({
-            jacksgay: ["Cancel", "", "Finish", ""],
+            jacksgay: ["Cancel", "btn btn-outline-warn card-button right", "Finish", "btn btn-outline-success card-button left"],
             currentPrinter: this.props.data["status"]
           });
         case "DONE":
