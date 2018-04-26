@@ -23,7 +23,7 @@ class NavBar extends Component {
   //When the component loads, this is called starting the interval to repeditally call on the api to refresh the data
   componentDidMount() {
     this.refresh();
-    this.interval = setInterval(this.refresh, 5000);
+    this.interval = setInterval(this.refresh, 500);
   }
   //Reset the interval to stop calling the backend to refresh the data
   componentWillUnmount() {
