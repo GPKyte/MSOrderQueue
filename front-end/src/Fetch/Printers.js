@@ -25,6 +25,25 @@ function printerList(url) {
   });
 }
 
+function functionToEndAllFunctions(url, id, typeOfRequest, statusActual) {
+  console.log(url, id, typeOfRequest, statusActual)
+  const myRequest = new Request(url + "/api/printers/" + id, {
+    method: typeOfRequest,
+    headers: header,
+    body: JSON.stringify({
+      status: statusActual
+    })
+  });
+  fetch(myRequest).then(response => {
+    console.log("Kill Me Now", response.json())
+    this.getList(url);
+  });
+};
+
+this.Finish = function(url, id) {
+  functionToEndAllFunctions(url, id, "PATCH", "DONE")
+}
+
 this.getList = function(url) {
   return printerList(url);
 };

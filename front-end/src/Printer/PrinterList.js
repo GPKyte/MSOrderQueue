@@ -22,6 +22,7 @@ class PrinterList extends Component {
                   id={i["id"]}
                   finishButton={this.finishPrinter}
                   requests={this.props.requests}
+                  url={this.props.url}
                   data={i}
                 />
               );
