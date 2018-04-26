@@ -57,13 +57,13 @@ class ArchivePage extends Component {
           {printerData != null && printerData.map(i => {
           console.log(i);
           size++;
-          return <tr>
+          return (<tr key={i["id"]}>
             <td printerData="Id">{size}</td>
             <td printerData="User">{i["user"]}</td>
             <td printerData="Comments">{i["comments"]}</td>
             <td printerData1="Timestamp">{i["timestamp"]}</td>
             <td printerData="For Class">{i["forClass"]? "Yes":"No"}</td>
-          </tr>
+          </tr>)
           })}
           </tbody>
         </table>

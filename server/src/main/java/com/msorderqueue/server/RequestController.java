@@ -83,6 +83,7 @@ public class RequestController {
                     if (item.getQty() > 0) { updatedItem.setQty(item.getQty()); }
                     if (item.getFileName() != null) { updatedItem.setFileName(item.getFileName()); }
                     if (item.getStatus() != null) { updatedItem.setStatus(item.getStatus()); }
+                    if (item.getCompleted() != null) { updateItem.setCompleted(item.getCompleted()); }
                     items.set(index, updatedItem);
                     requestData.setRequestItems(items);
                     return ResponseEntity.ok().body(requestRepository.save(requestData));

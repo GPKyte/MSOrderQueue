@@ -18,7 +18,7 @@ this.deleteRequest = function(url, id) {
 
 function archiveList(url) {
   return new Promise((resolve, reject) => {
-    fetch(url + "/api/achive").then(results => {
+    fetch(url + "/api/archive").then(results => {
       if (results.status === 200) {
         results
           .json()
