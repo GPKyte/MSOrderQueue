@@ -23,8 +23,8 @@ public class Printer {
     @NotBlank private String model;
     @NotBlank private String name;
     @NotNull private PrinterStatus status;
-    @NotNull private String requestID;
-    @NotNull private ArrayList<PrintItem> printItems; // [{"index": Integer, "qty": Integer}]
+    private String requestID;
+    private ArrayList<PrintItem> printItems; // [{"index": Integer, "qty": Integer}]
 
     private Printer() {
         this.requestID = null;

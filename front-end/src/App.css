@@ -68,22 +68,77 @@ h3 {
 }
 
 .right {
-  position: relative;
   float: right;
-  margin-right: 10%;
+}
+
+.left {
+  float: left;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
 }
 
 .text-input-50 {
   width: 50%;
 }
 
+.PrinterContainer {
+  /* ul element here is weird with padding */
+  padding-left: 40px;
+  width: 340px;
+  margin-right: 40px;
+}
+
 .printerTitle {
   width: 100%;
 }
+
 .printerTitle h3 {
-  width: 0%;
+  width: 100%;
   margin-left: 0;
   margin-right: auto;
+}
+
+/* 2 printers*/
+@media (min-width: 900px) {
+  .PrinterContainer {
+    width: 640px;
+  }
+}
+/* 3 printers */
+@media (min-width: 1200px) {
+  .PrinterContainer {
+    width: 940px;
+  }
+}
+/* 4 printers */
+@media (min-width: 1500px) {
+  .PrinterContainer {
+    width: 1240px;
+  }
+}
+
+.card * {
+  line-height: 1.3em;
+}
+
+.printer-status {
+  margin-bottom: 40px;
+}
+
+.print-item {
+  display: inline-block;
+  width: 30%;
+  margin: 0 auto;
+}
+
+.card-block button {
+  padding: 2px 0;
+  width: 49%;
 }
 
 .model-background-custom {
@@ -170,4 +225,13 @@ a.navbar-brand {
 
 div.Printer.list-group-item {
   padding: 6px;
+}
+
+.btn-close {
+  font-size: 10px;
+  padding: 2px;
+  line-height: 8px;
+  background-color: #DC4545;
+  border: none;
+  border-radius: 2px;
 }
