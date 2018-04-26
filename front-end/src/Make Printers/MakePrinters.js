@@ -6,8 +6,8 @@ class MakePrinter extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      PrinterName: "Geoffrey",
-      Model: "SomeModel",
+      PrinterName: "Bruce",
+      Model: "5th Gen Replicator",
       Brand: "MakerBot",
       Status: "OPEN"
     };
@@ -44,10 +44,8 @@ class MakePrinter extends Component {
 
   render() {
     return (
-      <div className="container">
-        This is for testing the addition of printers and will not be in the
-        final iteration
-        <div />
+      <div className="container"><div />
+        <h3>Add Printer</h3>
         <div className="input-group mb-3 text-input-50">
           <div className="input-group-prepend">
             <div className="input-group-text" id="inputGroup-sizing-default">
