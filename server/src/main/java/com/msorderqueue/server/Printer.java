@@ -34,8 +34,8 @@ public class Printer {
         this.brand = brand;
         this.model = model;
         this.name = name;
-        this.status = status;
         this.printItems = new ArrayList<PrintItem>();
+        conditionalSetStatus(status);
     }
 
     public void conditionalSetStatus(PrinterStatus status) {
