@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Printers from "./../Fetch/Printers.js";
 
 class Printer extends Component {
   constructor(props) {
@@ -6,40 +7,66 @@ class Printer extends Component {
     //Patrick Gimpy told me to do this
     //ButtonText,
     this.state = {
-      jacksgay: ["", "", "", ""],
+      jacksgay: ["Loading", "", "Loading", "btn btn-outline-danger disabled card-button right"],
       currentPrinter: ""
     };
-
     this.onClick = this.onClick.bind(this);
   }
 
   //This is the base printer object that displays all of the data needed on every printer
-  onClick() {
-    switch (this.props.data["status"]) {
-      case "BUSY":
-        this.setState({
-          jacksgay: ["", "", "", ""]
-        });
+  onClick(event) {
+    console.log(event.target.value);
+    if (this.props.data !== null) {
+      switch (this.props.data["status"] + event.target.value) {
+        case "BUSY0":
+          return Printers.Cancel(this.props.url, this.props.data["id"]);
+        case "BUSY1":
+          return Printers.Finish(this.props.url, this.props.data["id"]);
+        case "OPEN0":
+          return null;
+        case "OPEN1":
+          return; //TODO Printers.Delete(this.props.url, this.props.data["id"]);;
+        case "DONE0":
+          return Printers.Restart(this.props.url, this.props.data["id"]);
+        case "DONE1":
+          return Printers.Clear(this.props.url, this.props.data["id"]);
+        default:
+          console.log("You cant touch this HAHAHAHAHA");
+      }
     }
-    this.props.finishButton(this.props.id);
   }
 
   componentWillUpdate() {
     if (this.state.currentPrinter !== this.props.data["status"]) {
       switch (this.props.data["status"]) {
-        case "BUSY":
-          return this.setState({
-            jacksgay: ["", "", "Delete", "btn btn-outline-danger card-button left"],
-            currentPrinter: this.props.data["status"]
-          });
         case "OPEN":
           return this.setState({
-            jacksgay: ["Cancel", "btn btn-outline-warn card-button right", "Finish", "btn btn-outline-success card-button left"],
+            jacksgay: [
+              "",
+              "",
+              "Delete",
+              "btn btn-outline-danger card-button right"
+            ],
+            currentPrinter: this.props.data["status"]
+          });
+        case "BUSY":
+          return this.setState({
+            jacksgay: [
+              "Cancel",
+              "btn btn-outline-warn card-button left",
+              "Finish",
+              "btn btn-outline-success card-button right"
+            ],
             currentPrinter: this.props.data["status"]
           });
         case "DONE":
           return this.setState({
-            jacksgay: ["Restart", "btn btn-outline-warn card-button right", "Clear", "btn btn-outline-success card-button left"],
+            jacksgay: [
+              "Restart",
+              "btn btn-outline-warn card-button left",
+              "Clear",
+              "btn btn-outline-success card-button right"
+            ],
             currentPrinter: this.props.data["status"]
           });
       }
@@ -74,7 +101,7 @@ class Printer extends Component {
             return i["qty"] > 0 ? (
               <div key={i["index"]}>
                 <div className="print-item">
-                  <div className="left">File: {i["index"]+1}</div>
+                  <div className="left">File: {i["index"] + 1}</div>
                   <div className="right">Qty: {i["qty"]}</div>
                 </div>
               </div>
@@ -82,12 +109,18 @@ class Printer extends Component {
           })}
         <div className="printer-status"> {printerData["status"]} </div>
         <div className="card-block bottom">
-          {this.state.jacksgay[0] !== "" && <button className={this.state.jacksgay[1]} id="0">
-            {this.state.jacksgay[0]}
-          </button>}
+          {this.state.jacksgay[0] !== "" && (
+            <button
+              className={this.state.jacksgay[1]}
+              onClick={this.onClick}
+              value="0"
+            >
+              {this.state.jacksgay[0]}
+            </button>
+          )}
           <button
             onClick={this.onClick}
-            id="1"
+            value="1"
             className={this.state.jacksgay[3]}
           >
             {this.state.jacksgay[2]}
