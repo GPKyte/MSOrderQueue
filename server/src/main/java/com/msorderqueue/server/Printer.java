@@ -31,11 +31,15 @@ public class Printer {
     }
 
     public Printer(String brand, String model, String name, PrinterStatus status) {
+        this(brand, model, name);
+    }
+
+    public Printer(String brand, String model, String name) {
         this.brand = brand;
         this.model = model;
         this.name = name;
         this.printItems = new ArrayList<PrintItem>();
-        conditionalSetStatus(status);
+        this.status = PrinterStatus.OPEN; // Illusion of choice
     }
 
     public void conditionalSetStatus(PrinterStatus status) {
