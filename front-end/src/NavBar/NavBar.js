@@ -4,7 +4,7 @@ import MakePrinter from "./../Make Printers/MakePrinters.js";
 import PrinterList from "./../Printer/PrinterList.js";
 import LoginPage from "./../LoginPage/LoginPage.js";
 import SideBar from "./../SideBar/SideBarList.js";
-import ArchivePage from "./../Archive/Arcive.js";
+import ArchivePage from "./../Archive/Archive.js";
 import Printer from "./../Fetch/Printers.js";
 import Requests from "./../Fetch/Requests.js";
 import QueuePopup from "./../QueuePopup/QueuePopup.js";

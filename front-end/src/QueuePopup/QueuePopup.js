@@ -107,6 +107,7 @@ class QueuePopup extends Component {
     var printerObjects = this.props.printers;
     return (
       <div className="modal-background-custom">
+        <h3>Start Print Job</h3>
         <div className="custom-model">
           <div className="dropdown open">
             <button

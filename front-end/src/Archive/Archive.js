@@ -41,31 +41,33 @@ class ArchivePage extends Component {
     var printerData = this.state.archiveData;
     var size = -1;
     return (
-      <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Username</th>
-      <th scope="col">Comments</th>
-      <th scope="col">Timestamp</th>
-      <th scope="col">Status</th>
-    </tr>
-  </thead>
-  <tbody>
-  {printerData != null && printerData.map(i => {
-    console.log(i);
-    size++;
-    return <tr>
-          <td printerData="Id">{size}</td>
-          <td printerData="User">{i["user"]}</td>
-          <td printerData="Comments">{i["comments"]}</td>
-          <td printerData1="Timestamp">{i["timestamp"]}</td>
-          <td printerData="Status">{i["status"]}</td>
-      </tr>
-  })}
-
-  </tbody>
-</table>
+      <div className="container">
+        <h3>Archive</h3>
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Username</th>
+              <th scope="col">Comments</th>
+              <th scope="col">Timestamp</th>
+              <th scope="col">For Class?</th>
+            </tr>
+          </thead>
+        <tbody>
+          {printerData != null && printerData.map(i => {
+          console.log(i);
+          size++;
+          return <tr>
+            <td printerData="Id">{size}</td>
+            <td printerData="User">{i["user"]}</td>
+            <td printerData="Comments">{i["comments"]}</td>
+            <td printerData1="Timestamp">{i["timestamp"]}</td>
+            <td printerData="For Class">{i["forClass"]? "Yes":"No"}</td>
+          </tr>
+          })}
+          </tbody>
+        </table>
+      </div>
     );
   }
 };
