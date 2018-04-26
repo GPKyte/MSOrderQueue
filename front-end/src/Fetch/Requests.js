@@ -5,7 +5,6 @@ const header = {
 
 this.deleteRequest = function(url, id) {
   return new Promise((resolve, reject) => {
-    console.log("Helllppppp");
     const myRequest = new Request(url + "/api/requests/" + id, {
       method: "DELETE",
       headers: header
