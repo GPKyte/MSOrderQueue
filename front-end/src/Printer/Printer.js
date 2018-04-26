@@ -67,23 +67,15 @@ class Printer extends Component {
           src={require("./../Images/download.jpg")}
           alt="Card cap"
         />
-        {printerData["name"]}
+        <div className="printer-name">{printerData["name"]}</div>
         {printerData["printItems"] !== null &&
           printerData["printItems"].map(i => {
             // Excludes non-printing items
             return i["qty"] > 0 ? (
               <div key={i["index"]}>
                 <div className="print-item">
-                  <div className="left">
-                    File:{" "}
-                    {this.findRequestById(
-                      i["index"],
-                      requestData,
-                      printerData["requestID"]
-                    )}{" "}
-                    :
-                  </div>
-                  <div className="right">Qty: {i["qty"]}></div>
+                  <div className="left">File: {i["index"]+1}</div>
+                  <div className="right">Qty: {i["qty"]}</div>
                 </div>
               </div>
             ) : null;

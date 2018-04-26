@@ -53,7 +53,10 @@ h3 {
 }
 
 .printer-name {
-  font-size: 24px;
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  margin-top: 2px;
 }
 
 .content-body {
@@ -132,7 +135,7 @@ h3 {
 
 .print-item {
   display: inline-block;
-  width: 30%;
+  width: 29%;
   margin: 0 auto;
 }
 
