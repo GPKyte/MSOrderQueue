@@ -91,7 +91,11 @@ class Printer extends Component {
       <div className="card card-size" id={"printer/" + this.props.id}>
         <img
           className="card-img-top"
+<<<<<<< Updated upstream
           src={require("./../Images/download.jpg")}
+=======
+          src={require("./../Images/0.jpg")}
+>>>>>>> Stashed changes
           alt="Card cap"
         />
         <div className="printer-name">{printerData["name"]}</div>

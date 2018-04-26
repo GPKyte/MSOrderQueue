@@ -13,7 +13,9 @@ class QueuePopup extends Component {
       listOfFiles: [],
       listOfAmmounts: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
       colorOfPrinter: "red",
-      currentPrinter: ""
+      currentPrinter: "",
+      currentRequest:"",
+      currentRequestID:""
     };
     this.onClick = this.onClick.bind(this);
     this.changeFileAmmount = this.changeFileAmmount.bind(this);
