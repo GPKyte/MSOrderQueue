@@ -54,7 +54,7 @@ public class RequestController {
     public @ResponseBody Request createRequest(@Valid @RequestBody Request request) {
         ArrayList<RequestItem> items = new ArrayList<>();
         for (RequestItem i : request.getRequestItems()) {
-            items.add(new RequestItem(i.getFileName(), i.getQty()));
+            items.add(new RequestItem(i.getFileName(), i.getQty(), i.getColor()));
         }
         return requestRepository.save(new Request(request.getUser(), request.getComments(), request.isForClass(), items));
     }

@@ -16,11 +16,11 @@ import lombok.Data;
 @Data
 public class RequestItem {
     @NotBlank private String fileName;
-    @NotBlank private int qty = 1;
-    @NotNull private int completed = 0;
-    @NotNull private boolean started = false;
+    @NotBlank private int qty;
+    @NotNull private int completed;
+    @NotNull private boolean started;
     @NotNull private RequestStatus status;
-    @NotBlank private String color = "any";
+    @NotBlank private String color;
 
     public RequestItem() {
         this.completed = 0;
