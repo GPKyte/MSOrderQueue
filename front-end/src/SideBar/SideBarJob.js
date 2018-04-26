@@ -23,8 +23,9 @@ class SideBarrequest extends Component {
     }
   }
   onDelete(event) {
+    //TODO fix this please
     console.log(event.target);
-    this.props.deleteRequest("", this.props.data["id"]);
+    this.props.deleteRequest(this.props.url, this.props.data["id"]);
   }
 
   render() {
@@ -42,9 +43,9 @@ class SideBarrequest extends Component {
     //Add the popup later with inserting this {this.state.popupVisable && (<QueuePopup printers={printers}></QueuePopup>)}
     return (
       <div className={this.state.printerProperty}>
-
-
-        <button className="btn-close" onClick={this.onDelete}>X</button>
+        <button className="btn-close" onClick={this.onDelete}>
+          X
+        </button>
         <div className="panel-group">
           <div className="wrap-emails" onClick={this.onClick.bind(this)}>
             {" "}
