@@ -87,13 +87,15 @@ class Printer extends Component {
   render() {
     var printerData = this.props.data;
     var requestData = this.props.requests;
+    var index = "./../Images/" + this.props.index.toString() + ".jpeg";
+    console.log(index)
     return (
       <div className="card card-size" id={"printer/" + this.props.id}>
-        <img
+        {index!== null && <img
           className="card-img-top"
-          src={require("./../Images/download.jpg")}
+          src={require(index)}
           alt="Card cap"
-        />
+        />}
         <div className="printer-name">{printerData["name"]}</div>
         {printerData["printItems"] !== null &&
           printerData["printItems"].map(i => {

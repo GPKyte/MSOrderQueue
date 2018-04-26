@@ -8,7 +8,7 @@ class PrinterList extends Component {
   render() {
     //Make This a object to be repeated
     var ListOfPrinters = this.props.printers;
-
+    var size = -1;
     //Generates all of the printers that we are using for the project
     if (ListOfPrinters != null && ListOfPrinters.length > 0) {
       return (
@@ -16,10 +16,12 @@ class PrinterList extends Component {
           <ul className="PrinterContainer row">
             <div className="printerTitle"><h3>Printers</h3></div>
             {ListOfPrinters.map(i => {
+              size++;
               return (
                   <Printer
                   key={i["id"]}
                   id={i["id"]}
+                  index={size}
                   finishButton={this.finishPrinter}
                   requests={this.props.requests}
                   url={this.props.url}
