@@ -7,7 +7,7 @@ class Printer extends Component {
     //Patrick Gimpy told me to do this
     //ButtonText,
     this.state = {
-      jacksgay: ["Loading", "", "Loading", "btn btn-outline-danger disabled card-button right"],
+      jacksgay: ["Loading", "btn btn-danger disabled card-button right", "Loading", "btn btn-danger disabled card-button right"],
       currentPrinter: ""
     };
     this.onClick = this.onClick.bind(this);
@@ -44,8 +44,8 @@ class Printer extends Component {
             jacksgay: [
               "",
               "",
-              "Delete",
-              "btn btn-outline-danger card-button right"
+              "",
+              ""
             ],
             currentPrinter: this.props.data["status"]
           });
@@ -118,13 +118,14 @@ class Printer extends Component {
               {this.state.jacksgay[0]}
             </button>
           )}
+          {this.state.jacksgay[2] !== "" && (
           <button
             onClick={this.onClick}
             value="1"
             className={this.state.jacksgay[3]}
           >
             {this.state.jacksgay[2]}
-          </button>
+          </button>)}
         </div>
       </div>
     );
