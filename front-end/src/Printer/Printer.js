@@ -11,7 +11,6 @@ class Printer extends Component {
     };
 
     this.onClick = this.onClick.bind(this);
-    this.whenUpdate = this.whenUpdate.bind(this);
   }
 
   //This is the base printer object that displays all of the data needed on every printer
@@ -25,17 +24,26 @@ class Printer extends Component {
     this.props.finishButton(this.props.id);
   }
 
-  whenUpdate(printer) {
-    // switch (this.props.data["status"]) {
-    //   case "BUSY":
-    //     return this.setState({
-    //       jacksgay: ["", "", "", ""]
-    //     });
-    //     case "OPEN":
-    //     return this.setState({
-    //
-    //     })
-    // }
+  componentWillUpdate() {
+    if (this.state.currentPrinter !== this.props.data["status"]) {
+      switch (this.props.data["status"]) {
+        case "BUSY":
+          return this.setState({
+            jacksgay: ["", "", "Delete", ""],
+            currentPrinter: this.props.data["status"]
+          });
+        case "OPEN":
+          return this.setState({
+            jacksgay: ["Cancel", "", "Finish", ""],
+            currentPrinter: this.props.data["status"]
+          });
+        case "DONE":
+          return this.setState({
+            jacksgay: ["Restart", "", "Clear", ""],
+            currentPrinter: this.props.data["status"]
+          });
+      }
+    }
   }
 
   findRequestById(index, request, id) {
@@ -52,7 +60,6 @@ class Printer extends Component {
   render() {
     var printerData = this.props.data;
     var requestData = this.props.requests;
-    this.whenUpdate(printerData);
     return (
       <div className="card card-size" id={"printer/" + this.props.id}>
         <img
@@ -83,15 +90,15 @@ class Printer extends Component {
           })}
         <div className="printer-status"> {printerData["status"]} </div>
         <div className="card-block bottom">
-          <button className="btn btn-outline-danger card-button left" id="0">
-            Cancel
-          </button>
+          {this.state.jacksgay[0] !== "" && <button className="btn btn-outline-danger card-button left" id="0">
+            {this.state.jacksgay[0]}
+          </button>}
           <button
             onClick={this.onClick}
             id="1"
             className="btn btn-outline-success card-button right"
           >
-            Finish
+            {this.state.jacksgay[2]}
           </button>
         </div>
       </div>
