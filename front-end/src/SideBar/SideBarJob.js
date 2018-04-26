@@ -42,10 +42,8 @@ class SideBarrequest extends Component {
     //The element id is the current index of the component that we are on
     //Add the popup later with inserting this {this.state.popupVisable && (<QueuePopup printers={printers}></QueuePopup>)}
     return (
-      <div className={this.state.printerProperty}>
-        <button className="btn-close" onClick={this.onDelete}>
-          X
-        </button>
+      <div className="list-group-item">
+        <button className="btn-close" onClick={this.onDelete}>X</button>
         <div className="panel-group">
           <div className="wrap-emails" onClick={this.onClick.bind(this)}>
             {" "}
@@ -68,7 +66,7 @@ class FullList extends Component {
     var size = 0;
     var requests = this.props.data["requestItems"];
     return (
-      <ul className="PrinterContainer">
+      <ul className="list-group list-group-flush">
         {requests.map(i => {
           size += 1;
           return <SideBarFile key={size - 1} elementID={size - 1} data={i} />;

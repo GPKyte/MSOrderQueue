@@ -3,23 +3,12 @@ import React, { Component } from "react";
 class File extends Component {
   render() {
     var sidebarRequestFile = this.props.data;
+    var file = sidebarRequestFile["fileName"];
     return (
-      <div className="File">
-        {/* This is the base printer Object that displays all the nessicary for the future releases. */}
-        {sidebarRequestFile["fileName"]}
-        <div />
-        <button
-          className="btn btn-primary btn-sm disabled"
-          aria-disabled="true"
-        >
-          Delete
-        </button>
-        <button
-          className="btn btn-secondary btn-sm disabled"
-          aria-disabled="true"
-        >
-          Print
-        </button>
+      <div className="file">
+        <div className="left">{file.indexOf("thingiverse") !== -1 ?
+          <a href="file">Thingiverse</a> : file}</div>
+          <div className="right">{sidebarRequestFile["color"]} {sidebarRequestFile["completed"]}/{sidebarRequestFile["qty"]}</div>
       </div>
     );
   }

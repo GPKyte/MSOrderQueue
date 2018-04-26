@@ -35,7 +35,7 @@ class SideBarList extends Component {
         var list = requests.map(i => {
           size += 1;
           return (
-            <nav key={i["id"]}>
+            <div key={i["id"]}>
               <SideBarrequest
                 onClick={this.onClick.bind(this)}
                 currentIndex={this.changeSelectedIndex}
@@ -47,7 +47,7 @@ class SideBarList extends Component {
                 url={this.props.url}
                 data={i}
               />
-            </nav>
+            </div>
           );
         });
       }
