@@ -1,40 +1,73 @@
 import React, { Component } from "react";
+import Request from "./../Fetch/Requests.js"
 
 class ArchivePage extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      archiveData: []
+    }
+
     this.onClick = this.onClick.bind(this);
+    this.refresh = this.refresh.bind(this);
   }
 
+
   //This is the base printer object that displays all of the data needed on every printer
+
   onClick() {
     this.props.deleteFunction(this.props.id);
   }
 
-  render() {
-    var printerData = this.props.data;
+  //When the component loads, this is called starting the interval to repeditally call on the api to refresh the data
+  componentDidMount() {
+    this.refresh();
+    this.interval = setInterval(this.refresh, 5000);
+  }
+  //Reset the interval to stop calling the backend to refresh the data
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
 
+  refresh() {
+    Request.getArchive(this.props.url).then(response => {
+      this.setState({
+        archiveData: response
+      })
+    })
+  }
+  render() {
+    var printerData = this.state.archiveData;
+    var size = -1;
     return (
-      <div className="card card-size ">
-        <img
-          className="card-img-top"
-          src={require("./../Images/download.jpg")}
-          alt="Card cap"
-        />
-        {printerData["name"]}
-        <div> Status: {printerData["status"]} </div>
-        <div className="card-block">
-          <button className="btn btn-primary card-button">Dequeue</button>
-          <button
-            onClick={this.onClick}
-            className="btn btn-outline-danger card-button"
-          >
-            Delete
-          </button>
-        </div>
-      </div>
+      <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Username</th>
+      <th scope="col">Comments</th>
+      <th scope="col">Timestamp</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+  {printerData != null && printerData.map(i => {
+    console.log(i);
+    size++;
+    return <tr>
+          <td printerData="Id">{size}</td>
+          <td printerData="User">{i["user"]}</td>
+          <td printerData="Comments">{i["comments"]}</td>
+          <td printerData1="Timestamp">{i["timestamp"]}</td>
+          <td printerData="Status">{i["status"]}</td>
+      </tr>
+  })}
+
+  </tbody>
+</table>
     );
   }
-}
+};
 
 export default ArchivePage;

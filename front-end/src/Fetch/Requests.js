@@ -15,6 +15,31 @@ this.deleteRequest = function(path, id) {
   });
 };
 
+function archiveList(url) {
+  return new Promise((resolve, reject) => {
+    fetch(url + "/api/queue").then(results => {
+      if (results.status === 200) {
+        results
+          .json()
+          .then(data => ({
+            data: data,
+            status: results.status
+          }))
+          .then(results => {
+            resolve(results.data)
+          });
+      } else {
+        throw new Error("Server no longer has the file");
+      }
+    });
+  });
+}
+
+this.getArchive = function(url) {
+  var temp = "";
+  temp = archiveList(url);
+  return temp;
+}
 
 function requestList(url) {
   return new Promise((resolve, reject) => {
