@@ -7,7 +7,7 @@ class Printer extends Component {
     //Patrick Gimpy told me to do this
     //ButtonText,
     this.state = {
-      jacksgay: ["", "", "", ""],
+      jacksgay: ["Loading", "", "Loading", "btn btn-outline-danger disabled card-button right"],
       currentPrinter: ""
     };
     this.onClick = this.onClick.bind(this);
@@ -19,17 +19,17 @@ class Printer extends Component {
     if (this.props.data !== null) {
       switch (this.props.data["status"] + event.target.value) {
         case "BUSY0":
-          return;
+          return Printers.Cancel(this.props.url, this.props.data["id"]);
         case "BUSY1":
           return Printers.Finish(this.props.url, this.props.data["id"]);
         case "OPEN0":
-          return;
+          return null;
         case "OPEN1":
-          return;
+          return; //TODO Printers.Delete(this.props.url, this.props.data["id"]);;
         case "DONE0":
-          return;
+          return Printers.Restart(this.props.url, this.props.data["id"]);
         case "DONE1":
-          return;
+          return Printers.Clear(this.props.url, this.props.data["id"]);
         default:
           console.log("You cant touch this HAHAHAHAHA");
       }

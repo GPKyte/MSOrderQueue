@@ -36,12 +36,24 @@ function functionToEndAllFunctions(url, id, typeOfRequest, statusActual) {
   });
   fetch(myRequest).then(response => {
     console.log("Kill Me Now", response.json())
-    this.getList(url);
+    // this.getList(url);
   });
 };
 
 this.Finish = function(url, id) {
   functionToEndAllFunctions(url, id, "PATCH", "DONE")
+}
+
+this.Restart = function(url, id) {
+  functionToEndAllFunctions(url, id, "PATCH", "BUSY")
+}
+
+this.Clear = function(url, id) {
+  functionToEndAllFunctions(url, id, "PATCH", "OPEN")
+}
+
+this.Cancel = function(url, id) {
+  functionToEndAllFunctions(url, id, "PATCH", "OPEN")
 }
 
 this.getList = function(url) {
