@@ -23,19 +23,23 @@ public class Printer {
     @NotBlank private String model;
     @NotBlank private String name;
     @NotNull private PrinterStatus status;
-    @NotNull private String requestID;
-    @NotNull private ArrayList<PrintItem> printItems; // [{"index": Integer, "qty": Integer}]
+    private String requestID;
+    private ArrayList<PrintItem> printItems; // [{"index": Integer, "qty": Integer}]
 
     private Printer() {
         this.requestID = null;
     }
 
     public Printer(String brand, String model, String name, PrinterStatus status) {
+        this(brand, model, name);
+    }
+
+    public Printer(String brand, String model, String name) {
         this.brand = brand;
         this.model = model;
         this.name = name;
-        this.status = status;
         this.printItems = new ArrayList<PrintItem>();
+        this.status = PrinterStatus.OPEN; // Illusion of choice
     }
 
     public void conditionalSetStatus(PrinterStatus status) {

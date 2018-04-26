@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import static org.junit.Assert.*;
+import java.util.List;
+import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -29,12 +31,20 @@ public class PrinterControllerTest {
 
     @Test
     public void testGetAllPrinters() {
+        //getting all the printers. check if there are printers name: Bruce, Tiny, Lilo. Jen
         return;
     }
 
     @Test
     public void testCreatePrinter() {
-        return;
+        Printer p = new Printer("MakerBot", "Replicator 5th Gen", "Bruce", PrinterStatus.BUSY);
+        // Some tests on p, maybe check the id or other fields
+        assertEquals("MakerBot", p.getBrand());
+        assertEquals("Replicator 5th Gen", p.getModel());
+        assertEquals("Bruce", p.getName());
+        assertEquals(PrinterStatus.OPEN, p.getStatus());
+        assertEquals(p.getPrintItems().isEmpty(), true);
+        assertNull(p.getRequestID());
     }
 
     @Test
@@ -43,8 +53,15 @@ public class PrinterControllerTest {
     }
 
     @Test
-    public void deletePrinter() {
-        return;
+    public void testDeletePrinter() {
+      List<Printer> printers = controller.getAllPrinters();
+      String id = printers.get(0).getId();
+      controller.deletePrinter(id);
+
+      List<Printer> newPrinters = controller.getAllPrinters();
+      for (Printer p : newPrinters) {
+        assertEquals(false, p.getId().equals(id));
+      }
     }
 
     @After

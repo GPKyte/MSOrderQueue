@@ -17,6 +17,8 @@ import java.util.Optional;
 public class RequestController {
     @Autowired
     RequestMongoRepository requestRepository;
+    @Autowired
+    PrinterMongoRepository printerRepository;
 
     @GetMapping(value="/requests")
     public ResponseEntity<List<Request>> getAllRequests() {
@@ -92,6 +94,9 @@ public class RequestController {
         return requestRepository.findById(id)
                 .map(request -> {
                     requestRepository.deleteById(id);
+                    for(Printer p : printerRepository.findAll()) {
+                        if(id.equals(p.getRequestID())) { p.conditionalSetStatus(PrinterStatus.OPEN); }
+                    }
                     return ResponseEntity.ok().build();
                 }).orElse(ResponseEntity.notFound().build());
     }

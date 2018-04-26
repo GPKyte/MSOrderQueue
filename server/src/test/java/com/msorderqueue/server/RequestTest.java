@@ -21,17 +21,17 @@ public class RequestTest {
         Request goodRequest = new Request("user", "comments", true, items1);
         Request nullRequest = new Request();
 
-        assertEquals(goodRequest.getStatus(), RequestStatus.ORDERED);
-        assertEquals(goodRequest.getComments(), "comments");
-        assertEquals(goodRequest.getRequestItems().size(), 3);
-        assertEquals(goodRequest.getRequestItems().get(0).getColor(), "blue");
-        assertEquals(goodRequest.isForClass(), true);
+        assertEquals(RequestStatus.ORDERED, goodRequest.getStatus());
+        assertEquals("comments", goodRequest.getComments());
+        assertEquals(3, goodRequest.getRequestItems().size());
+        assertEquals("blue", goodRequest.getRequestItems().get(0).getColor());
+        assertEquals(true, goodRequest.isForClass());
 
         assertNull(nullRequest.getUser());
         assertNull(nullRequest.getRequestItems());
         assertNull(nullRequest.getComments());
         assertNull(nullRequest.getStatus());
-        assertEquals(nullRequest.isForClass(), false);
+        assertEquals(false, nullRequest.isForClass());
         assertNotNull(nullRequest.getTimestamp());
     }
 
@@ -52,9 +52,9 @@ public class RequestTest {
         nullReq.setStatus(RequestStatus.COMPLETE);
         assertNull(nullReq.getStatus());
         nullReq.setStatus(RequestStatus.NOTIFIED);
-        assertEquals(nullReq.getStatus(), RequestStatus.NOTIFIED);
+        assertEquals(RequestStatus.NOTIFIED, nullReq.getStatus());
         nullReq.setStatus(RequestStatus.DELIVERED);
-        assertEquals(nullReq.getStatus(), RequestStatus.DELIVERED);
+        assertEquals(RequestStatus.DELIVERED, nullReq.getStatus());
 
         ArrayList<RequestItem> items = new ArrayList<>();
         RequestItem r1 = new RequestItem("testFile1.stl", 83, "blue");
@@ -65,24 +65,24 @@ public class RequestTest {
         Request goodRequest = new Request("user", "comments", true, items);
 
         // Test that we switch to in progress after item is in process
-        assertEquals(goodRequest.getStatus(), RequestStatus.ORDERED);
+        assertEquals(RequestStatus.ORDERED, goodRequest.getStatus());
         r1.setCompleted(83);
         r2.setCompleted(1);
         items.set(0, r1);
         items.set(1, r2);
         goodRequest.setRequestItems(items);
-        assertEquals(goodRequest.getStatus(), RequestStatus.IN_PROCESS);
+        assertEquals(RequestStatus.IN_PROCESS, goodRequest.getStatus());
 
         // Now to complete the request
         r2.setCompleted(5);
         r3.setCompleted(7);
         items.set(1, r1);
         items.set(2, r2);
-        assertEquals(items.get(0).getStatus(), RequestStatus.COMPLETE);
-        assertEquals(items.get(1).getStatus(), RequestStatus.COMPLETE);
-        assertEquals(items.get(2).getStatus(), RequestStatus.COMPLETE);
+        assertEquals(RequestStatus.COMPLETE, items.get(0).getStatus());
+        assertEquals(RequestStatus.COMPLETE, items.get(1).getStatus());
+        assertEquals(RequestStatus.COMPLETE, items.get(2).getStatus());
         goodRequest.setRequestItems(items);
-        assertEquals(goodRequest.getStatus(), RequestStatus.COMPLETE);
+        assertEquals(RequestStatus.COMPLETE, goodRequest.getStatus());
     }
 
     @Test

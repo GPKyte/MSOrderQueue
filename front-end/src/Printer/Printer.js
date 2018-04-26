@@ -54,7 +54,7 @@ class Printer extends Component {
     var requestData = this.props.requests;
     this.whenUpdate(printerData);
     return (
-      <div className="card card-size " id={"printer/" + this.props.id}>
+      <div className="card card-size" id={"printer/" + this.props.id} >
         <img
           className="card-img-top"
           src={require("./../Images/download.jpg")}
@@ -63,21 +63,22 @@ class Printer extends Component {
         {printerData["name"]}
         {printerData["printItems"] !== null &&
           printerData["printItems"].map(i => {
-            return (
+          // Excludes non-printing items
+            return ({return i["qty"] > 0 ?
               <div key={i["index"]}>
-                {this.findRequestById(i["index"], requestData, printerData["requestID"])} : {i["qty"]}
-              </div>
+                <div className="print-item"><div className="left">File: {this.findRequestById(i["index"], requestData, printerData["requestID"])} : </div>
+              <div className="right">Qty: {i["qty"]}</div></div>
             );
-          })}
-        <div> Status: {printerData["status"]} </div>
-        <div className="card-block">
-          <button className="btn btn-primary card-button" id="0">
-            Dequeue
+            : null})}
+        <div className="printer-status"> {printerData["status"]} </div>
+        <div className="card-block bottom">
+          <button className="btn btn-outline-danger card-button left" id="0">
+            Cancel
           </button>
           <button
             onClick={this.onClick}
             id="1"
-            className="btn btn-outline-success card-button"
+            className="btn btn-outline-success card-button right"
           >
             Finish
           </button>

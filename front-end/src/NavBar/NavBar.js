@@ -50,8 +50,8 @@ class NavBar extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand navbar-light bg-light flex-row-reverse">
-          <a className="navbar-brand">MakerSpace Printer Queue</a>
+        <nav className="navbar navbar-expand navbar-light bg-light flex-row">
+          <a className="navbar-brand">MakerSpace Queue</a>
           <NavBarButtons
             onClick={this.onClick}
             currentView={this.state.currentView}
@@ -147,7 +147,7 @@ class NavBarButtons extends Component {
     var buttons = ["Printers", "Add Printers", "Login", "Archive", "Queueing"];
 
     return (
-      <div>
+      <div id="navbar-btns">
         <button
           className="navbar-toggler"
           type="button"
