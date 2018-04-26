@@ -13,7 +13,7 @@ class PrinterList extends Component {
       return (
         <div className="page-header">
           <ul className="PrinterContainer row">
-            <h1 className="printerTitle">Printers</h1>
+            <div className="printerTitle"><h3>Printers</h3></div>
             {ListOfPrinters.map(i => {
               return (
                   <Printer

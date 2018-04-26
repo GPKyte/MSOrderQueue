@@ -15,23 +15,26 @@ class Printer extends Component {
     var printerData = this.props.data;
 
     return (
-      <div className="card card-size " id={"printer/" + this.props.id} >
+      <div className="card card-size" id={"printer/" + this.props.id} >
         <img
           className="card-img-top"
           src={require("./../Images/download.jpg")}
           alt="Card cap"
         />
-        {printerData["name"]}
-        {printerData["printItems"] !== null && printerData["printItems"].map(i => {
-
-          return (<div>{i["index"]} : {i["qty"]}</div>)
-        })}
-        <div> Status: {printerData["status"]} </div>
-        <div className="card-block">
-          <button className="btn btn-primary card-button">Dequeue</button>
+        <p className="printer-name">{printerData["name"]}</p>
+        {printerData["printItems"] !== null && printerData["printItems"].map(i =>
+          // Excludes non-printing items
+          {return i["qty"] > 0 ?
+            (<div className="print-item"><div className="left">File: {i["index"]+1}</div>
+              <div className="right">Qty: {i["qty"]}</div></div>)
+            :  null})
+        }
+        <div className="printer-status">{printerData["status"]}</div>
+        <div className="card-block bottom">
+          <button className="btn btn-outline-danger card-button left">Cancel</button>
           <button
             onClick={this.onClick}
-            className="btn btn-outline-success card-button"
+            className="btn btn-outline-success card-button right"
           >
             Finish
           </button>
