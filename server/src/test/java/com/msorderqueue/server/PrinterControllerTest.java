@@ -42,7 +42,7 @@ public class PrinterControllerTest {
         assertEquals("MakerBot", p.getBrand());
         assertEquals("Replicator 5th Gen", p.getModel());
         assertEquals("Bruce", p.getName());
-        assertEquals(PrinterStatus.BUSY, p.getStatus());
+        assertEquals(PrinterStatus.OPEN, p.getStatus());
         assertEquals(p.getPrintItems().isEmpty(), true);
         assertNull(p.getRequestID());
     }
