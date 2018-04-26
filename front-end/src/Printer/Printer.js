@@ -39,7 +39,7 @@ class Printer extends Component {
           });
         case "DONE":
           return this.setState({
-            jacksgay: ["Restart", "", "Clear", ""],
+            jacksgay: ["Restart", "btn btn-outline-warn card-button right", "Clear", "btn btn-outline-success card-button left"],
             currentPrinter: this.props.data["status"]
           });
       }
@@ -82,13 +82,13 @@ class Printer extends Component {
           })}
         <div className="printer-status"> {printerData["status"]} </div>
         <div className="card-block bottom">
-          {this.state.jacksgay[0] !== "" && <button className="btn btn-outline-danger card-button left" id="0">
+          {this.state.jacksgay[0] !== "" && <button className={this.state.jacksgay[1]} id="0">
             {this.state.jacksgay[0]}
           </button>}
           <button
             onClick={this.onClick}
             id="1"
-            className="btn btn-outline-success card-button right"
+            className={this.state.jacksgay[3]}
           >
             {this.state.jacksgay[2]}
           </button>
