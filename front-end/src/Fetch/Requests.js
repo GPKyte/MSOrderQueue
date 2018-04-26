@@ -27,19 +27,13 @@ function archiveList(url) {
             status: results.status
           }))
           .then(results => {
-            resolve(results.data)
+            resolve(results.data);
           });
       } else {
-        throw new Error("Server no longer has the file");
+        throw new Error("Server No Longer Has Has The File");
       }
     });
   });
-}
-
-this.getArchive = function(url) {
-  var temp = "";
-  temp = archiveList(url);
-  return temp;
 }
 
 function requestList(url) {
@@ -65,5 +59,11 @@ function requestList(url) {
 this.getList = function(url) {
   var temp = "";
   temp = requestList(url);
+  return temp;
+};
+
+this.getArchive = function(url) {
+  var temp = "";
+  temp = archiveList(url);
   return temp;
 };
