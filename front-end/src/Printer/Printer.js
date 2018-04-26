@@ -6,10 +6,12 @@ class Printer extends Component {
     //Patrick Gimpy told me to do this
     //ButtonText,
     this.state = {
-      jacksgay:["","",""]
-    }
+      jacksgay: ["", "", "", ""],
+      currentPrinter: ""
+    };
 
     this.onClick = this.onClick.bind(this);
+    this.whenUpdate = this.whenUpdate.bind(this);
   }
 
   //This is the base printer object that displays all of the data needed on every printer
@@ -17,20 +19,40 @@ class Printer extends Component {
     switch (this.props.data["status"]) {
       case "BUSY":
         this.setState({
-          jacksgay:
+          jacksgay: ["", "", "", ""]
         });
     }
     this.props.finishButton(this.props.id);
   }
 
-  // findRequestById(id) {
-  //   for ()
-  // }
+  whenUpdate(printer) {
+    // switch (this.props.data["status"]) {
+    //   case "BUSY":
+    //     return this.setState({
+    //       jacksgay: ["", "", "", ""]
+    //     });
+    //     case "OPEN":
+    //     return this.setState({
+    //
+    //     })
+    // }
+  }
+
+  findRequestById( index, request, id) {
+    console.log(index, request, id)
+    for (var i=0; i < request.length; i++) {
+      console.log(request[i]["id"],id)
+      if (request[i]["id"] === id) {
+        return request[i]["requestItems"][index]["fileName"]
+      }
+    }
+    return "Fucking Error";
+  }
 
   render() {
     var printerData = this.props.data;
     var requestData = this.props.requests;
-
+    this.whenUpdate(printerData);
     return (
       <div className="card card-size " id={"printer/" + this.props.id}>
         <img
@@ -43,15 +65,18 @@ class Printer extends Component {
           printerData["printItems"].map(i => {
             return (
               <div key={i["index"]}>
-                {i["index"]} : {i["qty"]}
+                {this.findRequestById(i["index"], requestData, printerData["requestID"])} : {i["qty"]}
               </div>
             );
           })}
         <div> Status: {printerData["status"]} </div>
         <div className="card-block">
-          <button className="btn btn-primary card-button">Dequeue</button>
+          <button className="btn btn-primary card-button" id="0">
+            Dequeue
+          </button>
           <button
             onClick={this.onClick}
+            id="1"
             className="btn btn-outline-success card-button"
           >
             Finish
