@@ -8,6 +8,7 @@ class PrinterList extends Component {
   render() {
     //Make This a object to be repeated
     var ListOfPrinters = this.props.printers;
+
     //Generates all of the printers that we are using for the project
     if (ListOfPrinters != null && ListOfPrinters.length > 0) {
       return (
@@ -20,6 +21,7 @@ class PrinterList extends Component {
                   key={i["id"]}
                   id={i["id"]}
                   finishButton={this.finishPrinter}
+                  requests={this.props.requests}
                   data={i}
                 />
               );

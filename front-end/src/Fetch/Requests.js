@@ -1,20 +1,21 @@
-
 const header = {
   "Content-Type": "application/json",
   "Access-Control-Allow-Origin": "True"
 };
 
-this.deleteRequest = function(path, id) {
-  const myRequest = new Request(this.props.url + "/api/requests/" + id, {
-    method: "DELETE",
-    headers: header
-  });
+this.deleteRequest = function(url, id) {
+  return new Promise((resolve, reject) => {
+    console.log("Helllppppp");
+    const myRequest = new Request(url + "/api/requests/" + id, {
+      method: "DELETE",
+      headers: header
+    });
 
-  fetch(myRequest).then(response => {
-    this.requestList();
+    fetch(myRequest).then(response => {
+      resolve(requestList(url));
+    });
   });
 };
-
 
 function requestList(url) {
   return new Promise((resolve, reject) => {
@@ -27,7 +28,7 @@ function requestList(url) {
             status: results.status
           }))
           .then(results => {
-            resolve(results.data)
+            resolve(results.data);
           });
       } else {
         throw new Error("Server No Longer Has Has The File");
@@ -38,6 +39,6 @@ function requestList(url) {
 
 this.getList = function(url) {
   var temp = "";
-  temp = requestList(url)
+  temp = requestList(url);
   return temp;
 };

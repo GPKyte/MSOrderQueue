@@ -8,11 +8,18 @@ class Printer extends Component {
 
   //This is the base printer object that displays all of the data needed on every printer
   onClick() {
+    this.props.data["status"]
+
     this.props.finishButton(this.props.id);
   }
 
+  // findRequestById(id) {
+  //   for ()
+  // }
+
   render() {
     var printerData = this.props.data;
+    var requestData = this.props.requests;
 
     return (
       <div className="card card-size " id={"printer/" + this.props.id} >
@@ -24,7 +31,7 @@ class Printer extends Component {
         {printerData["name"]}
         {printerData["printItems"] !== null && printerData["printItems"].map(i => {
 
-          return (<div>{i["index"]} : {i["qty"]}</div>)
+          return (<div key={i["index"]}>{i["index"]} : {i["qty"]}</div>)
         })}
         <div> Status: {printerData["status"]} </div>
         <div className="card-block">

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import SideBarrequest from "./SideBarJob.js";
+import Request from "./../Fetch/Requests.js";
 var Promise = require("bluebird");
 Promise.promisifyAll(require("request"));
 
@@ -12,8 +13,8 @@ class SideBarList extends Component {
     this.deleteRequest = this.deleteRequest.bind(this);
   }
 
-  deleteRequest(string, id) {
-    return "";
+  deleteRequest(url, id) {
+    Request.deleteRequest(url,id)
   }
 
   //Part of the logic to see which of the requests is currenty expanded.
@@ -43,6 +44,7 @@ class SideBarList extends Component {
                 deleteRequest={this.deleteRequest}
                 currentlyRevealed={this.state.selectedIndex}
                 elementID={size - 1}
+                url={this.props.url}
                 data={i}
               />
             </nav>

@@ -23,8 +23,9 @@ class SideBarrequest extends Component {
     }
   }
   onDelete(event) {
+    //TODO fix this please
     console.log(event.target);
-    this.props.deleteRequest("", this.props.data["id"]);
+    this.props.deleteRequest(this.props.url, this.props.data["id"]);
   }
 
   render() {

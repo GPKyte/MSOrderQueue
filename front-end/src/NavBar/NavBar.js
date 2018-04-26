@@ -83,7 +83,11 @@ class RenderedView extends Component {
     switch (this.props.value) {
       case "printers":
         return (
-          <PrinterList url={this.props.url} printers={this.props.printers} />
+          <PrinterList
+            url={this.props.url}
+            printers={this.props.printers}
+            requests={this.props.requests}
+          />
         );
       case "add printers":
         return <MakePrinter url={this.props.url} />;
@@ -91,10 +95,7 @@ class RenderedView extends Component {
         return <LoginPage url={this.props.url} />;
       case "archive":
         return (
-          <ArchivePage
-            url={this.props.url}
-            requests={this.props.requests}
-          />
+          <ArchivePage url={this.props.url} requests={this.props.requests} />
         );
       case "queueing":
         return (
